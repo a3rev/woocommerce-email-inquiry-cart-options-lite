@@ -2,11 +2,13 @@
 /*
 Plugin Name: WooCommerce Email Inquiry & Cart Options LITE
 Description: Transform your entire WooCommerce products catalog or any individual product into an online brochure with Product Email Inquiry button and pop-up email form. Add product email inquiry functionality to any product either with WooCommerce functionality or hide that functionality and the page becomes a brochure.
-Version: 1.4.5
+Version: 1.4.6
 Author: a3rev Software
 Author URI: https://a3rev.com/
 Text Domain: woocommerce-email-inquiry-cart-options
 Domain Path: /languages
+WC requires at least: 2.0.0
+WC tested up to: 3.2.0
 License: This software is under commercial license and copyright to A3 Revolution Software Development team
 
 	WooCommerce Email Inquiry & Cart Options. Plugin for the WooCommerce shopping Cart.
@@ -33,7 +35,7 @@ define('WC_EMAIL_INQUIRY_CSS_URL', WC_EMAIL_INQUIRY_URL . '/assets/css');
 if (!defined("WC_EMAIL_AUTHOR_URI")) define("WC_EMAIL_AUTHOR_URI", "http://a3rev.com/shop/woocommerce-email-inquiry-and-cart-options/");
 if (!defined("WC_EMAIL_ULTIMATE_URI")) define("WC_EMAIL_ULTIMATE_URI", "http://a3rev.com/shop/woocommerce-email-inquiry-ultimate/");
 
-define('WC_EMAIL_INQUIRY_VERSION',  '1.4.5' );
+define('WC_EMAIL_INQUIRY_VERSION',  '1.4.6' );
 
 /**
  * Load Localisation files.
