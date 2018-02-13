@@ -1,6 +1,6 @@
 <?php
 function wc_email_inquiry_install(){
-	update_option('a3rev_wc_email_inquiry_version', '1.4.6');
+	update_option('a3rev_wc_email_inquiry_version', WC_EMAIL_INQUIRY_VERSION );
 	update_option('a3rev_wc_email_inquiry_ultimate_version', '1.2.6');
 	update_option('a3rev_wc_orders_quotes_version', '1.1.8');
 
@@ -9,8 +9,6 @@ function wc_email_inquiry_install(){
 
 	update_option('a3rev_wc_email_inquiry_just_installed', true);
 }
-
-update_option('a3rev_wc_email_inquiry_plugin', 'wc_email_inquiry');
 
 function wc_email_inquiry_init() {
 	if ( get_option('a3rev_wc_email_inquiry_just_installed') ) {
@@ -23,9 +21,6 @@ function wc_email_inquiry_init() {
 		// Build sass
 		global $wc_email_inquiry_less;
 		$wc_email_inquiry_less->plugin_build_sass();
-
-		wp_redirect( admin_url( 'admin.php?page=email-cart-options', 'relative' ) );
-		exit;
 	}
 
 	wc_email_inquiry_plugin_textdomain();
@@ -160,7 +155,7 @@ function wc_ei_upgrade_plugin () {
 		include( WC_EMAIL_INQUIRY_DIR. '/includes/updates/update-1.4.0.php' );
 	}
 
-	update_option('a3rev_wc_email_inquiry_version', '1.4.6');
+	update_option('a3rev_wc_email_inquiry_version', WC_EMAIL_INQUIRY_VERSION );
 	update_option('a3rev_wc_email_inquiry_ultimate_version', '1.2.6');
 	update_option('a3rev_wc_orders_quotes_version', '1.1.8');
 

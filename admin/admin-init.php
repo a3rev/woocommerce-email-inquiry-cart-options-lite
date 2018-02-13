@@ -34,7 +34,7 @@ class WC_Email_Inquiry_Admin_Init extends WC_Email_Inquiry_Admin_UI
 	/*-----------------------------------------------------------------------------------*/
 	public function init() {
 
-		$this->add_admin_menu();
+		add_action( 'plugins_loaded', array( $this, 'add_admin_menu' ), 7 );
 
 		// Filter to add admin pages for Amin UI process
 		add_filter( $this->plugin_name . '_admin_pages', array( $this, 'add_admin_pages' ) );
@@ -225,6 +225,7 @@ class WC_Email_Inquiry_Admin_Init extends WC_Email_Inquiry_Admin_UI
 							echo 'nav-tab-active';
 							$tab_data = $tab;
 						}
+						echo ' ' . esc_attr( sanitize_title( $tab['name'] ) );
 						echo '">' . $tab['label'] . '</a>';
 					}
 

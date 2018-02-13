@@ -85,7 +85,7 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 			add_action( $this->plugin_name . '_admin_field_' . $custom_type, array( $this, $custom_type ) );
 		}
 		
-		$this->init_form_fields();
+		add_action( 'plugins_loaded', array( $this, 'init_form_fields' ), 1 );
 		//$this->subtab_init();
 		
 		$this->form_messages = array(
@@ -127,9 +127,9 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 	/* Process after settings is saved */
 	/*-----------------------------------------------------------------------------------*/
 	public function after_settings_save() {
-		if ( get_option( 'wc_email_inquiry_lite_clean_on_deletion' ) == 0  )  {
+		if ( get_option( $this->plugin_name . '_clean_on_deletion' ) == 0  )  {
 			$uninstallable_plugins = (array) get_option('uninstall_plugins');
-			unset($uninstallable_plugins[WC_EMAIL_INQUIRY_NAME]);
+			unset($uninstallable_plugins[ $this->plugin_path ]);
 			update_option('uninstall_plugins', $uninstallable_plugins);
 		}
 	}
@@ -243,7 +243,7 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 			array(
 				'name' 		=> __( 'Clean up on Deletion', 'woocommerce-email-inquiry-cart-options' ),
 				'desc' 		=> __( 'On deletion (not deactivate) the plugin will completely remove all tables and data it created, leaving no trace it was ever here.', 'woocommerce-email-inquiry-cart-options' ),
-				'id' 		=> 'wc_email_inquiry_lite_clean_on_deletion',
+				'id' 		=> $this->plugin_name . '_clean_on_deletion',
 				'type' 		=> 'onoff_checkbox',
 				'default'	=> '0',
 				'separate_option'	=> true,

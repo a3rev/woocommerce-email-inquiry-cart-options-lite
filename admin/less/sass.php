@@ -5,10 +5,10 @@ if (!defined('ABSPATH'))
 
 class WC_Email_Inquiry_Less
 {
-	public $plugin_name = 'wc_orders_quotes';
-	public $css_file_name = 'wc_email_inquiry_cart_options';
-	public $plugin_folder = WC_EMAIL_INQUIRY_FOLDER;
-	public $plugin_dir = WC_EMAIL_INQUIRY_DIR;
+    public $plugin_name   = WC_EMAIL_INQUIRY_KEY;
+    public $css_file_name = 'wc_email_inquiry_cart_options';
+    public $plugin_folder = WC_EMAIL_INQUIRY_FOLDER;
+    public $plugin_dir    = WC_EMAIL_INQUIRY_DIR;
     
     /*-----------------------------------------------------------------------------------*/
     /* Constructor */

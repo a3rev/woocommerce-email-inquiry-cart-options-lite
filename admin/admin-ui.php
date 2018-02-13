@@ -30,19 +30,16 @@ class WC_Email_Inquiry_Admin_UI
 	 * @var string
 	 * You must change to correct plugin name that you are working
 	 */
-	public $plugin_name = 'wc_orders_quotes';
 
-	public $google_api_key_option = 'wc_orders_quotes_google_api_key';
-
-	public $toggle_box_open_option = 'wc_orders_quotes_toggle_box_open';
-
-	public $is_free_plugin = true;
-
-	public $version_transient = 'a3rev_wc_email_inquiry_update_info';
-
-	public $plugin_option_key = 'a3rev_wc_email_inquiry_plugin';
-
-	public $support_url = 'https://wordpress.org/support/plugin/woocommerce-email-inquiry-cart-options/';
+	public $framework_version      = '2.0.2';
+	public $plugin_name            = WC_EMAIL_INQUIRY_KEY;
+	public $plugin_path            = WC_EMAIL_INQUIRY_NAME;
+	public $google_api_key_option  = WC_EMAIL_INQUIRY_KEY . '_google_api_key';
+	public $toggle_box_open_option = WC_EMAIL_INQUIRY_KEY . '_toggle_box_open';
+	public $version_transient      = WC_EMAIL_INQUIRY_KEY . '_licinfo';
+	public $is_free_plugin         = true;
+	
+	public $support_url            = 'https://a3rev.com/forums/forum/woocommerce-plugins/woocommerce-email-inquiry-cart-options/';
 
 
 	/**
@@ -55,11 +52,11 @@ class WC_Email_Inquiry_Admin_UI
 	 * @var string
 	 * You must change to correct pro plugin page url on a3rev site
 	 */
-	public $pro_plugin_page_url = 'http://a3rev.com/shop/woocommerce-quotes-and-orders/';
+	public $pro_plugin_page_url = 'https://a3rev.com/shop/woocommerce-quotes-and-orders/';
 
-	public $ultimate_plugin_page_url = 'http://a3rev.com/shop/woocommerce-email-inquiry-ultimate/';
+	public $ultimate_plugin_page_url = 'https://a3rev.com/shop/woocommerce-email-inquiry-ultimate/';
 
-	public $profirst_plugin_page_url = 'http://a3rev.com/shop/woocommerce-email-inquiry-and-cart-options/';
+	public $profirst_plugin_page_url = 'https://a3rev.com/shop/woocommerce-email-inquiry-and-cart-options/';
 
 	/**
 	 * @var string
@@ -111,7 +108,7 @@ class WC_Email_Inquiry_Admin_UI
 	public function get_premium_video_data() {
 		$premium_video_data = array(
 				'box_title'    => __( 'Premium Version Enhanced Features', 'woocommerce-email-inquiry-cart-options' ),
-				'image_url'    => WOO_DYNAMIC_GALLERY_IMAGES_URL. '/video.jpg',
+				'image_url'    => WC_EMAIL_INQUIRY_IMAGES_URL. '/video.jpg',
 				'video_url'    => 'https://www.youtube.com/embed/9dGw-ORfMIk?version=3&autoplay=1',
 				'left_title'   => __( 'Premium Version Enhanced Features', 'woocommerce-email-inquiry-cart-options' ),
 				'left_text'    => __( 'WooCommerce Dynamic Gallery Premium', 'woocommerce-email-inquiry-cart-options' )
@@ -327,11 +324,11 @@ class WC_Email_Inquiry_Admin_UI
 				if ( FALSE !== stristr( $version_transient, '||' )
 					&& is_array( $version_info )
 					&& isset( $version_info[1] ) && $version_info[1] == 'valid'
-					&& version_compare( get_option('a3rev_wc_email_inquiry_version') , $version_info[0], '<' ) ) {
+					&& version_compare( WC_EMAIL_INQUIRY_VERSION , $version_info[0], '<' ) ) {
 
 						$version_message = sprintf( __( 'There is a new version <span class="a3rev-ui-new-plugin-version">%s</span> available, <a href="%s" target="_blank">update now</a> or download direct from <a href="%s" target="_blank">My Account</a> on a3rev.com', 'woocommerce-email-inquiry-cart-options' ),
 							$version_info[0],
-							wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' . WC_EMAIL_INQUIRY_NAME ), 'upgrade-plugin_' . WC_EMAIL_INQUIRY_NAME ),
+							wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' . $this->plugin_path ), 'upgrade-plugin_' . $this->plugin_path ),
 							'https://a3rev.com/my-account/downloads/'
 						);
 				}
