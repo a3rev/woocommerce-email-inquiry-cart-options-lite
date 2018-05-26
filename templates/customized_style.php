@@ -72,9 +72,17 @@ body .wc_email_inquiry_button_container .wc_email_inquiry_hyperlink_text:hover {
 // Email Inquiry Form Button Style
 global $wc_email_inquiry_global_settings;
 extract($wc_email_inquiry_global_settings);
+
+global $wc_email_inquiry_fancybox_popup_settings;
+$fancybox_popup_width = ! empty( $wc_email_inquiry_fancybox_popup_settings['fancybox_popup_width'] ) ? $wc_email_inquiry_fancybox_popup_settings['fancybox_popup_width'] : 600;
 ?>
 
 /* Email Inquiry Form Style */
+<?php if ( $inquiry_popup_type != 'colorbox') { ?>
+.wc_email_inquiry_form {
+	width: <?php echo $fancybox_popup_width; ?>px;
+}
+<?php } ?>
 .wc_email_inquiry_form * {
 	box-sizing:content-box !important;
 	-moz-box-sizing:content-box !important;
@@ -105,6 +113,7 @@ a.wc_email_inquiry_custom_form_product_url {
 }
 
 .wc_email_inquiry_field input, .wc_email_inquiry_field textarea{
+	box-sizing: border-box !important;
 	/*Border*/
 	<?php echo $wc_ei_admin_interface->generate_border_css( $inquiry_input_border ); ?>
 	

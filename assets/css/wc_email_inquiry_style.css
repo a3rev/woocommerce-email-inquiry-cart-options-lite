@@ -56,7 +56,7 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 	cursor:pointer;	
 	float:left;
 }
-.wc_email_inquiry_send_copy input {
+.wc_email_inquiry_send_copy input, .wc_email_inquiry_field input.agree_terms {
 	width:auto !important;	
 	margin:0 !important;
 }
@@ -130,6 +130,7 @@ body .wc_email_inquiry_send_copy input {
 body .wc_email_inquiry_send_copy {
 	width:100%;
 	margin-bottom:5px;
+	float: none;
 }
 body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 	float:left !important;	

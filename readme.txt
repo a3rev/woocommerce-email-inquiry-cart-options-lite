@@ -2,8 +2,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 4.1
-Tested up to: 4.9.4
-Stable tag: 1.4.7
+Tested up to: 4.9.6
+Stable tag: 1.4.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -194,6 +194,15 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 1.4.8 - 2018/05/26 =
+* This maintenance update is for compatibility with WordPress 4.9.6 and WooCommerce 3.4.0 and the new GDPR compliance requirements for users in the EU 
+* Tweak - Default Email Inquiry Form. Add new GDPR Compliance Options Box with option to turn Acceptance notice ON or OFF for default form.
+* Tweak - When Acceptance notice is ON option shows to edit the default text that shows to the right of the acceptance box. 
+* Tweak - When Acceptance Notice is ON option shows to add information text to the bottom of the form. Leave the text edit empty on and nothing shows on the form footer.
+* Framework - Update a3rev Plugin Framework to version 2.0.3
+* Tweak - Test for compatibility with WooCommerce 3.4.0
+* Tweak - Test for compatibility with WordPress 4.9.6
 
 = 1.4.7 - 2018/02/13 =
 * Maintenance Update. Under the bonnet tweaks to keep your plugin running smoothly and is the foundation for new features to be developed this year 
@@ -510,6 +519,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.4.8 =
+Maintenance Update. Compatibility with WordPress 4.9.6 and WooCommerce 3.4.0 and the new GDPR compliance requirements for users in the EU
 
 = 1.4.7 =
 Maintenance Update. This version updates the Plugin Framework to v 2.0.2, adds full compatibility with a3rev Dashboard, WordPress v 4.9.4 and WooCoomerce v 3.3.1

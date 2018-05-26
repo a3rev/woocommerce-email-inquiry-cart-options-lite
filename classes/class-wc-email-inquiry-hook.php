@@ -263,7 +263,9 @@ class WC_Email_Inquiry_Hook_Filter
 		$wc_email_inquiry_contact_form_class = '';
 
 		$wc_email_inquiry_send_copy = false;
-		
+
+		$show_acceptance = true;
+		if ( isset( $wc_email_inquiry_contact_form_settings['acceptance'] ) && $wc_email_inquiry_contact_form_settings['acceptance'] == 'no') $show_acceptance = false;
 		
 	?>	
 <div class="wc_email_inquiry_form <?php echo $wc_email_inquiry_contact_form_class; ?>">
@@ -285,6 +287,25 @@ class WC_Email_Inquiry_Hook_Filter
 		<div class="wc_email_inquiry_field">
         	<label class="wc_email_inquiry_label" for="your_message_<?php echo $product_id; ?>"><?php _e('Message','woocommerce-email-inquiry-cart-options' ); ?></label> 
 			<textarea class="your_message" name="your_message" id="your_message_<?php echo $product_id; ?>"></textarea></div>
+
+        <?php if ( $show_acceptance ) { ?>
+		<div class="wc_email_inquiry_field">&nbsp;</div>
+
+		<?php $information_text = get_option( 'wc_email_inquiry_contact_form_information_text', '' ); ?>
+		<?php if ( ! empty( $information_text ) ) { ?>
+		<div class="wc_email_inquiry_field">
+			<?php echo stripslashes( $information_text ); ?>
+		</div>
+		<?php } ?>
+
+		<?php $condition_text = get_option( 'wc_email_inquiry_contact_form_condition_text', '' ); ?>
+		<?php if ( empty( $condition_text ) ) { $condition_text = __( 'I have read and agree to the website terms and conditions', 'woocommerce-email-inquiry-cart-options' ); } ?>
+		<div class="wc_email_inquiry_field">
+			<label class="wc_email_inquiry_send_copy"><input type="checkbox" name="agree_terms" class="agree_terms" value="1"> <?php echo stripslashes( $condition_text ); ?></label>
+		</div>
+		<div class="wc_email_inquiry_field">&nbsp;</div>
+		<?php } ?>
+
         <div class="wc_email_inquiry_field">
             <a class="wc_email_inquiry_form_button wc_email_inquiry_bt_<?php echo $product_id; ?> <?php echo $wc_email_inquiry_contact_button_class; ?>" id="wc_email_inquiry_bt_<?php echo $product_id; ?>" product_id="<?php echo $product_id; ?>"><?php echo $wc_email_inquiry_contact_text_button; ?></a> <span class="wc_email_inquiry_loading" id="wc_email_inquiry_loading_<?php echo $product_id; ?>"><img src="<?php echo WC_EMAIL_INQUIRY_IMAGES_URL; ?>/ajax-loader.gif" /></span>
         </div>
@@ -335,6 +356,8 @@ class WC_Email_Inquiry_Hook_Filter
 	public static function script_contact_popup() {
 		global $wc_email_inquiry_global_settings;
 		global $wc_email_inquiry_contact_form_settings;
+		$show_acceptance = true;
+		if ( isset( $wc_email_inquiry_contact_form_settings['acceptance'] ) && $wc_email_inquiry_contact_form_settings['acceptance'] == 'no') $show_acceptance = false;
 		
 		
 		$woocommerce_db_version = get_option( 'woocommerce_db_version', null );
@@ -420,6 +443,16 @@ class WC_Email_Inquiry_Hook_Filter
 			var your_phone = $("#your_phone_"+product_id).val();
 			var your_message = $("#your_message_"+product_id).val();
 			var send_copy = 0;
+
+			<?php if ( $show_acceptance ) { ?>
+			var agree_terms = $(this).parents('.wc_email_inquiry_content').find('.agree_terms');
+			var is_agree_terms = 0;
+			if ( agree_terms.is(':checked') ) {
+				is_agree_terms = 1;
+			}
+			<?php } else { ?>
+			var is_agree_terms = 1;
+			<?php } ?>
 			
 			var wc_email_inquiry_error = "";
 			var wc_email_inquiry_have_error = false;
@@ -437,6 +470,12 @@ class WC_Email_Inquiry_Hook_Filter
 				wc_email_inquiry_error += "<?php _e('Please enter your Phone', 'woocommerce-email-inquiry-cart-options' ); ?>\n";
 				wc_email_inquiry_have_error = true;
 			}
+
+			if ( 0 === is_agree_terms ) {
+				wc_email_inquiry_error += "<?php _e('You need to agree to the website terms and conditions if want to submit this inquiry', 'woocommerce-email-inquiry-cart-options' ); ?>\n";
+				wc_email_inquiry_have_error = true;
+			}
+
 			if (wc_email_inquiry_have_error) {
 				$(this).removeClass('wc_email_inquiry_sending');
 				alert(wc_email_inquiry_error);

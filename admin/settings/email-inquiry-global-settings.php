@@ -424,6 +424,10 @@ $(document).ready(function() {
 			$('.show_email_inquiry_button_after_login_container').css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
 		}
 
+		if ( $("input.acceptance:checked").val() != 'yes') {
+			$(".show_acceptance_yes").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
+		}
+
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.rules_roles_explanation', function( event, value, status ) {
 			if ( status == 'true' ) {
 				$(".rules_roles_explanation_container").slideDown();
@@ -438,6 +442,13 @@ $(document).ready(function() {
 				$(".show_email_inquiry_button_after_login_container").slideDown();
 			} else {
 				$(".show_email_inquiry_button_after_login_container").slideUp();
+			}
+		});
+
+		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.acceptance', function( event, value, status ) {
+			$(".show_acceptance_yes").attr('style','display:none;');
+			if ( value == 'yes' && status == 'true' ) {
+				$(".show_acceptance_yes").slideDown();
 			}
 		});
 
