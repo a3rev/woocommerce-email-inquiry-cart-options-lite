@@ -31,7 +31,7 @@ class WC_Email_Inquiry_Admin_UI
 	 * You must change to correct plugin name that you are working
 	 */
 
-	public $framework_version      = '2.0.3';
+	public $framework_version      = '2.0.4';
 	public $plugin_name            = WC_EMAIL_INQUIRY_KEY;
 	public $plugin_path            = WC_EMAIL_INQUIRY_NAME;
 	public $google_api_key_option  = '';
@@ -39,7 +39,7 @@ class WC_Email_Inquiry_Admin_UI
 	public $version_transient      = '';
 	public $is_free_plugin         = true;
 	
-	public $support_url            = 'https://a3rev.com/forums/forum/woocommerce-plugins/woocommerce-email-inquiry-cart-options/';
+	public $support_url            = '';
 
 
 	/**
@@ -55,8 +55,6 @@ class WC_Email_Inquiry_Admin_UI
 	public $pro_plugin_page_url = 'https://a3rev.com/shop/woocommerce-quotes-and-orders/';
 
 	public $ultimate_plugin_page_url = 'https://a3rev.com/shop/woocommerce-email-inquiry-ultimate/';
-
-	public $profirst_plugin_page_url = 'https://a3rev.com/shop/woocommerce-email-inquiry-and-cart-options/';
 
 	/**
 	 * @var string
@@ -78,6 +76,8 @@ class WC_Email_Inquiry_Admin_UI
 		$this->google_api_key_option  = WC_EMAIL_INQUIRY_KEY . '_google_api_key';
 		$this->toggle_box_open_option = WC_EMAIL_INQUIRY_KEY . '_toggle_box_open';
 		$this->version_transient      = WC_EMAIL_INQUIRY_KEY . '_licinfo';
+
+		$this->support_url = 'https://wordpress.org/support/plugin/woocommerce-email-inquiry-cart-options';
 	}
 	
 	

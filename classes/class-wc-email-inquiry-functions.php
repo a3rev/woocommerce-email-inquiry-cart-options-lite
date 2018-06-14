@@ -92,13 +92,74 @@ class WC_Email_Inquiry_Functions
 		return WC_Email_Inquiry_Functions::check_add_email_inquiry_button($product_id);
 		
 	}
-	
+
+	public static function enqueue_modal_scripts() {
+
+		wp_register_script( 'wc-ei-modal-popup', WC_EMAIL_INQUIRY_JS_URL . '/modal-popup.js', array( 'jquery' ), WC_EMAIL_INQUIRY_VERSION, true );
+
+		wp_localize_script( 'wc-ei-modal-popup',
+			'wc_ei_vars',
+			apply_filters( 'wc_ei_vars', array(
+				'ajax_url'       => admin_url( 'admin-ajax.php', 'relative' ),
+				'security_nonce' => wp_create_nonce( 'wc-ei-event' )
+			) )
+		);
+
+		if ( ! wp_script_is( 'bootstrap-modal', 'registered' ) 
+			&& ! wp_script_is( 'bootstrap-modal', 'enqueued' ) ) {
+			global $wc_ei_admin_interface;
+			$wc_ei_admin_interface->register_modal_scripts();
+		}
+
+		wp_enqueue_style( 'bootstrap-modal' );
+
+		// Don't include modal script if bootstrap is loaded by theme or plugins
+		if ( wp_script_is( 'bootstrap', 'registered' ) 
+			|| wp_script_is( 'bootstrap', 'enqueued' ) ) {
+			
+			wp_enqueue_script( 'bootstrap' );
+			wp_enqueue_script( 'wc-ei-modal-popup' );
+			
+			return;
+		}
+
+		if ( wp_script_is( 'wpsm_tabs_r_bootstrap-js-front', 'enqueued' ) || wp_script_is( 'wpsm_ac_bootstrap-js-front', 'enqueued' ) ) {
+
+			wp_enqueue_script( 'wc-ei-modal-popup' );
+			return;
+		}
+
+		wp_enqueue_script( 'bootstrap-modal' );
+		wp_enqueue_script( 'wc-ei-modal-popup' );
+	}
+
+
+	public static function enqueue_default_form_scripts() {
+
+		if ( wp_script_is( 'wc-ei-default-form', 'enqueued' ) ) {
+			return;
+		}
+
+		wp_enqueue_script( 'wc-ei-default-form', WC_EMAIL_INQUIRY_JS_URL . '/default-form.js', array( 'jquery' ), WC_EMAIL_INQUIRY_VERSION, true );
+
+		wp_localize_script( 'wc-ei-default-form',
+			'wc_ei_default_vars',
+			apply_filters( 'wc_ei_default_vars', array(
+				'ajax_url'          => admin_url( 'admin-ajax.php', 'relative' ),
+				'email_valid_error' => __( 'Please enter valid Email address', 'woocommerce-email-inquiry-cart-options' ),
+				'required_error'    => __( 'is required', 'woocommerce-email-inquiry-cart-options' ),
+				'agree_terms_error' => __( 'You need to agree to the website terms and conditions if want to submit this inquiry', 'woocommerce-email-inquiry-cart-options' ),
+				'security_nonce'    => wp_create_nonce( 'wc-ei-default-form' )
+			) )
+		);
+	}
+
 	public static function reset_products_to_global_settings() {
 		global $wpdb;
 		$wpdb->query( "DELETE FROM ".$wpdb->postmeta." WHERE meta_key='_wc_email_inquiry_settings_custom' " );
 	}
 	
-	public static function email_inquiry($product_id, $your_name, $your_email, $your_phone, $your_message, $send_copy_yourself = 1) {
+	public static function email_inquiry( $product_id, $your_name, $your_email, $your_phone, $your_message, $send_copy_yourself = 1 ) {
 		global $wc_email_inquiry_contact_form_settings;
 		$wc_email_inquiry_contact_success = stripslashes( get_option( 'wc_email_inquiry_contact_success', '' ) );
 		
@@ -147,39 +208,9 @@ class WC_Email_Inquiry_Functions
 			$subject = __('Email inquiry for', 'woocommerce-email-inquiry-cart-options' ).' '.$product_name;
 			$subject_yourself = __('[Copy]: Email inquiry for', 'woocommerce-email-inquiry-cart-options' ).' '.$product_name;
 			
-			$content = '
-	<table width="99%" cellspacing="0" cellpadding="1" border="0" bgcolor="#eaeaea"><tbody>
-	  <tr>
-		<td>
-		  <table width="100%" cellspacing="0" cellpadding="5" border="0" bgcolor="#ffffff"><tbody>
-			<tr bgcolor="#eaf2fa">
-			  <td colspan="2"><font style="FONT-FAMILY:sans-serif;FONT-SIZE:12px"><strong>'.__('Name', 'woocommerce-email-inquiry-cart-options' ).'</strong></font> 
-			  </td></tr>
-			<tr bgcolor="#ffffff">
-			  <td width="20">&nbsp;</td>
-			  <td><font style="FONT-FAMILY:sans-serif;FONT-SIZE:12px">[your_name]</font> </td></tr>
-			<tr bgcolor="#eaf2fa">
-			  <td colspan="2"><font style="FONT-FAMILY:sans-serif;FONT-SIZE:12px"><strong>'.__('Email Address', 'woocommerce-email-inquiry-cart-options' ).'</strong></font> </td></tr>
-			<tr bgcolor="#ffffff">
-			  <td width="20">&nbsp;</td>
-			  <td><font style="FONT-FAMILY:sans-serif;FONT-SIZE:12px"><a target="_blank" href="mailto:[your_email]">[your_email]</a></font> 
-			  </td></tr>
-			<tr bgcolor="#eaf2fa">
-			  <td colspan="2"><font style="FONT-FAMILY:sans-serif;FONT-SIZE:12px"><strong>'.__('Phone', 'woocommerce-email-inquiry-cart-options' ).'</strong></font> </td></tr>
-			<tr bgcolor="#ffffff">
-			  <td width="20">&nbsp;</td>
-			  <td><font style="FONT-FAMILY:sans-serif;FONT-SIZE:12px">[your_phone]</font> </td></tr>
-			<tr bgcolor="#eaf2fa">
-			  <td colspan="2"><font style="FONT-FAMILY:sans-serif;FONT-SIZE:12px"><strong>'.__('Product Name', 'woocommerce-email-inquiry-cart-options' ).'</strong></font> </td></tr>
-			<tr bgcolor="#ffffff">
-			  <td width="20">&nbsp;</td>
-			  <td><font style="FONT-FAMILY:sans-serif;FONT-SIZE:12px"><a target="_blank" href="[product_url]">[product_name]</a></font> </td></tr>
-			<tr bgcolor="#eaf2fa">
-			  <td colspan="2"><font style="FONT-FAMILY:sans-serif;FONT-SIZE:12px"><strong>'.__('Message', 'woocommerce-email-inquiry-cart-options' ).'</strong></font> </td></tr>
-			<tr bgcolor="#ffffff">
-			  <td width="20">&nbsp;</td>
-			  <td><font style="FONT-FAMILY:sans-serif;FONT-SIZE:12px">[your_message]</font> 
-		  </td></tr></tbody></table></td></tr></tbody></table>';
+			ob_start();
+			wc_ei_email_notification_tpl();
+			$content = ob_get_clean();
 		  
 			$content = str_replace('[your_name]', $your_name, $content);
 			$content = str_replace('[your_email]', $your_email, $content);
@@ -214,7 +245,7 @@ class WC_Email_Inquiry_Functions
 			
 			return $wc_email_inquiry_contact_success;
 		} else {
-			return __("Sorry, this product don't enable email inquiry.", 'woocommerce-email-inquiry-cart-options' );
+			return false;
 		}
 	}
 	

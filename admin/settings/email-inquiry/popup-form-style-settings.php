@@ -32,7 +32,7 @@ class WC_EI_Popup_Form_Style_Settings
 			array(
             	'name' 		=> __( 'Default Form Background Colour', 'woocommerce-email-inquiry-cart-options' ),
                 'type' 		=> 'heading',
-                'class'		=> 'wc_ei_default_form_container pro_feature_hidden',
+                'class'		=> 'wc_ei_default_form_container',
                 'id'		=> 'wc_ei_form_bg_box',
                 'is_box'	=> true,
            	),
@@ -41,7 +41,8 @@ class WC_EI_Popup_Form_Style_Settings
 				'desc' 		=> __( 'Default', 'woocommerce-email-inquiry-cart-options' ) . ' [default_value]',
 				'id' 		=> 'inquiry_form_bg_colour',
 				'type' 		=> 'color',
-				'default'	=> '#FFFFFF'
+				'default'	=> '#FFFFFF',
+				'free_version'		=> true,
 			),
 
 			array(
@@ -64,14 +65,11 @@ class WC_EI_Popup_Form_Style_Settings
 				'free_version'		=> true,
 			),
 			array(
-                'type' 		=> 'heading',
-                'class'		=> 'pro_feature_hidden',
-           	),
-			array(
 				'name' 		=> __( 'Text Font', 'woocommerce-email-inquiry-cart-options' ),
 				'id' 		=> 'inquiry_contact_heading_font',
 				'type' 		=> 'typography',
 				'default'	=> array( 'size' => '18px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#000000' ),
+				'free_version'		=> true,
 			),
 
 			array(
@@ -113,19 +111,19 @@ class WC_EI_Popup_Form_Style_Settings
 			array(
             	'name' 		=> __( 'Email Subject Name', 'woocommerce-email-inquiry-cart-options' ),
                 'type' 		=> 'heading',
-                'class'		=> 'pro_feature_hidden',
            	),
 			array(
 				'name' 		=> __( 'Subject Name Font', 'woocommerce-email-inquiry-cart-options' ),
 				'id' 		=> 'inquiry_form_subject_font',
 				'type' 		=> 'typography',
-				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#000000' )
+				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#000000' ),
+				'free_version'		=> true,
 			),
 
 			array(
             	'name' 		=> __( 'Default Form Text Input Fileds', 'woocommerce-email-inquiry-cart-options' ),
                 'type' 		=> 'heading',
-                'class'		=> 'wc_ei_default_form_container pro_feature_hidden',
+                'class'		=> 'wc_ei_default_form_container',
                 'id'		=> 'wc_ei_form_input_box',
                 'is_box'	=> true,
            	),
@@ -134,24 +132,27 @@ class WC_EI_Popup_Form_Style_Settings
 				'desc' 		=> __( 'Default', 'woocommerce-email-inquiry-cart-options' ) . ' [default_value]',
 				'id' 		=> 'inquiry_input_bg_colour',
 				'type' 		=> 'color',
-				'default'	=> '#FAFAFA'
+				'default'	=> '#FAFAFA',
+				'free_version'		=> true,
 			),
 			array(
 				'name' 		=> __( 'Font Colour', 'woocommerce-email-inquiry-cart-options' ),
 				'desc' 		=> __( 'Default', 'woocommerce-email-inquiry-cart-options' ) . ' [default_value]',
 				'id' 		=> 'inquiry_input_font_colour',
 				'type' 		=> 'color',
-				'default'	=> '#000000'
+				'default'	=> '#000000',
+				'free_version'		=> true,
 			),
 			array(
 				'name' 		=> __( 'Input Field Borders', 'woocommerce-email-inquiry-cart-options' ),
 				'id' 		=> 'inquiry_input_border',
 				'type' 		=> 'border',
 				'default'	=> array( 'width' => '1px', 'style' => 'solid', 'color' => '#CCCCCC', 'corner' => 'square' , 'rounded_value' => 0 ),
+				'free_version'		=> true,
 			),
 
 			array(
-            	'name' 		=> __( 'Default Form SEND Button', 'woocommerce-email-inquiry-cart-options' ),
+            	'name' 		=> __( 'Default Form SEND Button Style', 'woocommerce-email-inquiry-cart-options' ),
                 'type' 		=> 'heading',
                 'class'		=> 'wc_ei_default_form_container',
                 'id'		=> 'wc_ei_form_button_box',
@@ -165,49 +166,50 @@ class WC_EI_Popup_Form_Style_Settings
 				'default'	=> __( 'SEND', 'woocommerce-email-inquiry-cart-options' ),
 				'free_version'		=> true,
 			),
-
-			array(
-                'type' 		=> 'heading',
-                'class'		=> 'pro_feature_hidden',
-           	),
 			array(
 				'name' 		=> __( 'Button Font', 'woocommerce-email-inquiry-cart-options' ),
 				'id' 		=> 'inquiry_contact_button_font',
 				'type' 		=> 'typography',
-				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#FFFFFF' )
+				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#FFFFFF' ),
+				'free_version'		=> true,
 			),
 			array(
 				'name' 		=> __( 'Background Colour', 'woocommerce-email-inquiry-cart-options' ),
 				'desc' 		=> __( 'Default', 'woocommerce-email-inquiry-cart-options' ) . ' [default_value]',
 				'id' 		=> 'inquiry_contact_button_bg_colour',
 				'type' 		=> 'color',
-				'default'	=> '#EE2B2B'
+				'default'	=> '#EE2B2B',
+				'free_version'		=> true,
 			),
 			array(
 				'name' 		=> __( 'Background Colour Gradient From', 'woocommerce-email-inquiry-cart-options' ),
 				'desc' 		=> __( 'Default', 'woocommerce-email-inquiry-cart-options' ) . ' [default_value]',
 				'id' 		=> 'inquiry_contact_button_bg_colour_from',
 				'type' 		=> 'color',
-				'default'	=> '#FBCACA'
+				'default'	=> '#FBCACA',
+				'free_version'		=> true,
 			),
 			array(
 				'name' 		=> __( 'Background Colour Gradient To', 'woocommerce-email-inquiry-cart-options' ),
 				'desc' 		=> __( 'Default', 'woocommerce-email-inquiry-cart-options' ) . ' [default_value]',
 				'id' 		=> 'inquiry_contact_button_bg_colour_to',
 				'type' 		=> 'color',
-				'default'	=> '#EE2B2B'
+				'default'	=> '#EE2B2B',
+				'free_version'		=> true,
 			),
 			array(
 				'name' 		=> __( 'Button Border', 'woocommerce-email-inquiry-cart-options' ),
 				'id' 		=> 'inquiry_contact_button_border',
 				'type' 		=> 'border',
 				'default'	=> array( 'width' => '1px', 'style' => 'solid', 'color' => '#EE2B2B', 'corner' => 'rounded' , 'rounded_value' => 3 ),
+				'free_version'		=> true,
 			),
 			array(
 				'name' => __( 'Button Shadow', 'woocommerce-email-inquiry-cart-options' ),
 				'id' 		=> 'inquiry_contact_button_shadow',
 				'type' 		=> 'box_shadow',
-				'default'	=> array( 'enable' => 0, 'h_shadow' => '5px' , 'v_shadow' => '5px', 'blur' => '2px' , 'spread' => '2px', 'color' => '#999999', 'inset' => '' )
+				'default'	=> array( 'enable' => 0, 'h_shadow' => '5px' , 'v_shadow' => '5px', 'blur' => '2px' , 'spread' => '2px', 'color' => '#999999', 'inset' => '' ),
+				'free_version'		=> true,
 			),
 
         );

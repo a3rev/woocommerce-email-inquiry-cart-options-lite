@@ -57,8 +57,6 @@ add_action('wp_enqueue_scripts', array('WC_Email_Inquiry_Hook_Filter', 'add_styl
 // Include google fonts into header
 add_action( 'wp_enqueue_scripts', array( 'WC_Email_Inquiry_Hook_Filter', 'add_google_fonts'), 9 );
 
-// Include script into footer
-add_action('wp_footer', array('WC_Email_Inquiry_Hook_Filter', 'script_contact_popup'), 20 );
 
 // Change item meta value as long url to short url
 add_filter('woocommerce_order_item_display_meta_value', array('WC_Email_Inquiry_Hook_Filter', 'change_order_item_display_meta_value' ) );
@@ -70,14 +68,6 @@ add_action('wp_ajax_nopriv_wc_ei_yellow_message_dontshow', array('WC_Email_Inqui
 // AJAX hide yellow message dismiss
 add_action('wp_ajax_wc_ei_yellow_message_dismiss', array('WC_Email_Inquiry_Functions', 'wc_ei_yellow_message_dismiss') );
 add_action('wp_ajax_nopriv_wc_ei_yellow_message_dismiss', array('WC_Email_Inquiry_Functions', 'wc_ei_yellow_message_dismiss') );
-
-// AJAX wc_email_inquiry contact popup
-add_action('wp_ajax_wc_email_inquiry_popup', array('WC_Email_Inquiry_Hook_Filter', 'wc_email_inquiry_popup') );
-add_action('wp_ajax_nopriv_wc_email_inquiry_popup', array('WC_Email_Inquiry_Hook_Filter', 'wc_email_inquiry_popup') );
-
-// AJAX wc_email_inquiry_action
-add_action('wp_ajax_wc_email_inquiry_action', array('WC_Email_Inquiry_Hook_Filter', 'wc_email_inquiry_action') );
-add_action('wp_ajax_nopriv_wc_email_inquiry_action', array('WC_Email_Inquiry_Hook_Filter', 'wc_email_inquiry_action') );
 
 // Hide Add to Cart button on Shop page
 add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'shop_before_hide_add_to_cart_button'), 100, 4 );
@@ -93,6 +83,9 @@ add_filter('single_add_to_cart_text', array('WC_Email_Inquiry_Hook_Filter', 'gro
 add_filter('woocommerce_product_single_add_to_cart_text', array('WC_Email_Inquiry_Hook_Filter', 'grouped_product_hide_add_to_cart'), 100, 2 ); // for Woo 2.1
 add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'before_grouped_product_hide_quatity_control'), 100, 4 );
 add_action('woocommerce_after_template_part', array('WC_Email_Inquiry_Hook_Filter', 'after_grouped_product_hide_quatity_control'), 1, 4 );
+
+// Include Modal container to footer
+add_action( 'wp_footer', array( 'WC_Email_Inquiry_Hook_Filter', 'wc_email_inquiry_modal_popup' ) );
 
 // Add Email Inquiry Button on Shop page
 $wc_email_inquiry_customize_email_button_settings = get_option( 'wc_email_inquiry_customize_email_button', array( 'inquiry_button_position' => 'below' ) );
@@ -153,6 +146,12 @@ function wc_ei_upgrade_plugin () {
 		update_option('a3rev_wc_email_inquiry_version', '1.4.0');
 
 		include( WC_EMAIL_INQUIRY_DIR. '/includes/updates/update-1.4.0.php' );
+	}
+
+	if(version_compare(get_option('a3rev_wc_email_inquiry_version'), '2.0.0') === -1){
+		update_option('a3rev_wc_email_inquiry_version', '2.0.0');
+
+		include( WC_EMAIL_INQUIRY_DIR. '/includes/updates/update-2.0.0.php' );
 	}
 
 	update_option('a3rev_wc_email_inquiry_version', WC_EMAIL_INQUIRY_VERSION );

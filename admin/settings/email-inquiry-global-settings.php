@@ -300,30 +300,6 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
 		global $wc_ei_popup_form_style_settings;
 		$this->form_fields = array_merge( $this->form_fields, $wc_ei_popup_form_style_settings->form_fields );
 
-		$this->form_fields =  array_merge( $this->form_fields, array(
-
-			// Popup Tool
-			array(
-            	'name' => __( 'Select a Pop-Up Tool', 'woocommerce-email-inquiry-cart-options' ),
-                'type' => 'heading',
-                'class'		=> 'wc_ei_popup_tool_container',
-                'id'		=> 'wc_ei_inquiry_popup_tool_box',
-                'is_box'	=> true,
-           	),
-			array(
-				'name' 		=> __( "Pop-Up Tool", 'woocommerce-email-inquiry-cart-options' ),
-				'class'		=> 'inquiry_popup_type',
-				'id' 		=> 'inquiry_popup_type',
-				'type' 		=> 'switcher_checkbox',
-				'default'	=> 'fb',
-				'checked_value'		=> 'fb',
-				'unchecked_value'	=> 'colorbox',
-				'checked_label'		=> __( 'FANCYBOX', 'woocommerce-email-inquiry-cart-options' ),
-				'unchecked_label' 	=> __( 'COLORBOX', 'woocommerce-email-inquiry-cart-options' ),
-				'free_version'		=> true,
-			),
-
-        ));
 
 		include_once( $this->admin_plugin_dir() . '/settings/email-inquiry/success-message-settings.php' );
 		global $wc_ei_success_message_settings;
@@ -424,6 +400,10 @@ $(document).ready(function() {
 			$('.show_email_inquiry_button_after_login_container').css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
 		}
 
+		if ( $("input.show_phone:checked").val() != 'yes') {
+			$(".show_phone_yes_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
+		}
+
 		if ( $("input.acceptance:checked").val() != 'yes') {
 			$(".show_acceptance_yes").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
 		}
@@ -442,6 +422,13 @@ $(document).ready(function() {
 				$(".show_email_inquiry_button_after_login_container").slideDown();
 			} else {
 				$(".show_email_inquiry_button_after_login_container").slideUp();
+			}
+		});
+
+		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.show_phone', function( event, value, status ) {
+			$(".show_phone_yes_container").attr('style','display:none;');
+			if ( value == 'yes' && status == 'true' ) {
+				$(".show_phone_yes_container").slideDown();
 			}
 		});
 

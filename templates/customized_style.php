@@ -1,4 +1,8 @@
 <style>
+.wc_email_inquiry_expand_text {
+	min-width:20px;
+	display:inline-block;	
+}
 .wc_email_inquiry_custom_form_container {
 	position:relative !important;	
 }
@@ -19,7 +23,7 @@ extract($wc_email_inquiry_customize_email_button);
 	margin-left: <?php echo $inquiry_button_margin_left; ?>px !important;
 	margin-right: <?php echo $inquiry_button_margin_right; ?>px !important;
 }
-body .wc_email_inquiry_button_container .wc_email_inquiry_button, body .wc_email_inquiry_button_container .wc_email_inquiry_popup_button, body .wc_email_inquiry_button_container .wc_email_inquiry_button_3rd {
+body .wc_email_inquiry_button_container .wc_email_inquiry_button {
 	position: relative !important;
 	cursor:pointer;
 	display: inline-block !important;
@@ -72,23 +76,15 @@ body .wc_email_inquiry_button_container .wc_email_inquiry_hyperlink_text:hover {
 // Email Inquiry Form Button Style
 global $wc_email_inquiry_global_settings;
 extract($wc_email_inquiry_global_settings);
-
-global $wc_email_inquiry_fancybox_popup_settings;
-$fancybox_popup_width = ! empty( $wc_email_inquiry_fancybox_popup_settings['fancybox_popup_width'] ) ? $wc_email_inquiry_fancybox_popup_settings['fancybox_popup_width'] : 600;
 ?>
 
 /* Email Inquiry Form Style */
-<?php if ( $inquiry_popup_type != 'colorbox') { ?>
-.wc_email_inquiry_form {
-	width: <?php echo $fancybox_popup_width; ?>px;
-}
-<?php } ?>
 .wc_email_inquiry_form * {
 	box-sizing:content-box !important;
 	-moz-box-sizing:content-box !important;
 	-webkit-box-sizing:content-box !important;	
 }
-.email_inquiry_cb #cboxLoadedContent, .wc_email_inquiry_form, #fancybox-content > div {
+.wc_email_inquiry_form, .wc_email_inquiry_modal.default .modal-content {
 	background-color: <?php echo $inquiry_form_bg_colour; ?> !important;	
 }
 body .wc_email_inquiry_form, .wc_email_inquiry_form, .wc_email_inquiry_form .wc_email_inquiry_field, body .wc_email_inquiry_field {
@@ -164,12 +160,8 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 }
 
 /* Contact Form Heading */
-h1.wc_email_inquiry_result_heading {
+.wc_email_inquiry_result_heading {
 	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_contact_heading_font ); ?>
 }
 
-/* Colorbox Background */
-#cboxOverlay.email_inquiry_cb{ 
-	background:#666666 !important;
-}
 </style>
