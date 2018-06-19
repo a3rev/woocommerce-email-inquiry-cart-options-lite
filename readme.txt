@@ -3,7 +3,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 4.6
 Tested up to: 4.9.6
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -185,6 +185,13 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.0.1 - 2018/06/19 =
+* Maintenance update fixes a bug with email inquiry showing under footer on some sites plus a tweak to the modal pop up in mobile and fix on framework setting options.
+* Tweak - Auto scroll to top of modal popup when it opens for improved UI on mobile
+* Framework - Fix for Framework Global Box open and close settings options  
+* Framework - Update a3rev Plugin Framework to version 2.0.5
+* Fix - Issue where Email Inquiry form was loading at footer of page on some sites
 
 = 2.0.0 - 2018/06/14 =
 * Major Upgrade. V2 is a massive step forward in the plugins development with 11 new features, new pop up tool and big code refactoring.
@@ -537,6 +544,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.0.1 =
+Maintenance update fixes a bug with email inquiry showing under footer on some sites plus a tweak to the modal pop up in mobile and fix on framework setting options.
 
 = 2.0.0 =
 Major Upgrade. V2 is a massive step forward in the plugins development with 11 new features, new pop up tool, introduction of templating and multiple coding standard enhancements

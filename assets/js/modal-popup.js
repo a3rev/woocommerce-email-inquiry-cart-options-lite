@@ -5,6 +5,12 @@
 			$('.wc_email_inquiry_modal').appendTo('body');
 		}, 1000 );
 
+		$(window).on('wc-ei-modal-scrolltop', function(e) {
+			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+				$('.wc_email_inquiry_modal,body,html').animate({ scrollTop: 0 }, 'slow');
+			}
+		});
+
 		$('#wc_email_inquiry_modal').on( 'hide.bs.modal', function (event) {
 			var modal = $(this);
 
@@ -55,6 +61,8 @@
 				modal.find('.wc_email_inquiry_form_button').data( 'product_id' , product_id );
 				modal.find('.wc_email_inquiry_subject').html( product_name );
 			}
+
+			$(window).trigger( 'wc-ei-modal-scrolltop' );
 		});
 
 		$(document).on( 'calculate_modal_iframe_height', function(){

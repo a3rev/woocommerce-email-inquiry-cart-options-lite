@@ -16,7 +16,7 @@ if ( '' != trim( $wc_email_inquiry_global_settings['inquiry_contact_heading'] ) 
 }
 ?>
 
-<div class="wc_email_inquiry_modal modal fade default" id="wc_email_inquiry_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="wc_email_inquiry_modal modal fade default" id="wc_email_inquiry_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display:none !important;">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">

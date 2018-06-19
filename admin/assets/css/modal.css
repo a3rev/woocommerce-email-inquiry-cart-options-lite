@@ -60,6 +60,10 @@
   pointer-events: none;
 }
 
+.modal.fade{
+  opacity: 1;
+}
+
 .modal.fade .modal-dialog {
   transition: -webkit-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;

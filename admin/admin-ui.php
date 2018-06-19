@@ -31,7 +31,7 @@ class WC_Email_Inquiry_Admin_UI
 	 * You must change to correct plugin name that you are working
 	 */
 
-	public $framework_version      = '2.0.4';
+	public $framework_version      = '2.0.5';
 	public $plugin_name            = WC_EMAIL_INQUIRY_KEY;
 	public $plugin_path            = WC_EMAIL_INQUIRY_NAME;
 	public $google_api_key_option  = '';

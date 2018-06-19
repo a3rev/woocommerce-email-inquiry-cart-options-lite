@@ -40,6 +40,8 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 	/*-----------------------------------------------------------------------------------*/
 	public function __construct() {
 
+		parent::__construct();
+
 		$this->admin_includes();
 
 		add_action( 'init', array( $this, 'init_scripts' ) );
