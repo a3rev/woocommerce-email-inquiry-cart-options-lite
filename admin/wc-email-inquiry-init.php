@@ -2,7 +2,6 @@
 function wc_email_inquiry_install(){
 	update_option('a3rev_wc_email_inquiry_version', WC_EMAIL_INQUIRY_VERSION );
 	update_option('a3rev_wc_email_inquiry_ultimate_version', '1.2.6');
-	update_option('a3rev_wc_orders_quotes_version', '1.1.8');
 
 	global $wc_ei_admin_init;
 	delete_metadata( 'user', 0, $wc_ei_admin_init->plugin_name . '-' . 'plugin_framework_global_box' . '-' . 'opened', '', true );
@@ -84,6 +83,34 @@ add_filter('woocommerce_product_single_add_to_cart_text', array('WC_Email_Inquir
 add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'before_grouped_product_hide_quatity_control'), 100, 4 );
 add_action('woocommerce_after_template_part', array('WC_Email_Inquiry_Hook_Filter', 'after_grouped_product_hide_quatity_control'), 1, 4 );
 
+
+// Hide Price on Shop page and Details page
+add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'shop_before_hide_price'), 100, 4 );
+add_action('woocommerce_after_template_part', array('WC_Email_Inquiry_Hook_Filter', 'shop_after_hide_price'), 1, 4 );
+
+// Hide Price
+add_filter('woocommerce_get_price_html', array('WC_Email_Inquiry_Hook_Filter', 'global_hide_price'), 100 );
+add_filter('woocommerce_variation_sale_price_html', array('WC_Email_Inquiry_Hook_Filter', 'global_hide_price'), 100 );
+add_filter('woocommerce_variation_price_html', array('WC_Email_Inquiry_Hook_Filter', 'global_hide_price'), 100 );
+add_filter('woocommerce_variation_free_price_html', array('WC_Email_Inquiry_Hook_Filter', 'global_hide_price'), 100 );
+add_filter('woocommerce_variation_empty_price_html', array('WC_Email_Inquiry_Hook_Filter', 'global_hide_price'), 100 );
+
+add_filter('woocommerce_cart_item_price', array('WC_Email_Inquiry_Hook_Filter', 'hide_price_from_mini_cart'), 100 );
+
+add_filter( 'woocommerce_cart_item_subtotal', array( 'WC_Email_Inquiry_Hook_Filter', 'hide_price_from_mini_cart' ), 100 );
+add_filter('woocommerce_widget_cart_item_quantity', array('WC_Email_Inquiry_Hook_Filter', 'remove_x_character_mini_cart'), 100 );
+add_filter('woocommerce_cart_product_subtotal', array('WC_Email_Inquiry_Hook_Filter', 'hide_cart_product_subtotal'), 100 );
+
+// Hide Price from On Page Checkout plugin
+add_filter( 'wc_product_options_discount_price_html', array('WC_Email_Inquiry_Hook_Filter', 'hide_price_from_mini_cart'), 101 );
+add_filter( 'wc_product_options_discount_variation_onsale_price_html', array('WC_Email_Inquiry_Hook_Filter', 'global_hide_price'), 101 );
+add_filter( 'wc_product_options_discount_variable_onsale_price_html', array('WC_Email_Inquiry_Hook_Filter', 'global_hide_price'), 101 );
+add_filter( 'wc_product_options_discount_onsale_price_html', array('WC_Email_Inquiry_Hook_Filter', 'global_hide_price'), 101);
+
+add_filter('woocommerce_cart_subtotal', array('WC_Email_Inquiry_Hook_Filter', 'hide_mini_cart_subtotal'), 101 );
+add_filter('woocommerce_cart_total', array('WC_Email_Inquiry_Hook_Filter', 'hide_mini_cart_contents_total'), 101 );
+add_filter('woocommerce_cart_contents_total', array('WC_Email_Inquiry_Hook_Filter', 'hide_mini_cart_contents_total'), 101 );
+
 // Include Modal container to footer
 add_action( 'wp_footer', array( 'WC_Email_Inquiry_Hook_Filter', 'wc_email_inquiry_modal_popup' ) );
 
@@ -156,7 +183,6 @@ function wc_ei_upgrade_plugin () {
 
 	update_option('a3rev_wc_email_inquiry_version', WC_EMAIL_INQUIRY_VERSION );
 	update_option('a3rev_wc_email_inquiry_ultimate_version', '1.2.6');
-	update_option('a3rev_wc_orders_quotes_version', '1.1.8');
 
 }
 

@@ -24,6 +24,12 @@ class WC_Email_Inquiry_Functions
 	 */
 	
 	public static function check_hide_add_cart_button ($product_id) {
+
+		$force_value = apply_filters( 'wc_ei_force_value_hide_add_cart_button', null, $product_id );
+		if ( null !== $force_value ) {
+			return $force_value;
+		}
+
 		global $wc_email_inquiry_rules_roles_settings;
 			
 		$wc_email_inquiry_hide_addcartbt = $wc_email_inquiry_rules_roles_settings['hide_addcartbt'] ;
@@ -51,7 +57,42 @@ class WC_Email_Inquiry_Functions
 		return false;
 		
 	}
+	
+	public static function check_hide_price ($product_id) {
+
+		$force_value = apply_filters( 'wc_ei_force_value_hide_price', null, $product_id );
+		if ( null !== $force_value ) {
+			return $force_value;
+		}
+
+		global $wc_email_inquiry_rules_roles_settings;
+			
+		$wc_email_inquiry_hide_price = $wc_email_inquiry_rules_roles_settings['hide_price'];
 		
+		// dont hide price if setting is not checked and not logged in users
+		if ($wc_email_inquiry_hide_price == 'no' && !is_user_logged_in() ) return false;
+		
+		// alway hide price if setting is checked and not logged in users
+		if ($wc_email_inquiry_hide_price != 'no' && !is_user_logged_in()) return true;
+		
+		$wc_email_inquiry_hide_price_after_login = $wc_email_inquiry_rules_roles_settings['hide_price_after_login'] ;
+
+		// don't hide price if for logged in users is deacticated
+		if ( $wc_email_inquiry_hide_price_after_login != 'yes' ) return false;
+		
+		$role_apply_hide_price = (array) $wc_email_inquiry_rules_roles_settings['role_apply_hide_price'];
+		
+		$user_login = wp_get_current_user();		
+		if (is_array($user_login->roles) && count($user_login->roles) > 0) {
+			$role_existed = array_intersect( $user_login->roles, $role_apply_hide_price );
+			
+			// hide price if current user role in list apply role
+			if ( is_array( $role_existed ) && count( $role_existed ) > 0 ) return true;
+		}
+		
+		return false;
+	}
+	
 	public static function check_add_email_inquiry_button ($product_id) {
 		global $wc_email_inquiry_global_settings;
 			

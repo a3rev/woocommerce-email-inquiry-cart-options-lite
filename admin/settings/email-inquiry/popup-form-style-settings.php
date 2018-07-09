@@ -30,9 +30,8 @@ class WC_EI_Popup_Form_Style_Settings
      	$this->form_fields = array(
 
 			array(
-            	'name' 		=> __( 'Default Form Background Colour', 'woocommerce-email-inquiry-cart-options' ),
+            	'name' 		=> __( 'Form Background Colour', 'woocommerce-email-inquiry-cart-options' ),
                 'type' 		=> 'heading',
-                'class'		=> 'wc_ei_default_form_container',
                 'id'		=> 'wc_ei_form_bg_box',
                 'is_box'	=> true,
            	),

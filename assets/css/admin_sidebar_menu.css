@@ -39,4 +39,8 @@
 	.wc_ei_tab_bar .chosen-container {
 		width:100% !important;	
 	}
+  .a3rev_panel_container select.chzn-select {
+    width: 100% !important;
+    max-width: 100%;
+  }
 }

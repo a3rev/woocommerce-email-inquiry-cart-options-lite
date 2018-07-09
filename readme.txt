@@ -3,11 +3,11 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 4.6
 Tested up to: 4.9.6
-Stable tag: 2.0.1
+Stable tag: 2.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Set Product Page Rules, Hide Add to Cart, Show Email Inquiry, Filter Rules by Roles for logged in users. 100% Mobile responsive Email Inquiry form!
+Set Product Page Rules, Hide Add to Cart, Hide Price, Show Email Inquiry, Filter Rules by Roles for logged in users. 100% Mobile responsive Email Inquiry form!
 
 == Description ==
 
@@ -15,20 +15,15 @@ WooCommerce Email Inquiry & Cart Options allows you to fine tune the e-commerce 
 
 Add a space saving and impressive pop-up email inquiry form to your product offering. Pop-up Email Inquiry form is 100% mobile responsive and displays the form beautifully in any mobile in portrait or landscape.
 
-= GDPR Compliant =
-
-The plugins email contact form has options to turn on GDPR compliance features. They include:
-
-* EU GDPR law complaint email form with option to turn it ON or OFF if not required
-* Option to include Privacy Policy Statement with link to privacy Page.
-* When on shows Terms and conditions acceptance checkbox on form with Dynamic text.
-
 = Catalog Visibility Rules =
 
-* Product Page Rule: Hide 'Add to Cart'
+* Rule: Hide 'Hide Product Prices'
 	- Apply Rule to all not logged in users
 	- Filter Rule by user role for logged in users.
-* Product Page Rule: Show Email Inquiry Button
+* Rule: Hide 'Add to Cart'
+	- Apply Rule to all not logged in users
+	- Filter Rule by user role for logged in users.
+* Rule: Show Email Inquiry Button
 	- Apply Rule to all logged in users.
 	- Filter Rule by user Role for logged in users.
 
@@ -36,11 +31,6 @@ The plugins email contact form has options to turn on GDPR compliance features. 
 
 Fine tune your entire Catalog visibility by
 * 'Apply Rules to Roles' - Configure which user roles each Rule is to Apply too. Fine grained control over what your account holders can see and access once they are logged into your site.
-
-= Hide 'Add to Cart' =
-
-* Turn the Rule ON and Hide the add to cart feature from all not logged in users.
-*  Use Roles to give selected users grouped by Roles access to full store functionality.
 
 = Email Product Inquiry Form =
 
@@ -59,85 +49,35 @@ WooCommerce Email Inquiry & Cart Options uses the WordPress email config and req
 * Fully customizable Sent success message shows on a pop-up after inquiry is submitted.
 * Use the WordPress text editor (WYSIWYG and HTML) to style the success message (see image under the Screenshots tab on this page).
 
+= GDPR Compliant =
+
+The plugins email contact form has options to turn on GDPR compliance features. They include:
+
+* EU GDPR law complaint email form with option to turn it ON or OFF if not required
+* Option to include Privacy Policy Statement with link to privacy Page.
+* When on shows Terms and conditions acceptance checkbox on form with Dynamic text.
+
 = Templating =
 
 If you are a coder and wish to add your own style (that can’t be added from the plugins settings) the plugin supports template over rides. Copy any template file into your theme and apply custom CSS from there.
 
->= Premium Support =
+= Premium Upgrade & Support =
 
-> The a3rev team does not provide support for the WooCommerce Email Inquiry and Cart Options plugin on the WordPress.org forums. One on one developer support is available via the plugins a3rev support forum to people who have purchased a Premium Version annual subscription.
+Please be aware that whilst we upgrade this plugin regularly time does not permit us to monitor the support forum and provide active support for the WooCommerce Email Inquiry and Cart Options Free version. 
 
-> The Premium Versions of this plugin have lots of extra features that coupled with developer support might be well worth your investment!
+Premium support and some nice advanced features are available with the [WooCommerce Email Inquiry Ultimate](https://a3rev.com/shop/woocommerce-email-inquiry-ultimate/) Premium version upgrade.
 
-This plugin has a choice of 2 Premium version upgrade plugins that add more functionality to this Free version. They are:
+= Contribute =
 
-= WooCommerce Email Inquiry Ultimate =
-[WooCommerce Email Inquiry Ultimate](http://a3rev.com/shop/woocommerce-email-inquiry-ultimate/)includes all the features of the Free version plus these enhancements:
+If you’re interested in contributing to WooCommerce Email Inquiry & Cart Options head over to the plugins [GitHub Repository](https://github.com/a3rev/woocommerce-email-inquiry-cart-options-lite) to find out how you can pitch in.
 
-* Additional Rule: Hide Products Prices Rule. 
-* Per Product Page Settings. Set Product Page Rules for every individual product from the Product Page Email and Cart meta.
-* Gives you tremendous flexibility in setting up a mixed 'add to cart' and product brochure store.
-* 100% WPML compatibility for all static and dynamic text.
-* Default Form Enhancements
-* Option to Not show email inquiry button on Product Cards
-* Option to allow the sender to send a copy of the Email Inquiry form they are submitting to themselves.
-* Option to set Email Sender Options - Set the email 'From Name' and 'From Email Address'
-
-
-Forms by Shortcode
-
-The Free Version Default email form can only be created once for all products. If you require individual forms for different products the Ultimate version is enables you use the Free Contact Form 7 or Premium Gravity forms shortcodes to create the product inquiry form. The features are: 
-
-* Full integration with the Gravity Forms and Contact Form 7 plugins
-* Use these industry leading email plugin create highly customized inquiry forms.
-* Add unique contact forms from these plugins shortcodes to individual products.
-* Choose to open the Inquiry form On Page by Ajax 'roll down' below button.
-* For sites where space is limited open the Email Inquiry form on new page.
-
-= OR =
- 
-= WooCommerce Quotes and Orders =
-[WooCommerce Quotes and Orders](http://a3rev.com/shop/woocommerce-quotes-and-orders/)includes all of the features in the FREE and Ultimate versions plus:
- 
-* Adds 3 Store Rules, Manual Quote, Auto Quote and Add to Order.
-* Auto Converts the WooCommerce add to cart function into the activated Store Rule function.
-* Apply a Store Rule to not logged in users and then Filter by selected Roles for logged in users.
-* Choice of Manual Quotes or Auto Quotes
-	- Users never see product prices
-	- Add products to 'Request a Quote' cart.
-	- Fully integrated with WooCommerce - submit Quote request and saved as new Order Status 'Quotes'
-	- Customizable Quotes My Cart, Checkout, Order Received Templates
-	- Customizable Email Request and account created email templates.
-	- Manual Quotes - Submit Quote Prices 'Off line' or edit Quote and send to client from the Edit Order dashboard.
-	- Auto Quotes - Quote Request Received Email shows products prices with link to pay for the order. Client still never sees prices on products on your store.
-* Use Manual' Quote Mode when you want to submit quote prices off-line after the Quote request is received.
-* Generate Instant and payable (via your payment gateways) Quotes including shipping and taxes with Auto Quotes Mode.
-* Add to Order for Business to Business users.
-	- Converts the WooCommerce add to cart function into a client friendly on-line Ordering system.
-	- Ideal for businesses with monthly account clients.
-	- Customizable My Cart, Checkout, Order Received Templates
-	- Built in Orders payment gateway removes WooCommerce payment requests
-	- Customizable Email Order received and account created email templates.
-	- Fully integrated with WooCommerce 'Orders' system.
-	- Fully integrated with WooCommerce My Account dashboard.
-
-= Localization =
-
-* English (default) - always included.
-* .po file (wc_email_inquiry.po) in languages folder for translations.
-* If you do a translation for your site please send it to us for inclusion in the plugin language folder. We'll acknowledge your work here. [Go here](http://a3rev.com/contact-us-page/) to send your translation files to us.
-
-= Plugin Resources =
-
-[Documentation](http://docs.a3rev.com/user-guides/woocommerce/woo-email-inquiry-cart-options/)
-[Support](http://wordpress.org/support/plugin/woocommerce-email-inquiry-cart-options)
-
+Want to add a new language translation? Great! You can contribute via [translate.wordpress.org.](https://translate.wordpress.org/projects/wp-plugins/woocommerce-email-inquiry-cart-options)
 
 == Installation ==
 
 = Minimum Requirements =
 
-* WordPress 4.5
+* WordPress 4.6
 * WooCommerce 3.0
 * PHP version 5.6 or greater
 * MySQL version 5.5 or greater
@@ -185,6 +125,18 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.1.0 - 2018/07/09 =
+* This Feature Upgrade adds a new Product Page Rule, Hide Product Price plus full compatibility with WooCommerce Quotes and Orders major version 3.0.0, WooCommerce On Page Checkout and WooCommerce 3.4.3
+* Feature - Add new Product Page Rule Hide Product Price
+* Feature - Define new hooks and filters for compatibility with WooCommerce Quotes & Orders plugin
+* Tweak - Add new hooks and functions for full compatibility with WooCommerce On Page Checkout plugin
+* Tweak - Move and Update Help Notes from the Plugin Framework Global Settings option box to new option box called Help Notes 
+* Tweak - Update plugins description in readme file.
+* Tweak - Various plugins option boxes text changes and additions
+* Framework - Convert old tooltip script to bootstrap tooltip
+* Tweak - Test for compatibility with WooCommerce 3.4.3
+* Framework - Update a3rev Plugin Framework to version 2.0.6
 
 = 2.0.1 - 2018/06/19 =
 * Maintenance update fixes a bug with email inquiry showing under footer on some sites plus a tweak to the modal pop up in mobile and fix on framework setting options.
@@ -544,6 +496,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.1.0 =
+This Feature Upgrade adds a new Product Page Rule, Hide Product Price plus full compatibility with WooCommerce Quotes and Orders major version 3.0.0, WooCommerce On Page Checkout and WooCommerce 3.4.3
 
 = 2.0.1 =
 Maintenance update fixes a bug with email inquiry showing under footer on some sites plus a tweak to the modal pop up in mobile and fix on framework setting options.

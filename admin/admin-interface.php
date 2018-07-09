@@ -90,8 +90,29 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 	public function register_modal_scripts() {
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		wp_register_style( 'bootstrap-modal', $this->admin_plugin_url() . '/assets/css/modal' . $suffix . '.css', array(), '4.1.1', 'all' );
-		wp_register_script( 'bootstrap-util', $this->admin_plugin_url() . '/assets/js/bootstrap/util' . $suffix . '.js', array( 'jquery' ), '4.1.1', false );
+
+		if ( ! wp_script_is( 'bootstrap-util', 'registered' ) ) {
+			wp_register_script( 'bootstrap-util', $this->admin_plugin_url() . '/assets/js/bootstrap/util' . $suffix . '.js', array( 'jquery' ), '4.1.1', false );
+		}
+
 		wp_register_script( 'bootstrap-modal', $this->admin_plugin_url() . '/assets/js/bootstrap/modal' . $suffix . '.js', array( 'jquery', 'bootstrap-util' ), '4.1.1', false );
+	}
+
+	public function register_popover_scripts() {
+		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+		wp_enqueue_style( 'bootstrap-popover', $this->admin_plugin_url() . '/assets/css/popover' . $suffix . '.css', array(), '4.1.1', 'all' );
+
+		wp_register_script( 'bootstrap-popper', $this->admin_plugin_url() . '/assets/js/bootstrap/popper.min.js', array( 'jquery' ), '4.1.1', false );
+
+		if ( ! wp_script_is( 'bootstrap-tooltip', 'registered' ) ) {
+			wp_register_script( 'bootstrap-tooltip', $this->admin_plugin_url() . '/assets/js/bootstrap/tooltip' . $suffix . '.js', array( 'jquery' ), '4.1.1', false );
+		}
+
+		if ( ! wp_script_is( 'bootstrap-util', 'registered' ) ) {
+			wp_register_script( 'bootstrap-util', $this->admin_plugin_url() . '/assets/js/bootstrap/util' . $suffix . '.js', array( 'jquery' ), '4.1.1', false );
+		}
+
+		wp_register_script( 'bootstrap-popover', $this->admin_plugin_url() . '/assets/js/bootstrap/popover' . $suffix . '.js', array( 'jquery', 'bootstrap-popper', 'bootstrap-util', 'bootstrap-tooltip' ), '4.1.1', false );
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -102,16 +123,17 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 		
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		$rtl = is_rtl() ? '.rtl' : '';
+
+		$this->register_popover_scripts();
 		
 		wp_register_script( 'chosen', $this->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), true, false );
 		wp_register_script( 'a3rev-chosen-new', $this->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), $this->framework_version, false );
 		wp_register_script( 'a3rev-style-checkboxes', $this->admin_plugin_url() . '/assets/js/iphone-style-checkboxes' . $rtl . '.js', array('jquery'), $this->framework_version, false );
 		wp_register_script( 'jquery-ui-slider-rtl', $this->admin_plugin_url() . '/assets/js/ui-slider/jquery.ui.slider.rtl' . $suffix . '.js', array('jquery'), true, true );
 		
-		wp_register_script( 'a3rev-admin-ui-script', $this->admin_plugin_url() . '/assets/js/admin-ui-script.js', array('jquery'), $this->framework_version, true );
+		wp_register_script( 'a3rev-admin-ui-script', $this->admin_plugin_url() . '/assets/js/admin-ui-script.js', array('jquery', 'bootstrap-popover' ), $this->framework_version, true );
 		wp_register_script( 'a3rev-typography-preview', $this->admin_plugin_url() . '/assets/js/a3rev-typography-preview.js',  array('jquery'), $this->framework_version, true );
 		wp_register_script( 'a3rev-settings-preview', $this->admin_plugin_url() . '/assets/js/a3rev-settings-preview.js',  array('jquery'), $this->framework_version, true );
-		wp_register_script( 'jquery-tiptip', $this->admin_plugin_url() . '/assets/js/tipTip/jquery.tipTip' . $suffix . '.js', array( 'jquery' ), true, true );
 		wp_register_script( 'a3rev-metabox-ui', $this->admin_plugin_url() . '/assets/js/data-meta-boxes.js', array( 'jquery' ), $this->framework_version, true );
 		wp_register_script( 'jquery-rwd-image-maps', $this->admin_plugin_url() . '/assets/js/rwdImageMaps/jquery.rwdImageMaps.min.js', array( 'jquery' ), true, true );
 		wp_register_script( 'jquery-datetime-picker', $this->admin_plugin_url() . '/assets/js/datetimepicker/jquery.datetimepicker.js', array( 'jquery' ), true, true );
@@ -130,7 +152,6 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 		wp_enqueue_script( 'a3rev-admin-ui-script' );
 		wp_enqueue_script( 'a3rev-typography-preview' );
 		wp_enqueue_script( 'a3rev-settings-preview' );
-		wp_enqueue_script( 'jquery-tiptip' );
 		wp_enqueue_script( 'a3rev-metabox-ui' );
 
 	} // End admin_script_load()
@@ -235,7 +256,6 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( 'jquery-datetime-picker', $this->admin_plugin_url() . '/assets/css/jquery.datetimepicker.css' );
 		wp_enqueue_style( 'a3rev-chosen-new-style', $this->admin_plugin_url() . '/assets/js/chosen/chosen' . $suffix . '.css', array(), $this->framework_version );
-		wp_enqueue_style( 'a3rev-tiptip-style', $this->admin_plugin_url() . '/assets/js/tipTip/tipTip.css' );
 		wp_enqueue_style( 'a3rev-metabox-ui-style', $this->admin_plugin_url() . '/assets/css/a3_admin_metabox.css', array(), $this->framework_version );
 
 		if ( is_rtl() ) {
@@ -1459,7 +1479,7 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 	
 			} elseif ( $tip ) {
 	
-				$tip = '<div class="help_tip a3-plugin-ui-icon a3-plugin-ui-help-icon" data-tip="' . esc_attr( $tip ) . '"></div>';
+				$tip = '<div class="help_tip a3-plugin-ui-icon a3-plugin-ui-help-icon" data-trigger="hover" data-content="' . esc_attr( $tip ) . '"></div>';
 	
 			}
 			

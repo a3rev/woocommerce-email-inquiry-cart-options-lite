@@ -189,11 +189,7 @@
 		$(".a3rev_panel_container .chzn-select-deselect").chosen({ allow_single_deselect:true });
 
 		/* Apply help tip script */
-		$(".a3rev_panel_container .help_tip").tipTip({
-			"attribute" : "data-tip",
-			"fadeIn" : 50,
-			"fadeOut" : 50
-		});
+		$('.a3rev_panel_container .help_tip').popover({ html: true, placement: 'bottom' });
 
 		/* Apply Time Picker */
 		$('.a3rev_panel_container input.a3rev-ui-time_picker').each(function(i){

@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 ?>
 <?php
 /*-----------------------------------------------------------------------------------
-WC EI Rules & Roles Tab
+WC EI Cart & Price Tab
 
 TABLE OF CONTENTS
 
@@ -75,7 +75,7 @@ class WC_EI_Rules_Roles_Tab extends WC_Email_Inquiry_Admin_UI
 		
 		$tab_data = array( 
 			'name'				=> 'rules-roles',
-			'label'				=> __( 'Rules & Roles', 'woocommerce-email-inquiry-cart-options' ),
+			'label'				=> __( 'Cart & Price', 'woocommerce-email-inquiry-cart-options' ),
 			'callback_function'	=> 'wc_ei_rules_roles_tab_manager',
 		);
 		

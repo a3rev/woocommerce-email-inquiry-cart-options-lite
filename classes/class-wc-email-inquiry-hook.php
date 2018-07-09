@@ -8,6 +8,11 @@
  * shop_after_hide_add_to_cart_button()
  * details_before_hide_add_to_cart_button()
  * details_after_hide_add_to_cart_button()
+ * global_hide_price()
+ * hide_price_from_mini_cart()
+ * remove_x_character_mini_cart()
+ * shop_before_hide_price()
+ * shop_after_hide_price()
  * add_email_inquiry_button()
  * shop_add_email_inquiry_button_above()
  * shop_add_email_inquiry_button_below()
@@ -115,6 +120,67 @@ class WC_Email_Inquiry_Hook_Filter
 				ob_end_clean();
 			}
 		}
+	}
+	
+	public static function global_hide_price( $price ) {
+		$product_id = 0;
+
+		if ( ( in_array( basename ($_SERVER['PHP_SELF']), array('admin-ajax.php') ) || !is_admin() ) && WC_Email_Inquiry_Functions::check_hide_price($product_id)) return '';
+		
+		return $price;
+	}
+	
+	public static function hide_price_from_mini_cart($price) {
+		$product_id = 0;
+		if (WC_Email_Inquiry_Functions::check_hide_price($product_id)) return '';
+		
+		return $price;
+	}
+	
+	public static function remove_x_character_mini_cart($text_quantity='') {
+		$product_id = 0;
+		if (WC_Email_Inquiry_Functions::check_hide_price($product_id)) $text_quantity = str_replace('&times;', '', $text_quantity);
+		
+		return $text_quantity;
+	}
+	
+	public static function hide_cart_product_subtotal( $product_subtotal ) {
+		$product_id = 0;
+		if ( WC_Email_Inquiry_Functions::check_hide_price( $product_id ) ) return '';
+		
+		return $product_subtotal;
+	}
+	
+	public static function shop_before_hide_price($template_name, $template_path, $located, $args) {
+		if ($template_name == 'loop/price.php' || $template_name == 'single-product/price.php' || 'single-product/bundled-item-price.php' == $template_name ) {
+			$product_id = 0;
+			
+			if (WC_Email_Inquiry_Functions::check_hide_price($product_id))
+				ob_start();
+		}
+	}
+	
+	public static function shop_after_hide_price($template_name, $template_path, $located, $args) {
+		if ($template_name == 'loop/price.php' || $template_name == 'single-product/price.php' || 'single-product/bundled-item-price.php' == $template_name ) {
+			$product_id = 0;
+			
+			if (WC_Email_Inquiry_Functions::check_hide_price($product_id))
+				ob_end_clean();
+		}
+	}
+
+	public static function hide_mini_cart_subtotal( $cart_subtotal='' ) {
+		$product_id = 0;
+		if ( WC_Email_Inquiry_Functions::check_hide_price( $product_id ) ) return '';
+		
+		return $cart_subtotal;
+	}
+	
+	public static function hide_mini_cart_contents_total( $cart_contents_total ) {
+		$product_id = 0;
+		if ( WC_Email_Inquiry_Functions::check_hide_price( $product_id ) ) return '';
+		
+		return $cart_contents_total;
 	}
 	
 	public static function add_email_inquiry_button( $product_id ) {
@@ -261,7 +327,7 @@ class WC_Email_Inquiry_Hook_Filter
 	}
 		
 	public static function add_style_header() {
-		wp_enqueue_style('a3_wc_email_inquiry_style', WC_EMAIL_INQUIRY_CSS_URL . '/wc_email_inquiry_style.css');
+		wp_enqueue_style('a3_wc_email_inquiry_style', WC_EMAIL_INQUIRY_CSS_URL . '/wc_email_inquiry_style.css', array(), WC_EMAIL_INQUIRY_VERSION );
 	}
 	
 	public static function footer_modal_scripts() {
@@ -308,6 +374,7 @@ class WC_Email_Inquiry_Hook_Filter
 	}
 
 	public static function plugin_extension_box( $boxes = array() ) {
+
 		global $wc_ei_admin_init;
 
 		$support_box = '<a href="'.$wc_ei_admin_init->support_url.'" target="_blank" alt="'.__('Go to Support Forum', 'woocommerce-email-inquiry-cart-options' ).'"><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/go-to-support-forum.png" /></a>';
@@ -316,13 +383,13 @@ class WC_Email_Inquiry_Hook_Filter
 			'css' => 'border: none; padding: 0; background: none;'
 		);
 
-		$ultimate_box = '<a href="http://a3rev.com/shop/woocommerce-email-inquiry-ultimate/" target="_blank" alt="'.__('Go to Support Forum', 'woocommerce-email-inquiry-cart-options' ).'"><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/woocommerce-email-inquiry-ultimate.jpg" /></a>';
+		$ultimate_box = '<a href="'.$wc_ei_admin_init->ultimate_plugin_page_url.'" target="_blank" alt="'.__('Go to Support Forum', 'woocommerce-email-inquiry-cart-options' ).'"><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/woocommerce-email-inquiry-ultimate.jpg" /></a>';
 		$boxes[] = array(
 			'content' => $ultimate_box,
 			'css' => 'border: none; padding: 0; background: none;'
 		);
 
-		$quote_order_box = '<a href="http://a3rev.com/shop/woocommerce-quotes-and-orders/" target="_blank" alt="'.__('Go to Support Forum', 'woocommerce-email-inquiry-cart-options' ).'"><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/woocommerce-quotes-orders.jpg" /></a>';
+		$quote_order_box = '<a href="'.$wc_ei_admin_init->pro_plugin_page_url.'" target="_blank" alt="'.__('Go to Support Forum', 'woocommerce-email-inquiry-cart-options' ).'"><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/woocommerce-quotes-orders.jpg" /></a>';
 		$boxes[] = array(
 			'content' => $quote_order_box,
 			'css' => 'border: none; padding: 0; background: none;'

@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 ?>
 <?php
 /*-----------------------------------------------------------------------------------
-WC EI Rules & Roles Settings
+WC EI Cart & Price Settings
 
 TABLE OF CONTENTS
 
@@ -89,9 +89,9 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 		//$this->subtab_init();
 		
 		$this->form_messages = array(
-				'success_message'	=> __( 'Rules & Roles Settings successfully saved.', 'woocommerce-email-inquiry-cart-options' ),
-				'error_message'		=> __( 'Error: Rules & Roles Settings can not save.', 'woocommerce-email-inquiry-cart-options' ),
-				'reset_message'		=> __( 'Rules & Roles Settings successfully reseted.', 'woocommerce-email-inquiry-cart-options' ),
+				'success_message'	=> __( 'Cart & Price Settings successfully saved.', 'woocommerce-email-inquiry-cart-options' ),
+				'error_message'		=> __( 'Error: Cart & Price Settings can not save.', 'woocommerce-email-inquiry-cart-options' ),
+				'reset_message'		=> __( 'Cart & Price Settings successfully reseted.', 'woocommerce-email-inquiry-cart-options' ),
 			);
 		
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_end', array( $this, 'include_script' ) );
@@ -203,12 +203,12 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 			$wp_roles = new WP_Roles();
 		}
 		$roles = $wp_roles->get_names();
-		$roles_hide_cart = $roles;
-		unset( $roles_hide_cart['manual_quote'] );
-		unset( $roles_hide_cart['auto_quote'] );
-		$roles_activate_order = $roles_auto_quote = $roles_manual_quote = $roles_hide_price = $roles_hide_cart;
-		$roles_manual_quote = array_merge( array( 'manual_quote' => __( 'Manual Quote', 'woocommerce-email-inquiry-cart-options' ) ), $roles_manual_quote );
-		$roles_auto_quote = array_merge( array( 'auto_quote' => __( 'Auto Quote', 'woocommerce-email-inquiry-cart-options' ) ), $roles_auto_quote );
+		unset( $roles['manual_quote'] );
+		unset( $roles['auto_quote'] );
+		$roles_hide_price = $roles_hide_cart = $roles;
+
+		$roles_hide_cart  = apply_filters( 'wc_ei_roles_hide_cart', $roles_hide_cart, 0 );
+		$roles_hide_price = apply_filters( 'wc_ei_roles_hide_price', $roles_hide_price, 0 );
 		
   		// Define settings			
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
@@ -255,112 +255,8 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 			),
 
 			array(
-            	'name' 		=> __( 'Help Notes', 'woocommerce-email-inquiry-cart-options' ),
-            	'class'		=> 'help_notes_container',
-                'type' 		=> 'heading',
-            ),
-			array(
-				'name' 		=> __( "Rules & Roles Help Notes", 'woocommerce-email-inquiry-cart-options' ),
-				'class'		=> 'rules_roles_explanation',
-				'id' 		=> 'rules_roles_explanation',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'hide',
-				'checked_value'		=> 'show',
-				'unchecked_value' 	=> 'hide',
-				'checked_label'		=> __( 'SHOW', 'woocommerce-email-inquiry-cart-options' ),
-				'unchecked_label' 	=> __( 'HIDE', 'woocommerce-email-inquiry-cart-options' ),
-				'desc' 		=> '</span></td></tr><tr><td colspan="2"><div class="rules_roles_explanation_container">
-<div>' . __( "Product Page Rules apply a single action Rule to all product pages which can be filtered on a per User Role basis. These Rules can also be varied on a product by product basis from each product edit page", 'woocommerce-email-inquiry-cart-options' ) . '</div>
-<ul style="padding-left: 40px;">
-	<li>* ' . __( "Set Rules that apply to Product Pages or your entire store.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-	<li>* ' . __( "The Rules are applied to users who are NOT Logged in and Rules for when they login in.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-	<li>* ' . __( "Different Rules can be applied to logged in users based upon their user Role e.g. what users with the Customer Role see verses what users with the Subscriber role see.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-</ul>
-<div style="margin-bottom: 20px;">' . __( "<strong>Important!</strong> When an admin sets a Rule for NOT logged in users if they then check the front end to see the new Rule they will not see it, because they are logged in as administrator and have not applied that Rule to their role (this catches a lot of first time users who think the plugin is not working because they can't see the rule applied while they are logged in but can when they log out).", 'woocommerce-email-inquiry-cart-options' ) . '</div>
-				</div><span>',
-			),
-			array(
-				'name' 		=> __( "Troubleshooting", 'woocommerce-email-inquiry-cart-options' ),
-				'class'		=> 'troubleshooting_explanation',
-				'id' 		=> 'troubleshooting_explanation',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'hide',
-				'checked_value'		=> 'show',
-				'unchecked_value' 	=> 'hide',
-				'checked_label'		=> __( 'SHOW', 'woocommerce-email-inquiry-cart-options' ),
-				'unchecked_label' 	=> __( 'HIDE', 'woocommerce-email-inquiry-cart-options' ),
-				'desc' 		=> '</span></td></tr><tr><td colspan="2"><div class="troubleshooting_explanation_container">
-<div>' . __( "Below is a list of common issues we see", 'woocommerce-email-inquiry-cart-options' ) . '</div>
-<div style="margin-top: 20px;">' . __( "<strong>Don't See Rules Applied on front end.</strong>", 'woocommerce-email-inquiry-cart-options' ) . '
-<ul style="padding-left: 40px;">
-	<li>* ' . __( "This is because you have not applied the Rule to your logged in user role (administrator). Either apply your role to the rule or check it in another browser where you are not logged in.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-</ul>
-</div>
-<div>' . __( "<Strong>'Add to' Button and or Email Inquiry, Read More button does not show on some products.</strong>", 'woocommerce-email-inquiry-cart-options' ) . '</div>
-<ul style="padding-left: 40px;">
-	<li>* ' . __( "The 'Add to' Button e.g. Add to Quote button is the WooCommerce Add to Cart Button.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-	<li>* ' . __( "The Email Inquiry and Read More Buttons are hooked to the add to cart button.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-</ul>
-<div style="padding-left: 40px;">' . __( "There are 2 circumstances that WooCommerce removes the 'Add to Cart' function from the Product card and Product page. If either of these apply to a product then Quotes and Orders has nothing to hook to and cannot work. Those 2 are:", 'woocommerce-email-inquiry-cart-options' ) . '
-<ul style="padding-left: 40px;">
-	<li>1. ' . __( "IF a product has no price entered.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-	<li>2. ' . __( "If 'Inventory Management' is ON and the product is 'out of Stock'.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-</ul>
-</div>
-				</div><span>',
-			),
-
-			array(
-            	'name' 		=> __( 'WooCommerce Quotes and Orders Upgrade', 'woocommerce-email-inquiry-cart-options' ),
-            	'class'		=> 'help_notes_container',
-                'type' 		=> 'heading',
-            ),
-			array(
-				'name' 		=> __( "Advanced Features", 'woocommerce-email-inquiry-cart-options' ),
-				'class'		=> 'quotes_orders_upgrade',
-				'id' 		=> 'quotes_orders_upgrade',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'hide',
-				'checked_value'		=> 'show',
-				'unchecked_value' 	=> 'hide',
-				'checked_label'		=> __( 'SHOW', 'woocommerce-email-inquiry-cart-options' ),
-				'unchecked_label' 	=> __( 'HIDE', 'woocommerce-email-inquiry-cart-options' ),
-				'desc' 		=> '</span></td></tr><tr><td colspan="2"><div class="quotes_orders_upgrade_container">
-<div>' . __( "The WooCommerce Quotes and Orders plugin is an upgrade version for store owners who want all the feature of WooCommerce Email Inquiry plus advanced cart rules, Manual Quotes. Auto Quotes and Add to Order", 'woocommerce-email-inquiry-cart-options' ) . '</div>
-<div style="margin-top: 20px;"><strong>' . __( "Manual Quotes Rule", 'woocommerce-email-inquiry-cart-options' ) . ':</strong>
-<ul style="padding-left: 40px;">
-	<li>* ' . __( "Customers to create a basket of items and submit them for a quote.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-	<li>* ' . __( "Quote Request is created as a WooCommerce Order.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-	<li>* ' . __( "Admin edits Order and submits it by email from the order edit page.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-	<li>* ' . __( "Only Prices customers sees are those in the submitted quote.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-	<li>* ' . __( "Quote is converted into a Payable Order by changing order status to Payment Pending.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-</ul>
-</div>
-<div><strong>' . __( "Auto Quotes Rule", 'woocommerce-email-inquiry-cart-options' ) . ':</strong>
-<ul style="padding-left: 40px;">
-	<li>* ' . __( "All the same features as manual quotes except Quote is Auto.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-	<li>* ' . __( "Customer submits quote request, the email has all product prices, shipping and taxes.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-	<li>* ' . __( "Auto Quotes order status is Payment Pending and can be paid for online.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-</ul>
-</div>
-<div><strong>' . __( "Orders Rule", 'woocommerce-email-inquiry-cart-options' ) . '</strong>
-<ul style="padding-left: 40px;">
-	<li>* ' . __( "Genuine Business to Business (B2B) orders functionality.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-	<li>* ' . __( "Customers use WooCommerce as a virtual order pad.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-	<li>* ' . __( "Never see payment gateways or payment requests unless admin wants that.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-	<li>* ' . __( "Use for Add to Quote if you want Prices visible.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
-</ul>
-</div>
-<div>' . __( "Just like the Product Page Rules the Manual Quotes, Auto Quotes and Add to Order Rules can be applied to not logged in users and by user role after login.", 'woocommerce-email-inquiry-cart-options' ) . '</div>
-<div style="margin-top: 20px;">' . __( "WooCommerce Quotes and Orders is a once only payment Lifetime License plugin (not annual subscription). View details here on the a3rev.com site.", 'woocommerce-email-inquiry-cart-options' ) . '</div>
-<div style="margin-top: 20px;"><strong>' . __( "Special Offer!", 'woocommerce-email-inquiry-cart-options' ) . '</strong></div>
-<div>' . __( "Upgrade to WooCommerce Quotes and Orders within 60 days of purchasing your WooCommerce Email Inquiry Cart & Options License and we will refund for the full price paid for your Email Inquiry Cart & Options License.", 'woocommerce-email-inquiry-cart-options' ) . '</div>
-				</div><span>',
-			),
-
-			array(
-            	'name' 		=> __( "Product Page Rule: Hide 'Add to Cart'", 'woocommerce-email-inquiry-cart-options' ),
-            	'desc'		=> __( 'This Rule hides the add to cart button on all products. Hide or show add to cart can be set independently of these global settings from each product edit page.', 'woocommerce-email-inquiry-cart-options' ),
+            	'name' 		=> __( "Hide 'Add to Cart ' Rules and Roles", 'woocommerce-email-inquiry-cart-options' ),
+            	'desc'		=> sprintf( __( 'This Rule hides the add to cart button on all products. Hide or show add to cart can be set independently of these global settings from each product edit page with the Premium <a href="%s" target="_blank">WooCommerce Email Inquiry Ultimate</a> upgrade.', 'woocommerce-email-inquiry-cart-options' ), $this->ultimate_plugin_page_url ),
                 'type' 		=> 'heading',
                 'id'		=> 'wc_ei_hide_add_to_cart_box',
                 'is_box'	=> true,
@@ -408,6 +304,104 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 			array(
                 'type' 		=> 'hide_addtocart_yellow_message',
            	),
+			
+			array(
+				'name' 		=> __( "Hide 'Product Price' Rules and Roles", 'woocommerce-email-inquiry-cart-options' ),
+				'desc'		=> sprintf( __( 'This Rule hides product prices on all products. Hide or show price can be set independently of these global settings from each product edit page with the Premium <a href="%s" target="_blank">WooCommerce Email Inquiry Ultimate</a> upgrade.', 'woocommerce-email-inquiry-cart-options' ), $this->ultimate_plugin_page_url ),
+                'type' 		=> 'heading',
+                'id'		=> 'wc_ei_hide_price_box',
+                'is_box'	=> true,
+           	),
+			array(  
+				'name' 		=> __( "View before log in", 'woocommerce-email-inquiry-cart-options' ),
+				'desc'		=> __( 'ON all product prices will be hidden from all users before they log in.', 'woocommerce-email-inquiry-cart-options' ),
+				'class'		=> 'email_inquiry_hide_price_before_login',
+				'id' 		=> 'hide_price',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'yes',
+				'checked_value'		=> 'yes',
+				'unchecked_value' 	=> 'no',
+				'checked_label'		=> __( 'ON', 'woocommerce-email-inquiry-cart-options' ),
+				'unchecked_label' 	=> __( 'OFF', 'woocommerce-email-inquiry-cart-options' ),
+			),
+			array(  
+				'name' 		=> __( "View after login", 'woocommerce-email-inquiry-cart-options' ),
+				'desc'		=> __( 'Select user roles that you do not want to product prices when they log in.', 'woocommerce-email-inquiry-cart-options' ),
+				'class'		=> 'email_inquiry_hide_price_after_login',
+				'id' 		=> 'hide_price_after_login',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'yes',
+				'checked_value'		=> 'yes',
+				'unchecked_value' 	=> 'no',
+				'checked_label'		=> __( 'ON', 'woocommerce-email-inquiry-cart-options' ),
+				'unchecked_label' 	=> __( 'OFF', 'woocommerce-email-inquiry-cart-options' ),
+			),
+			array(
+				'class'		=> 'email_inquiry_hide_price_after_login_container',
+                'type' 		=> 'heading',
+           	),
+			array(  
+				'class' 	=> 'chzn-select role_apply_hide_price',
+				'id' 		=> 'role_apply_hide_price',
+				'type' 		=> 'multiselect',
+				'placeholder' => __( 'Choose Roles', 'woocommerce-email-inquiry-cart-options' ),
+				'css'		=> 'width:600px; min-height:80px;',
+				'options'	=> $roles_hide_price,
+			),
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'yellow_message_container hide_price_yellow_message_container',
+           	),
+			array(
+                'type' 		=> 'hide_price_yellow_message',
+           	),
+
+			array(
+            	'name' 		=> __( 'Help Notes', 'woocommerce-email-inquiry-cart-options' ),
+            	'class'		=> 'help_notes_container',
+                'type' 		=> 'heading',
+                'id'		=> 'wc_ei_help_notes_box',
+                'is_box'	=> true,
+            ),
+			array(
+				'name' 		=> __( "Rules & Roles Help Notes", 'woocommerce-email-inquiry-cart-options' ),
+				'class'		=> 'rules_roles_explanation',
+				'id' 		=> 'rules_roles_explanation',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'hide',
+				'checked_value'		=> 'show',
+				'unchecked_value' 	=> 'hide',
+				'checked_label'		=> __( 'SHOW', 'woocommerce-email-inquiry-cart-options' ),
+				'unchecked_label' 	=> __( 'HIDE', 'woocommerce-email-inquiry-cart-options' ),
+				'desc' 		=> '</span></td></tr><tr><td colspan="2"><div class="rules_roles_explanation_container">
+<div>' . sprintf( __( 'Product Page Rules apply a single action Rule to all product pages which can be filtered on a per User Role basis. Rules can also be varied on a product by product basis from each product edit page by upgrading to the Premium <a href="%s" target="_blank">WooCommerce Email Inquiry Ultimate</a> plugin', 'woocommerce-email-inquiry-cart-options' ), $this->ultimate_plugin_page_url ) . '</div>
+<ul style="padding-left: 40px;">
+	<li>* ' . __( "Set Rules that apply to Product Pages or your entire store.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
+	<li>* ' . __( "The Rules are applied to users who are NOT Logged in and Rules for when they login in.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
+	<li>* ' . __( "Different Rules can be applied to logged in users based upon their user Role e.g. what users with the Customer Role see verses what users with the Subscriber role see.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
+</ul>
+<div style="margin-bottom: 20px;">' . __( "<strong>Important!</strong> When an admin sets a Rule for NOT logged in users if they then check the front end to see the new Rule they will not see it, because they are logged in as administrator and have not applied that Rule to their role (this catches a lot of first time users who think the plugin is not working because they can't see the rule applied while they are logged in but can when they log out).", 'woocommerce-email-inquiry-cart-options' ) . '</div>
+				</div><span>',
+			),
+			array(
+				'name' 		=> __( "Troubleshooting", 'woocommerce-email-inquiry-cart-options' ),
+				'class'		=> 'troubleshooting_explanation',
+				'id' 		=> 'troubleshooting_explanation',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'hide',
+				'checked_value'		=> 'show',
+				'unchecked_value' 	=> 'hide',
+				'checked_label'		=> __( 'SHOW', 'woocommerce-email-inquiry-cart-options' ),
+				'unchecked_label' 	=> __( 'HIDE', 'woocommerce-email-inquiry-cart-options' ),
+				'desc' 		=> '</span></td></tr><tr><td colspan="2"><div class="troubleshooting_explanation_container">
+<div>' . __( "Below is a list of common issues we see", 'woocommerce-email-inquiry-cart-options' ) . '</div>
+<div style="margin-top: 20px;">' . __( "<strong>Don't See Rules Applied on front end.</strong>", 'woocommerce-email-inquiry-cart-options' ) . '
+<ul style="padding-left: 40px;">
+	<li>* ' . __( "This is because you have not applied the Rule to your logged in user role (administrator). Either apply your role to the rule or check it in another browser where you are not logged in.", 'woocommerce-email-inquiry-cart-options' ) . '</li>
+</ul>
+</div>
+				</div><span>',
+			),
 
         ));
 	}
@@ -712,6 +706,11 @@ $(document).ready(function() {
 			} else {
 				$('.hide_addcartbt_after_login_container').css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
 			}
+			if ( $("input.email_inquiry_hide_price_after_login:checked").val() == 'yes') {
+				$('.email_inquiry_hide_price_after_login_container').css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+			} else {
+				$('.email_inquiry_hide_price_after_login_container').css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
+			}
 			
 		},
 		
@@ -752,6 +751,15 @@ $(document).ready(function() {
 					$(".hide_addcartbt_after_login_container").slideDown();
 				} else {
 					$(".hide_addcartbt_after_login_container").slideUp();
+				}
+			});
+			
+			$(document).on( "a3rev-ui-onoff_checkbox-switch", '.email_inquiry_hide_price_after_login', function( event, value, status ) {
+				$('.email_inquiry_hide_price_after_login_container').hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+				if ( status == 'true' ) {
+					$(".email_inquiry_hide_price_after_login_container").slideDown();
+				} else {
+					$(".email_inquiry_hide_price_after_login_container").slideUp();
 				}
 			});
 		}

@@ -218,8 +218,8 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
      	$this->form_fields = array(
 
 			array(
-            	'name' 		=> __( "Email Inquiry Rules and Roles", 'woocommerce-email-inquiry-cart-options' ),
-            	'desc'		=> __( "Globally set Email Inquiry feature for all Products for not logged in users and users when they log in. Option to independently set these options for each products edit page.", 'woocommerce-email-inquiry-cart-options' ),
+            	'name' 		=> __( "'Email Inquiry' Rules and Roles", 'woocommerce-email-inquiry-cart-options' ),
+            	'desc'		=> sprintf( __( 'Globally set Email Inquiry feature for all Products for not logged in users and users when they log in. Option to independently set these options for each products edit page is available by upgrading to the Premium <a href="%s" target="_blank">WooCommerce Email Inquiry Ultimate</a> plugin.', 'woocommerce-email-inquiry-cart-options' ), $this->ultimate_plugin_page_url ),
                 'type' 		=> 'heading',
                 'id'		=> 'wc_ei_show_email_inquiry_button_box',
                 'is_box'	=> true,
