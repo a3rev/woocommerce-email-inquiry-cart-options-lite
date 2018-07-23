@@ -2,8 +2,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 4.6
-Tested up to: 4.9.6
-Stable tag: 2.1.0
+Tested up to: 4.9.7
+Stable tag: 2.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,6 +125,17 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.2.0 - 2018/07/23 =
+* This feature upgrade gives options between show email inquiry on frontend as a Button or Hyperlink text with full style options plus compatibility with WordPress 4.9.7
+* Feature - Added the option to show email inquiry as a Button or a Hyperlinked text on product cards and product pages.
+* Feature - Added Full Button Style setting options to style the button to match the theme
+* Feature - Added conditional logic to menu, when select Button the Button style options show, when select hyperlink those options show
+* Feature - Added Button margin settings for tweaking the alignment of the button
+* Feature - Added Hyperlink Font editor with margin settings for alignment
+* Feature - Added Hyperlink Dynamic Text editor, with Before linked text and After Link text options
+* Tweak - Added new menu on Email Inquiry Tab as a sub menu Email Button Style  
+* Tweak - Test for compatibility with WordPress 4.9.7
 
 = 2.1.0 - 2018/07/09 =
 * This Feature Upgrade adds a new Product Page Rule, Hide Product Price plus full compatibility with WooCommerce Quotes and Orders major version 3.0.0, WooCommerce On Page Checkout and WooCommerce 3.4.3
@@ -496,6 +507,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.2.0 =
+This feature upgrade gives options between show email inquiry on frontend as a Button or Hyperlink text with full style options plus compatibility with WordPress 4.9.7
 
 = 2.1.0 =
 This Feature Upgrade adds a new Product Page Rule, Hide Product Price plus full compatibility with WooCommerce Quotes and Orders major version 3.0.0, WooCommerce On Page Checkout and WooCommerce 3.4.3

@@ -97,8 +97,6 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_end', array( $this, 'include_script' ) );
 		
 		add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
-
-		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'reset_default_settings' ) );
 				
 		add_action( $this->plugin_name . '_get_all_settings' , array( $this, 'get_settings' ) );
 		
@@ -123,16 +121,6 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
 		global $wc_ei_admin_interface;
 		
 		$wc_ei_admin_interface->reset_settings( $this->form_fields, $this->option_name, false );
-	}
-
-	/*-----------------------------------------------------------------------------------*/
-	/* reset_default_settings()
-	/* Reset default settings with function called from Admin Interface */
-	/*-----------------------------------------------------------------------------------*/
-	public function reset_default_settings() {
-		global $wc_ei_admin_interface;
-		
-		$wc_ei_admin_interface->reset_settings( $this->form_fields, $this->option_name, true, true );
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -227,7 +215,6 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
 				'unchecked_value'	=> 'link',
 				'checked_label' 	=> __( 'Button', 'woocommerce-email-inquiry-cart-options' ),
 				'unchecked_label'	=> __( 'Hyperlink', 'woocommerce-email-inquiry-cart-options' ),
-				'free_version'		=> true,
 			),
 			array(  
 				'name' 		=> __( 'Relative Position', 'woocommerce-email-inquiry-cart-options' ),
@@ -239,39 +226,33 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
 				'unchecked_value'	=> 'above',
 				'checked_label' 	=> __( 'Below', 'woocommerce-email-inquiry-cart-options' ),
 				'unchecked_label'	=> __( 'Above', 'woocommerce-email-inquiry-cart-options' ),
-				'free_version'		=> true,
 			),
 			array(  
 				'name' 		=> __( 'Button or Hyperlink Margin', 'woocommerce-email-inquiry-cart-options' ),
 				'id' 		=> 'inquiry_button_margin',
 				'type' 		=> 'array_textfields',
-				'free_version'		=> true,
 				'ids'		=> array( 
 	 								array( 
 											'id' 		=> 'inquiry_button_margin_top',
 	 										'name' 		=> __( 'Top', 'woocommerce-email-inquiry-cart-options' ),
 	 										'css'		=> 'width:40px;',
-	 										'free_version'		=> true,
 	 										'default'	=> 5 ),
 	 
 	 								array(  'id' 		=> 'inquiry_button_margin_bottom',
 	 										'name' 		=> __( 'Bottom', 'woocommerce-email-inquiry-cart-options' ),
 	 										'css'		=> 'width:40px;',
-	 										'free_version'		=> true,
 	 										'default'	=> 5 ),
 											
 									array( 
 											'id' 		=> 'inquiry_button_margin_left',
 	 										'name' 		=> __( 'Left', 'woocommerce-email-inquiry-cart-options' ),
 	 										'css'		=> 'width:40px;',
-	 										'free_version'		=> true,
 	 										'default'	=> 0 ),
 											
 									array( 
 											'id' 		=> 'inquiry_button_margin_right',
 	 										'name' 		=> __( 'Right', 'woocommerce-email-inquiry-cart-options' ),
 	 										'css'		=> 'width:40px;',
-	 										'free_version'		=> true,
 	 										'default'	=> 0 ),
 	 							)
 			),
@@ -286,7 +267,7 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
 			array(
             	'name' 		=> __( 'Email Inquiry Button Style', 'woocommerce-email-inquiry-cart-options' ),
                 'type' 		=> 'heading',
-          		'class' 	=> 'email_inquiry_button_type_container pro_feature_hidden',
+          		'class' 	=> 'email_inquiry_button_type_container',
           		'id'		=> 'wc_ei_button_style_box',
           		'is_box'	=> true,
            	),
@@ -357,7 +338,7 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
 			array(
             	'name' 		=> __( 'Hyperlink Styling', 'woocommerce-email-inquiry-cart-options' ),
                 'type' 		=> 'heading',
-          		'class'		=> 'email_inquiry_hyperlink_type_container pro_feature_hidden',
+          		'class'		=> 'email_inquiry_hyperlink_type_container',
           		'id'		=> 'wc_ei_hyperlink_style_box',
           		'is_box'	=> true,
            	),
@@ -466,6 +447,28 @@ $(document).ready(function() {
 	padding-bottom: 0 !important;
 }
 </style>
+<script>
+(function($) {
+$(document).ready(function() {
+	if ( $("input.inquiry_button_type:checked").val() == 'button') {
+		$(".email_inquiry_hyperlink_type_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
+	} else {
+		$(".email_inquiry_button_type_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
+	}
+	$(document).on( "a3rev-ui-onoff_checkbox-switch", '.inquiry_button_type', function( event, value, status ) {
+		$(".email_inquiry_button_type_container").attr('style','display:none;');
+		$(".email_inquiry_hyperlink_type_container").attr('style','display:none;');
+		if ( status == 'true') {
+			$(".email_inquiry_button_type_container").slideDown();
+			$(".email_inquiry_hyperlink_type_container").slideUp();
+		} else {
+			$(".email_inquiry_button_type_container").slideUp();
+			$(".email_inquiry_hyperlink_type_container").slideDown();
+		}
+	});
+});
+})(jQuery);
+</script>
     <?php	
 	}
 }

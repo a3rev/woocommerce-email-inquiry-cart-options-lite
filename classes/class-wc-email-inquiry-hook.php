@@ -348,6 +348,8 @@ class WC_Email_Inquiry_Hook_Filter
 		global $wc_email_inquiry_customize_email_button;
 		$google_fonts = array( 
 							$wc_email_inquiry_global_settings['inquiry_contact_popup_text']['face'], 
+							$wc_email_inquiry_customize_email_button['inquiry_button_font']['face'], 
+							$wc_email_inquiry_customize_email_button['inquiry_hyperlink_font']['face'],
 						);
 		
 		$google_fonts = apply_filters( 'wc_ei_google_fonts', $google_fonts );
