@@ -2,8 +2,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 4.6
-Tested up to: 4.9.7
-Stable tag: 2.2.0
+Tested up to: 5.0.2
+Stable tag: 2.2.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,6 +125,20 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.2.1 - 2018/12/24 =
+* This maintenance update is for compatibility with WordPress 5.0.2, WooCommerce 3.5.3 and PHP 7.3. It also includes performance updates to the plugin framework.
+* Tweak - Editor sidebar global Email & Cart meta box works with both Gutenberg and Classic Editor
+* Tweak - Test for compatibility with WordPress 5.0.2 and WordPress 4.9.9
+* Tweak - Test for compatibility with WooCommerce 3.5.3
+* Tweak - Create new structure for future development of Gutenberg Blocks
+* Framework - Performance improvement.  Replace wp_remote_fopen  with file_get_contents for get web fonts
+* Framework - Performance improvement. Define new variable `is_load_google_fonts` if admin does not require to load google fonts
+* Credit - Props to Derek for alerting us to the framework google fonts performance issue
+* Framework - Register style name for dynamic style of plugin for use with Gutenberg block
+* Framework - Update Modal script and style to version 4.1.1
+* Framework - Update a3rev Plugin Framework to version 2.1.0
+* Framework - Test and update for compatibility with PHP 7.3
 
 = 2.2.0 - 2018/07/23 =
 * This feature upgrade gives options between show email inquiry on frontend as a Button or Hyperlink text with full style options plus compatibility with WordPress 4.9.7
@@ -507,6 +521,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.2.1 =
+This maintenance update is for compatibility with WordPress 5.0.2, WooCommerce 3.5.3 and PHP 7.3. It also includes performance updates to the plugin framework.
 
 = 2.2.0 =
 This feature upgrade gives options between show email inquiry on frontend as a Button or Hyperlink text with full style options plus compatibility with WordPress 4.9.7

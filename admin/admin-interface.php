@@ -128,6 +128,7 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 		
 		wp_register_script( 'chosen', $this->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), true, false );
 		wp_register_script( 'a3rev-chosen-new', $this->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), $this->framework_version, false );
+		wp_register_script( 'a3rev-chosen-ajaxify', $this->admin_plugin_url() . '/assets/js/chosen/chosen.ajaxify.js', array( 'jquery', 'a3rev-chosen-new' ), $this->framework_version, false );
 		wp_register_script( 'a3rev-style-checkboxes', $this->admin_plugin_url() . '/assets/js/iphone-style-checkboxes' . $rtl . '.js', array('jquery'), $this->framework_version, false );
 		wp_register_script( 'jquery-ui-slider-rtl', $this->admin_plugin_url() . '/assets/js/ui-slider/jquery.ui.slider.rtl' . $suffix . '.js', array('jquery'), true, true );
 		
@@ -147,7 +148,7 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 			wp_enqueue_script( 'jquery-ui-slider' );
 		}
 		wp_enqueue_script( 'chosen' );
-		wp_enqueue_script( 'a3rev-chosen-new' );
+		wp_enqueue_script( 'a3rev-chosen-ajaxify' );
 		wp_enqueue_script( 'a3rev-style-checkboxes' );
 		wp_enqueue_script( 'a3rev-admin-ui-script' );
 		wp_enqueue_script( 'a3rev-typography-preview' );
@@ -383,7 +384,7 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 				
 				default :
 					// Do not include when it's separate option
-					if ( isset( $value['separate_option'] ) && $value['separate_option'] != false ) continue;
+					if ( isset( $value['separate_option'] ) && $value['separate_option'] != false ) break;
 					
 					// Remove [, ] characters from id argument
 					if ( strstr( $value['id'], '[' ) ) {
@@ -1143,7 +1144,7 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 	 * @return void
 	 * ========================================================================
 	 * Option Array Structure :
-	 * type					=> row | column | heading | ajax_submit | ajax_multi_submit | google_api_key | onoff_toggle_box 
+	 * type					=> row | column | heading | ajax_submit | ajax_multi_submit | google_api_key | google_map_api_key | onoff_toggle_box 
 	 * 						   | text | email | number | password | color | bg_color | textarea | select | multiselect | radio | onoff_radio | checkbox | onoff_checkbox 
 	 *						   | switcher_checkbox | image_size | single_select_page | typography | border | border_styles | border_corner | box_shadow 
 	 *						   | slider | upload | wp_editor | array_textfields | time_picker
@@ -1180,6 +1181,7 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 	 * checked_label		=> text : apply for onoff_checkbox, switcher_checkbox only ( set it to show the text instead ON word default )
 	 * unchecked_label		=> text : apply for onoff_checkbox, switcher_checkbox only ( set it to show the text instead OFF word default  )
 	 * options				=> array : apply for select, multiselect, radio types
+	 * options_url		 	=> url : apply for select, multiselect
 	 *
 	 * onoff_options		=> array : apply for onoff_radio only
 	 *						   ---------------- example ---------------------
@@ -1832,6 +1834,62 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 
 				break;
 
+				// Google Map API Key input
+				case 'google_map_api_key':
+
+					$google_map_api_key        = $this->settings_get_option( $this->google_map_api_key_option );
+					$google_map_api_key_enable = $this->settings_get_option( $this->google_map_api_key_option . '_enable', 0 );
+					if ( ! isset( $value['checked_label'] ) ) $value['checked_label'] = __( 'ON', 'woocommerce-email-inquiry-cart-options' );
+					if ( ! isset( $value['unchecked_label'] ) ) $value['unchecked_label'] = __( 'OFF', 'woocommerce-email-inquiry-cart-options' );
+
+					?><tr valign="top">
+						<th scope="row" class="titledesc">
+                        	<?php echo $tip; ?>
+							<label for="<?php echo $this->google_map_api_key_option; ?>"><?php echo __( 'Google Maps API', 'woocommerce-email-inquiry-cart-options' ); ?></label>
+						</th>
+						<td class="forminp forminp-onoff_checkbox forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+							<input
+								name="<?php echo $this->google_map_api_key_option; ?>_enable"
+                                id="<?php echo $this->google_map_api_key_option; ?>_enable"
+								class="a3rev-ui-onoff_checkbox a3rev-ui-onoff_google_api_key_enable"
+                                checked_label="<?php echo esc_html( $value['checked_label'] ); ?>"
+                                unchecked_label="<?php echo esc_html( $value['unchecked_label'] ); ?>"
+                                type="checkbox"
+								value="1"
+								<?php checked( $google_map_api_key_enable, 1 ); ?>
+								/> <span class="description" style="margin-left:5px;"><?php echo __( 'Switch ON to connect to Google Maps API', 'woocommerce-email-inquiry-cart-options' ); ?></span>
+
+							<div>&nbsp;</div>
+							<div class="a3rev-ui-google-api-key-container" style="<?php if( 1 != $google_map_api_key_enable ) { echo 'display: none;'; } ?>">
+								<div class="a3rev-ui-google-api-key-description"><?php echo sprintf( __( "Enter your existing Google Map API Key below. Don't have a key? Visit <a href='%s' target='_blank'>Google Maps API</a> to create a key", 'woocommerce-email-inquiry-cart-options' ), 'https://developers.google.com/maps/documentation/javascript/get-api-key' ); ?></div>
+								<div class="a3rev-ui-google-api-key-inside 
+									<?php
+									if ( $this->is_valid_google_map_api_key() ) {
+										echo 'a3rev-ui-google-valid-key';
+									} elseif ( '' != $google_map_api_key ) {
+										echo 'a3rev-ui-google-unvalid-key';
+									}
+									?>
+									">
+									<input
+										name="<?php echo $this->google_map_api_key_option; ?>"
+										id="<?php echo $this->google_map_api_key_option; ?>"
+										type="text"
+										style="<?php echo esc_attr( $value['css'] ); ?>"
+										value="<?php echo esc_attr( $google_map_api_key ); ?>"
+										class="a3rev-ui-text a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?> <?php echo esc_attr( $value['class'] ); ?>"
+		                                placeholder="<?php echo __( 'Google Map API Key', 'woocommerce-email-inquiry-cart-options' ); ?>"
+										<?php echo implode( ' ', $custom_attributes ); ?>
+										/>
+									<p class="a3rev-ui-google-valid-key-message"><?php echo __( 'Your Google API Key is valid and automatic font updates are enabled.', 'woocommerce-email-inquiry-cart-options' ); ?></p>
+									<p class="a3rev-ui-google-unvalid-key-message"><?php echo __( 'Please enter a valid Google API Key.', 'woocommerce-email-inquiry-cart-options' ); ?></p>
+								</div>
+							</div>
+						</td>
+					</tr><?php
+
+				break;
+
 				// Manual Check New Version when click on the button instead of wait for daily
 				case 'manual_check_version':
 
@@ -1913,6 +1971,12 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 					$errors_text      = $value['errors_text'];
 					$statistic_column = isset( $value['statistic_column'] ) ? $value['statistic_column'] : 1;
 
+					$notice          = isset( $value['notice'] ) ? $value['notice'] : '';
+					$confirm_message = '';
+					if ( isset( $value['confirm_run'] ) && $value['confirm_run']['allow'] ) {
+						$confirm_message = isset( $value['confirm_run']['message'] ) ? $value['confirm_run']['message'] : '';
+					}
+
 					$multi_current_items = 0;
 					$multi_total_items   = 0;
 
@@ -1953,11 +2017,17 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 									class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?>-button <?php echo esc_attr( $value['class'] ); ?>"
 									style="<?php echo esc_attr( $value['css'] ); ?>"
 									<?php echo implode( ' ', $custom_attributes ); ?>
+								<?php if ( ! empty( $confirm_message ) ) { ?>
+									data-confirm_message="<?php echo esc_attr( $confirm_message ); ?>"
+								<?php } ?> 
 								><?php echo $button_name; ?></button>
 								<span class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?>-successed"><?php echo $successed_text; ?></span>
 								<span class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?>-errors"><?php echo $errors_text; ?></span>
 
 								<!-- Progress Bar -->
+								<?php if ( ! empty( $notice ) ) { ?>
+								<div class="a3rev-ui-progress-notice"><?php echo $notice; ?></div>
+								<?php } ?>
 								<div class="a3rev-ui-progress-bar-wrap">
 									<div class="a3rev-ui-progress-inner" data-current="<?php echo $multi_current_items; ?>" data-total="<?php echo $multi_total_items; ?>" ></div>
 									<div class="a3rev-ui-progressing-text"><?php echo $progressing_text; ?></div>
@@ -2181,6 +2251,12 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 						$value['class'] .= ' chzn-rtl';
 					}
 					if ( ! isset( $value['options'] ) ) $value['options'] = array();
+
+					$is_ajax = false;
+					if ( isset( $value['options_url'] ) && ! empty( $value['options_url'] ) ) {
+						$is_ajax = true;
+						$value['class'] .= ' chzn-select-ajaxify';
+					}
 		
 					?><tr valign="top">
 						<th scope="row" class="titledesc">
@@ -2196,6 +2272,11 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 								data-placeholder="<?php echo esc_html( $value['placeholder'] ); ?>"
 								<?php echo implode( ' ', $custom_attributes ); ?>
 								<?php if ( $value['type'] == 'multiselect' ) echo 'multiple="multiple"'; ?>
+								<?php if ( $is_ajax ) {
+									echo 'options_url="'.esc_url( $value['options_url'] ).'"';
+									echo 'data-no_results_text="Please enter 3 or more characters"';
+								}
+								?>
 								>
 								<?php
 								if ( is_array( $value['options'] ) && count( $value['options'] ) > 0 ) {
