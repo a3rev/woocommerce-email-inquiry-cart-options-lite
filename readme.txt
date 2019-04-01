@@ -2,8 +2,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 4.6
-Tested up to: 5.0.2
-Stable tag: 2.2.1
+Tested up to: 5.1.1
+Stable tag: 2.2.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,6 +125,12 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.2.2 - 2019/04/01 =
+* This maintenance upgrade fixes an issue with Variation Price and description display when add to cart is hidden plus compatibility with WooCommerce 3.5.7 and upcoming WordPress 5.2
+* Tweak - Test for compatibility with WordPress 5.2
+* Tweak - Test for compatibility with WooCommerce 3.5.7
+* Fix - don't add duplicate price and description for Product Variation, fix for work compatibility with WooCommerce version 3.5 +
 
 = 2.2.1 - 2018/12/24 =
 * This maintenance update is for compatibility with WordPress 5.0.2, WooCommerce 3.5.3 and PHP 7.3. It also includes performance updates to the plugin framework.
@@ -521,6 +527,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.2.2 =
+This maintenance upgrade fixes an issue with Variation Price and description display when add to cart is hidden plus compatibility with WooCommerce 3.5.7 and upcoming WordPress 5.2
 
 = 2.2.1 =
 This maintenance update is for compatibility with WordPress 5.0.2, WooCommerce 3.5.3 and PHP 7.3. It also includes performance updates to the plugin framework.

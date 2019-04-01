@@ -67,16 +67,6 @@ class WC_Email_Inquiry_Hook_Filter
 		
 		if (WC_Email_Inquiry_Functions::check_hide_add_cart_button($product_id)){
 			ob_end_clean();
-			
-			if ($product->is_type('variable')) {
-				?>
-					<div class="single_variation_wrap" style="display:none;">
-						<div class="woocommerce-variation single_variation"></div>
-						<div class="woocommerce-variation-add-to-cart variations_button"><input type="hidden" name="variation_id" value="" /></div>
-					</div>
-					<div><input type="hidden" name="product_id" value="<?php echo $post->ID; ?>" /></div>
-				<?php
-			}
 		}
 	}
 	
