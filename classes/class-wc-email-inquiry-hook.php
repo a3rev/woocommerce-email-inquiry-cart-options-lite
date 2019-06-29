@@ -381,12 +381,6 @@ class WC_Email_Inquiry_Hook_Filter
 			'css' => 'border: none; padding: 0; background: none;'
 		);
 
-		$quote_order_box = '<a href="'.$wc_ei_admin_init->pro_plugin_page_url.'" target="_blank" alt="'.__('Go to Support Forum', 'woocommerce-email-inquiry-cart-options' ).'"><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/woocommerce-quotes-orders.jpg" /></a>';
-		$boxes[] = array(
-			'content' => $quote_order_box,
-			'css' => 'border: none; padding: 0; background: none;'
-		);
-
 		$connect_box = '<div style="margin-bottom: 5px;">' . __('Connect with us via','woocommerce-email-inquiry-cart-options' ) . '</div>';
 		$connect_box .= '<a href="https://www.facebook.com/a3rev" target="_blank" alt="'.__('a3rev Facebook', 'woocommerce-email-inquiry-cart-options' ).'" style="margin-right: 5px;"><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/follow-facebook.png" /></a> ';
 		$connect_box .= '<a href="https://twitter.com/a3rev" target="_blank" alt="'.__('a3rev Twitter', 'woocommerce-email-inquiry-cart-options' ).'"><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/follow-twitter.png" /></a>';
@@ -394,13 +388,6 @@ class WC_Email_Inquiry_Hook_Filter
 		$boxes[] = array(
 			'content' => $connect_box,
 			'css' => 'border-color: #3a5795;'
-		);
-
-		$woocommerce_box = '<a href="http://a3rev.com/product-category/woocommerce/?display=products" target="_blank" alt="'.__('WooCommerce Plugins', 'woocommerce-email-inquiry-cart-options' ).'"><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/woocommerce-plugins.png" /></a>';
-
-		$boxes[] = array(
-			'content' => $woocommerce_box,
-			'css' => 'border: none; padding: 0; background: none;'
 		);
 
 		return $boxes;

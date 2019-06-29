@@ -1,9 +1,9 @@
-=== WooCommerce Email Inquiry & Cart Options ===
+=== Email Inquiry & Cart Options for WooCommerce ===
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 4.6
-Tested up to: 5.1.1
-Stable tag: 2.2.3
+Tested up to: 5.2.2
+Stable tag: 2.2.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -11,7 +11,7 @@ Set Product Page Rules, Hide Add to Cart, Hide Price, Show Email Inquiry, Filter
 
 == Description ==
 
-WooCommerce Email Inquiry & Cart Options allows you to fine tune the e-commerce accessibility on your WooCommerce site by setting 'Rules' that apply to all site visitors. Fine tune access to the e-commerce function for logged in users by assigning the Rules to WordPress user roles, including the WooCommerce Customer and Store manager Roles.
+Email Inquiry & Cart Options for WooCommerce allows you to fine tune the e-commerce accessibility on your WooCommerce site by setting 'Rules' that apply to all site visitors. Fine tune access to the e-commerce function for logged in users by assigning the Rules to WordPress user roles, including the WooCommerce Customer and Store manager Roles.
 
 Add a space saving and impressive pop-up email inquiry form to your product offering. Pop-up Email Inquiry form is 100% mobile responsive and displays the form beautifully in any mobile in portrait or landscape.
 
@@ -34,7 +34,7 @@ Fine tune your entire Catalog visibility by
 
 = Email Product Inquiry Form =
 
-WooCommerce Email Inquiry & Cart Options uses the WordPress email config and requires no external email plugin. Features
+Email Inquiry & Cart Options uses the WordPress email config and requires no external email plugin. Features
 
 * Instantly adds a Product Email Inquiry button to every product page.
 * Option to use hyperlinked text instead of a Button.
@@ -63,13 +63,13 @@ If you are a coder and wish to add your own style (that can’t be added from the 
 
 = Premium Upgrade & Support =
 
-Please be aware that whilst we upgrade this plugin regularly time does not permit us to monitor the support forum and provide active support for the WooCommerce Email Inquiry and Cart Options Free version. 
+Please be aware that whilst we upgrade this plugin regularly time does not permit us to monitor the support forum and provide active support for the Email Inquiry and Cart Options for WooCommerce Free version. 
 
-Premium support and some nice advanced features are available with the [WooCommerce Email Inquiry Ultimate](https://a3rev.com/shop/woocommerce-email-inquiry-ultimate/) Premium version upgrade.
+Premium support and some nice advanced features are available with the [Email Inquiry Ultimate](https://a3rev.com/shop/woocommerce-email-inquiry-ultimate/) Premium version upgrade.
 
 = Contribute =
 
-If you’re interested in contributing to WooCommerce Email Inquiry & Cart Options head over to the plugins [GitHub Repository](https://github.com/a3rev/woocommerce-email-inquiry-cart-options-lite) to find out how you can pitch in.
+If you’re interested in contributing to Email Inquiry & Cart Options for WooCommerce head over to the plugins [GitHub Repository](https://github.com/a3rev/woocommerce-email-inquiry-cart-options-lite) to find out how you can pitch in.
 
 Want to add a new language translation? Great! You can contribute via [translate.wordpress.org.](https://translate.wordpress.org/projects/wp-plugins/woocommerce-email-inquiry-cart-options)
 
@@ -79,14 +79,14 @@ Want to add a new language translation? Great! You can contribute via [translate
 
 * WordPress 4.6
 * WooCommerce 3.0
-* PHP version 5.6 or greater
-* MySQL version 5.5 or greater
+* PHP version 5.6.20
+* MySQL version 5.5
 
 = Automatic installation =
 
-Automatic installation is the easiest option as WordPress handles the file transfers itself and you don't even need to leave your web browser. To do an automatic install of WooCommerce Email Inquiry & Cart Options, log in to your WordPress admin panel, navigate to the Plugins menu and click Add New.
+Automatic installation is the easiest option as WordPress handles the file transfers itself and you don't even need to leave your web browser. To do an automatic install of Email Inquiry & Cart Options for WooCommerce, log in to your WordPress admin panel, navigate to the Plugins menu and click Add New.
 
-In the search field type "WooCommerce Email Inquiry & Cart Options" and click Search Plugins. Once you have found our plugin you can install it by simply clicking Install Now. After clicking that link you will be asked if you are sure you want to install the plugin. Click yes and WordPress will automatically complete the installation.
+In the search field type "Email Inquiry & Cart Options for WooCommerce" and click Search Plugins. Once you have found our plugin you can install it by simply clicking Install Now. After clicking that link you will be asked if you are sure you want to install the plugin. Click yes and WordPress will automatically complete the installation.
 
 = Manual installation =
 
@@ -125,6 +125,12 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.2.4 - 2019/06/29 =
+* This is a maintenance upgrade to fix a potentially fatal error conflict with sites running PHP 7.3 plus compatibility with WordPress v 5.2.2 and WooCommerce 3.6.4
+* Tweak - Test for compatibility with WooCommerce 3.6.4
+* Tweak - Test for compatibility with WordPress 5.2.2
+* Fix - PHP warning continue targeting switch is equivalent to break for compatibility on PHP 7.3
 
 = 2.2.3 - 2019/04/26 =
 * This maintenance update has tweaks for compatibility with WordPress 5.2.0 and WooCommerce 3.6.0 major new versions whilst maintaining backward compatibility
@@ -533,6 +539,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.2.4 =
+This is a maintenance upgrade to fix a potentially fatal error conflict with sites running PHP 7.3 plus compatibility with WordPress v 5.2.2 and WooCommerce 3.6.4
 
 = 2.2.3 =
 This maintenance update has tweaks for compatibility with WordPress 5.2.0 and WooCommerce 3.6.0 major new versions whilst maintaining backward compatibility
