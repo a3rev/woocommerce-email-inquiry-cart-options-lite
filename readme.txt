@@ -2,8 +2,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 4.6
-Tested up to: 5.2.2
-Stable tag: 2.2.4
+Tested up to: 5.2.3
+Stable tag: 2.2.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,6 +125,11 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.2.5 - 2019/09/25 =
+* Maintenance upgrade to add support for Hide Add to Cart on product cards added by WooCommerce Gutenberg block.
+* Tweaks - Add hook to hide Add to Cart on products inserted by WooCommerce Product Grid Block
+* Tweak - Test for compatibility with WooCommerce 3.7.0
 
 = 2.2.4 - 2019/06/29 =
 * This is a maintenance upgrade to fix a potentially fatal error conflict with sites running PHP 7.3 plus compatibility with WordPress v 5.2.2 and WooCommerce 3.6.4
@@ -539,6 +544,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.2.5 =
+Maintenance upgrade to add support for Hide Add to Cart and show Read More on product cards added by WooCommerce Gutenberg block.
 
 = 2.2.4 =
 This is a maintenance upgrade to fix a potentially fatal error conflict with sites running PHP 7.3 plus compatibility with WordPress v 5.2.2 and WooCommerce 3.6.4

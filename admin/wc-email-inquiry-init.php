@@ -68,6 +68,9 @@ add_action('wp_ajax_nopriv_wc_ei_yellow_message_dontshow', array('WC_Email_Inqui
 add_action('wp_ajax_wc_ei_yellow_message_dismiss', array('WC_Email_Inquiry_Functions', 'wc_ei_yellow_message_dismiss') );
 add_action('wp_ajax_nopriv_wc_ei_yellow_message_dismiss', array('WC_Email_Inquiry_Functions', 'wc_ei_yellow_message_dismiss') );
 
+// Check for hide add to cart on Product Grid Block
+add_filter( 'woocommerce_blocks_product_grid_item_html', array( 'WC_Email_Inquiry_Hook_Filter', 'product_grid_block' ), 10, 3 );
+
 // Hide Add to Cart button on Shop page
 add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'shop_before_hide_add_to_cart_button'), 100, 4 );
 add_action('woocommerce_after_template_part', array('WC_Email_Inquiry_Hook_Filter', 'shop_after_hide_add_to_cart_button'), 1, 4 );

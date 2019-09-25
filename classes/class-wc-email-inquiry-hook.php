@@ -40,6 +40,39 @@ class WC_Email_Inquiry_Hook_Filter
 				ob_start();
 		}
 	}
+
+	public static function product_grid_block( $content, $data, $product ) {
+
+		$product_id = $product->get_id();
+
+		$have_hide_add_cart = false;
+
+		if ( WC_Email_Inquiry_Functions::check_hide_add_cart_button( $product_id ) ) {
+			$have_hide_add_cart = true;
+		}
+
+		if ( ! $have_hide_add_cart ) {
+			return $content;
+		}
+
+		$custom_button = $data->button;
+		if ( $have_hide_add_cart ) {
+			$custom_button = '';
+		}
+
+		$content = "<li class=\"wc-block-grid__product\">
+				<a href=\"{$data->permalink}\" class=\"wc-block-grid__product-link\">
+					{$data->image}
+					{$data->title}
+				</a>
+				{$data->badge}
+				{$data->price}
+				{$data->rating}
+				{$custom_button}
+			</li>";
+
+		return $content;
+	}
 	
 	public static function shop_after_hide_add_to_cart_button($template_name, $template_path, $located, $args ) {
 		global $post;
