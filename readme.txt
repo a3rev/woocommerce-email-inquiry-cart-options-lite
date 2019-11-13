@@ -2,8 +2,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 4.6
-Tested up to: 5.2.3
-Stable tag: 2.2.5
+Tested up to: 5.3
+Stable tag: 2.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,6 +125,17 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.3.0 - 2019/11/13 =
+* This feature release has a lot including compatibility with WooCommerce 3.8.0, WordPress 5.3 whilst maintaining backward compatibility, PHP upgrade to Composer PHP Dependency Manger and a full security review and update.
+* Feature - Plugin fully refactored to Composer for cleaner code and faster PHP code
+* Tweak - Test for compatibility with WordPress 5.3.0
+* Tweak - Test for compatibility with WooCommerce 3.8.0
+* Tweak - Remove the hard coded PHP error_reporting display errors false from compile sass to css
+* Tweak - Update templates use new namespace
+* Tweak - Support for backward compatibility for the theme have override with old template
+* Dev - Replace file_get_contents with HTTP API wp_remote_get
+* Dev - Ensure that all inputs are sanitized and all outputs are escaped.
 
 = 2.2.5 - 2019/09/25 =
 * Maintenance upgrade to add support for Hide Add to Cart on product cards added by WooCommerce Gutenberg block.
@@ -544,6 +555,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.3.0 =
+This feature release has a lot including compatibility with WooCommerce 3.8.0, WordPress 5.3 whilst maintaining backward compatibility, PHP upgrade to Composer PHP Dependency Manger and a full security review and update
 
 = 2.2.5 =
 Maintenance upgrade to add support for Hide Add to Cart and show Read More on product cards added by WooCommerce Gutenberg block.

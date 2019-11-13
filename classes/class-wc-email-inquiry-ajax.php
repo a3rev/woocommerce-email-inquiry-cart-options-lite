@@ -1,10 +1,13 @@
 <?php
+
+namespace A3Rev\WCEmailInquiry;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class WC_Email_Inquiry_Ajax
+class Ajax
 {
 
 	public function __construct() {
@@ -35,14 +38,14 @@ class WC_Email_Inquiry_Ajax
 			'message' => __( "Sorry, this product don't enable email inquiry.", 'woocommerce-email-inquiry-cart-options' ),
 		);
 
-		$product_id         = stripslashes( $_POST['product_id'] );
-		$your_name          = esc_attr( stripslashes( $_POST['your_name'] ) );
-		$your_email         = esc_attr( stripslashes( $_POST['your_email'] ) );
-		$your_phone         = esc_attr( stripslashes( $_POST['your_phone'] ) );
-		$your_message       = esc_attr( stripslashes( strip_tags( $_POST['your_message'] ) ) );
-		$send_copy_yourself = stripslashes( $_POST['send_copy'] );
+		$product_id         = absint( $_POST['product_id'] );
+		$your_name          = wp_unslash( wp_strip_all_tags( $_POST['your_name'] ) );
+		$your_email         = wp_unslash( wp_strip_all_tags( $_POST['your_email'] ) );
+		$your_phone         = wp_unslash( wp_strip_all_tags( $_POST['your_phone'] ) );
+		$your_message       = wp_unslash( wp_strip_all_tags( $_POST['your_message'] ) );
+		$send_copy_yourself = wp_unslash( wp_strip_all_tags( $_POST['send_copy'] ) );
 		
-		$email_result = WC_Email_Inquiry_Functions::email_inquiry( $product_id, $your_name, $your_email, $your_phone, $your_message, $send_copy_yourself );
+		$email_result = Functions::email_inquiry( $product_id, $your_name, $your_email, $your_phone, $your_message, $send_copy_yourself );
 
 		if ( false !== $email_result ) {
 			$json_var['status']  = 'success';
@@ -54,8 +57,3 @@ class WC_Email_Inquiry_Ajax
 		die();
 	}
 }
-
-global $wc_ei_ajax;
-$wc_ei_ajax = new WC_Email_Inquiry_Ajax();
-
-?>

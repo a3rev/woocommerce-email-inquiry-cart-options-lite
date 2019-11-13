@@ -16,7 +16,10 @@
  * wc_ei_yellow_message_dontshow()
  * wc_ei_yellow_message_dismiss()
  */
-class WC_Email_Inquiry_Functions 
+
+namespace A3Rev\WCEmailInquiry;
+
+class Functions 
 {	
 	
 	/** 
@@ -130,7 +133,7 @@ class WC_Email_Inquiry_Functions
 		
 		if ($wc_email_inquiry_single_only == 'yes') return false;
 		
-		return WC_Email_Inquiry_Functions::check_add_email_inquiry_button($product_id);
+		return self::check_add_email_inquiry_button($product_id);
 		
 	}
 
@@ -204,7 +207,7 @@ class WC_Email_Inquiry_Functions
 		global $wc_email_inquiry_contact_form_settings;
 		$wc_email_inquiry_contact_success = stripslashes( get_option( 'wc_email_inquiry_contact_success', '' ) );
 		
-		if ( WC_Email_Inquiry_Functions::check_add_email_inquiry_button($product_id) ) {
+		if ( self::check_add_email_inquiry_button($product_id) ) {
 			
 			if ( trim( $wc_email_inquiry_contact_success ) != '') $wc_email_inquiry_contact_success = wpautop(wptexturize( $wc_email_inquiry_contact_success ));
 			else $wc_email_inquiry_contact_success = __("Thanks for your inquiry - we'll be in touch with you as soon as possible!", 'woocommerce-email-inquiry-cart-options' );
@@ -269,9 +272,9 @@ class WC_Email_Inquiry_Functions
 			$content = apply_filters('wc_email_inquiry_inquiry_content', $content);
 			
 			// Filters for the email
-			add_filter( 'wp_mail_from', array( 'WC_Email_Inquiry_Functions', 'get_from_address' ) );
-			add_filter( 'wp_mail_from_name', array( 'WC_Email_Inquiry_Functions', 'get_from_name' ) );
-			add_filter( 'wp_mail_content_type', array( 'WC_Email_Inquiry_Functions', 'get_content_type' ) );
+			add_filter( 'wp_mail_from', array( __CLASS__, 'get_from_address' ) );
+			add_filter( 'wp_mail_from_name', array( __CLASS__, 'get_from_name' ) );
+			add_filter( 'wp_mail_content_type', array( __CLASS__, 'get_content_type' ) );
 			
 			wp_mail( $to_email, $subject, $content, $headers, '' );
 			
@@ -280,9 +283,9 @@ class WC_Email_Inquiry_Functions
 			}
 			
 			// Unhook filters
-			remove_filter( 'wp_mail_from', array( 'WC_Email_Inquiry_Functions', 'get_from_address' ) );
-			remove_filter( 'wp_mail_from_name', array( 'WC_Email_Inquiry_Functions', 'get_from_name' ) );
-			remove_filter( 'wp_mail_content_type', array( 'WC_Email_Inquiry_Functions', 'get_content_type' ) );
+			remove_filter( 'wp_mail_from', array( __CLASS__, 'get_from_address' ) );
+			remove_filter( 'wp_mail_from_name', array( __CLASS__, 'get_from_name' ) );
+			remove_filter( 'wp_mail_content_type', array( __CLASS__, 'get_content_type' ) );
 			
 			return $wc_email_inquiry_contact_success;
 		} else {
@@ -317,7 +320,7 @@ class WC_Email_Inquiry_Functions
 	
 	public static function wc_ei_yellow_message_dontshow() {
 		check_ajax_referer( 'wc_ei_yellow_message_dontshow', 'security' );
-		$option_name   = $_REQUEST['option_name'];
+		$option_name   = sanitize_key( $_REQUEST['option_name'] );
 		update_option( $option_name, 1 );
 		die();
 	}
@@ -330,4 +333,3 @@ class WC_Email_Inquiry_Functions
 		die();
 	}
 }
-?>

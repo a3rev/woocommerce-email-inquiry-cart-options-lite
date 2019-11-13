@@ -2,15 +2,15 @@
 /*
 Plugin Name: Email Inquiry & Cart Options for WooCommerce
 Description: Transform your entire WooCommerce products catalog or any individual product into an online brochure with Product Email Inquiry button and pop-up email form. Add product email inquiry functionality to any product either with WooCommerce functionality or hide that functionality and the page becomes a brochure.
-Version: 2.2.5
+Version: 2.3.0
 Requires at least: 4.5
-Tested up to: 5.2.3
+Tested up to: 5.3
 Author: a3rev Software
 Author URI: https://a3rev.com/
 Text Domain: woocommerce-email-inquiry-cart-options
 Domain Path: /languages
 WC requires at least: 3.0.0
-WC tested up to: 3.7.0
+WC tested up to: 3.8
 License: This software is under commercial license and copyright to A3 Revolution Software Development team
 
 	WooCommerce Email Inquiry & Cart Options. Plugin for the WooCommerce shopping Cart.
@@ -38,8 +38,18 @@ define('WC_EMAIL_INQUIRY_CSS_URL', WC_EMAIL_INQUIRY_URL . '/assets/css');
 if (!defined("WC_EMAIL_ULTIMATE_URI")) define("WC_EMAIL_ULTIMATE_URI", "https://a3rev.com/shop/woocommerce-email-inquiry-ultimate/");
 
 define( 'WC_EMAIL_INQUIRY_KEY', 'wc_email_inquiry' );
-define( 'WC_EMAIL_INQUIRY_VERSION',  '2.2.5' );
+define( 'WC_EMAIL_INQUIRY_VERSION',  '2.3.0' );
 define( 'WC_EMAIL_INQUIRY_G_FONTS', true );
+
+if ( version_compare( PHP_VERSION, '5.6.0', '>=' ) ) {
+	require __DIR__ . '/vendor/autoload.php';
+
+	global $wc_ei_ajax;
+	$wc_ei_ajax = new \A3Rev\WCEmailInquiry\Ajax();
+
+} else {
+	return;
+}
 
 /**
  * Load Localisation files.
@@ -67,10 +77,6 @@ include ('admin/admin-init.php');
 include ('admin/less/sass.php');
 
 include ('includes/wc-email-inquiry-template-functions.php');
-include ('classes/class-wc-email-inquiry-ajax.php');
-
-include ('classes/class-wc-email-inquiry-functions.php');
-include ('classes/class-wc-email-inquiry-hook.php');
 
 include ('admin/wc-email-inquiry-init.php');
 
@@ -78,5 +84,3 @@ include ('admin/wc-email-inquiry-init.php');
  * Call when the plugin is activated
  */
 register_activation_hook(__FILE__, 'wc_email_inquiry_install');
-
-?>

@@ -31,7 +31,7 @@ class WC_Email_Inquiry_Admin_UI
 	 * You must change to correct plugin name that you are working
 	 */
 
-	public $framework_version      = '2.1.0';
+	public $framework_version      = '2.2.0';
 	public $plugin_name            = WC_EMAIL_INQUIRY_KEY;
 	public $plugin_path            = WC_EMAIL_INQUIRY_NAME;
 	public $google_api_key_option  = '';
@@ -75,9 +75,10 @@ class WC_Email_Inquiry_Admin_UI
 	public $admin_pages = array();
 
 	public function __construct() {
-		$this->google_api_key_option  = WC_EMAIL_INQUIRY_KEY . '_google_api_key';
-		$this->toggle_box_open_option = WC_EMAIL_INQUIRY_KEY . '_toggle_box_open';
-		$this->version_transient      = WC_EMAIL_INQUIRY_KEY . '_licinfo';
+		$this->google_api_key_option     = WC_EMAIL_INQUIRY_KEY . '_google_api_key';
+		$this->google_map_api_key_option = WC_EMAIL_INQUIRY_KEY . '_google_map_api_key';
+		$this->toggle_box_open_option    = WC_EMAIL_INQUIRY_KEY . '_toggle_box_open';
+		$this->version_transient         = WC_EMAIL_INQUIRY_KEY . '_licinfo';
 
 		if ( defined( 'WC_EMAIL_INQUIRY_G_FONTS' ) ) {
 			$this->is_load_google_fonts = (boolean) WC_EMAIL_INQUIRY_G_FONTS;
@@ -175,7 +176,7 @@ class WC_Email_Inquiry_Admin_UI
 
 			update_option( $this->google_map_api_key_option . '_enable', 1 );
 
-			$option_value = trim( $_POST[ $this->google_map_api_key_option ] );
+			$option_value = trim( sanitize_text_field( $_POST[ $this->google_map_api_key_option ] ) );
 
 			$old_google_map_api_key_option = get_option( $this->google_map_api_key_option );
 
@@ -193,7 +194,7 @@ class WC_Email_Inquiry_Admin_UI
 
 			update_option( $this->google_map_api_key_option . '_enable', 0 );
 
-			$option_value = trim( $_POST[ $this->google_map_api_key_option ] );
+			$option_value = trim( sanitize_text_field( $_POST[ $this->google_map_api_key_option ] ) );
 			update_option( $this->google_map_api_key_option, $option_value );
 
 			if ( 0 != $old_google_map_api_key_enable ) {

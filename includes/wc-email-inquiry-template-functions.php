@@ -74,5 +74,3 @@ function wc_ei_email_notification_tpl( $data = array() ) {
 
 	wc_ei_get_template( $file_name, $data );
 }
-
-?>

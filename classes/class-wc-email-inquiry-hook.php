@@ -27,7 +27,10 @@
  * admin_sidebar_menu_css()
  * plugin_extra_links()
  */
-class WC_Email_Inquiry_Hook_Filter
+
+namespace A3Rev\WCEmailInquiry;
+
+class Hook_Filter
 {
 		
 	public static function shop_before_hide_add_to_cart_button($template_name, $template_path, $located, $args ) {
@@ -36,7 +39,7 @@ class WC_Email_Inquiry_Hook_Filter
 		if ($template_name == 'loop/add-to-cart.php') {
 			$product_id = $product->get_id();
 			
-			if (WC_Email_Inquiry_Functions::check_hide_add_cart_button($product_id))
+			if (Functions::check_hide_add_cart_button($product_id))
 				ob_start();
 		}
 	}
@@ -47,7 +50,7 @@ class WC_Email_Inquiry_Hook_Filter
 
 		$have_hide_add_cart = false;
 
-		if ( WC_Email_Inquiry_Functions::check_hide_add_cart_button( $product_id ) ) {
+		if ( Functions::check_hide_add_cart_button( $product_id ) ) {
 			$have_hide_add_cart = true;
 		}
 
@@ -80,7 +83,7 @@ class WC_Email_Inquiry_Hook_Filter
 		if ($template_name == 'loop/add-to-cart.php') {
 			$product_id = $product->get_id();
 			
-			if (WC_Email_Inquiry_Functions::check_hide_add_cart_button($product_id))
+			if (Functions::check_hide_add_cart_button($product_id))
 				ob_end_clean();
 		}
 	}
@@ -89,7 +92,7 @@ class WC_Email_Inquiry_Hook_Filter
 		global $post, $product;
 		$product_id = $product->get_id();
 		
-		if (WC_Email_Inquiry_Functions::check_hide_add_cart_button($product_id) ) {
+		if (Functions::check_hide_add_cart_button($product_id) ) {
 			ob_start();
 		}
 	}
@@ -98,7 +101,7 @@ class WC_Email_Inquiry_Hook_Filter
 		global $post, $product;
 		$product_id = $product->get_id();
 		
-		if (WC_Email_Inquiry_Functions::check_hide_add_cart_button($product_id)){
+		if (Functions::check_hide_add_cart_button($product_id)){
 			ob_end_clean();
 		}
 	}
@@ -107,7 +110,7 @@ class WC_Email_Inquiry_Hook_Filter
 		global $product;
 		$product_id = $product->get_id();
 		
-		if ( $product->is_type('grouped') && WC_Email_Inquiry_Functions::check_hide_add_cart_button( $product_id ) ){
+		if ( $product->is_type('grouped') && Functions::check_hide_add_cart_button( $product_id ) ){
 			echo '<style>body table.group_table a.button, body table.group_table a.single_add_to_cart_button, body table.group_table .quantity, table.group_table a.button, table.group_table a.single_add_to_cart_button, table.group_table .quantity { display:none !important; } </style>';
 		}
 	}
@@ -116,7 +119,7 @@ class WC_Email_Inquiry_Hook_Filter
 		global $product;
 		$product_id = $product->get_id();
 		
-		if ( WC_Email_Inquiry_Functions::check_hide_add_cart_button( $product_id ) ){
+		if ( Functions::check_hide_add_cart_button( $product_id ) ){
 			$add_to_cart = '';
 		}
 		
@@ -128,7 +131,7 @@ class WC_Email_Inquiry_Hook_Filter
 		if ( $template_name == 'single-product/add-to-cart/quantity.php' ) {
 			$product_id = $product->get_id();
 			
-			if ( WC_Email_Inquiry_Functions::check_hide_add_cart_button( $product_id ) ) {
+			if ( Functions::check_hide_add_cart_button( $product_id ) ) {
 				ob_start();
 			}
 		}
@@ -139,7 +142,7 @@ class WC_Email_Inquiry_Hook_Filter
 		if ( $template_name == 'single-product/add-to-cart/quantity.php' ) {
 			$product_id = $product->get_id();
 			
-			if ( WC_Email_Inquiry_Functions::check_hide_add_cart_button( $product_id ) ) {
+			if ( Functions::check_hide_add_cart_button( $product_id ) ) {
 				ob_end_clean();
 			}
 		}
@@ -148,28 +151,28 @@ class WC_Email_Inquiry_Hook_Filter
 	public static function global_hide_price( $price ) {
 		$product_id = 0;
 
-		if ( ( in_array( basename ($_SERVER['PHP_SELF']), array('admin-ajax.php') ) || !is_admin() ) && WC_Email_Inquiry_Functions::check_hide_price($product_id)) return '';
+		if ( ( in_array( basename ($_SERVER['PHP_SELF']), array('admin-ajax.php') ) || !is_admin() ) && Functions::check_hide_price($product_id)) return '';
 		
 		return $price;
 	}
 	
 	public static function hide_price_from_mini_cart($price) {
 		$product_id = 0;
-		if (WC_Email_Inquiry_Functions::check_hide_price($product_id)) return '';
+		if (Functions::check_hide_price($product_id)) return '';
 		
 		return $price;
 	}
 	
 	public static function remove_x_character_mini_cart($text_quantity='') {
 		$product_id = 0;
-		if (WC_Email_Inquiry_Functions::check_hide_price($product_id)) $text_quantity = str_replace('&times;', '', $text_quantity);
+		if (Functions::check_hide_price($product_id)) $text_quantity = str_replace('&times;', '', $text_quantity);
 		
 		return $text_quantity;
 	}
 	
 	public static function hide_cart_product_subtotal( $product_subtotal ) {
 		$product_id = 0;
-		if ( WC_Email_Inquiry_Functions::check_hide_price( $product_id ) ) return '';
+		if ( Functions::check_hide_price( $product_id ) ) return '';
 		
 		return $product_subtotal;
 	}
@@ -178,7 +181,7 @@ class WC_Email_Inquiry_Hook_Filter
 		if ($template_name == 'loop/price.php' || $template_name == 'single-product/price.php' || 'single-product/bundled-item-price.php' == $template_name ) {
 			$product_id = 0;
 			
-			if (WC_Email_Inquiry_Functions::check_hide_price($product_id))
+			if (Functions::check_hide_price($product_id))
 				ob_start();
 		}
 	}
@@ -187,21 +190,21 @@ class WC_Email_Inquiry_Hook_Filter
 		if ($template_name == 'loop/price.php' || $template_name == 'single-product/price.php' || 'single-product/bundled-item-price.php' == $template_name ) {
 			$product_id = 0;
 			
-			if (WC_Email_Inquiry_Functions::check_hide_price($product_id))
+			if (Functions::check_hide_price($product_id))
 				ob_end_clean();
 		}
 	}
 
 	public static function hide_mini_cart_subtotal( $cart_subtotal='' ) {
 		$product_id = 0;
-		if ( WC_Email_Inquiry_Functions::check_hide_price( $product_id ) ) return '';
+		if ( Functions::check_hide_price( $product_id ) ) return '';
 		
 		return $cart_subtotal;
 	}
 	
 	public static function hide_mini_cart_contents_total( $cart_contents_total ) {
 		$product_id = 0;
-		if ( WC_Email_Inquiry_Functions::check_hide_price( $product_id ) ) return '';
+		if ( Functions::check_hide_price( $product_id ) ) return '';
 		
 		return $cart_contents_total;
 	}
@@ -255,8 +258,8 @@ class WC_Email_Inquiry_Hook_Filter
 		
 		$button_button = '<a '.$email_inquiry_page_link. $target_link .' class="wc_email_inquiry_email_button wc_email_inquiry_button_'.$product_id.' '.$email_inquiry_button_class.'" id="wc_email_inquiry_button_'.$product_id.'" '. $button_attributes .' data-product_id="'.$product_id.'" '. $product_attributes .' form_action="hide">'.$wc_email_inquiry_button_title.$expand_text.'</a>';
 
-		add_action( 'wp_footer', array( 'WC_Email_Inquiry_Hook_Filter', 'footer_modal_scripts' ) );
-		add_action( 'wp_footer', array( 'WC_Email_Inquiry_Hook_Filter', 'footer_default_form_scripts' ) );
+		add_action( 'wp_footer', array( __CLASS__, 'footer_modal_scripts' ) );
+		add_action( 'wp_footer', array( __CLASS__, 'footer_default_form_scripts' ) );
 
 		$button_ouput = '<span class="wc_email_inquiry_button_container">';
 
@@ -279,8 +282,8 @@ class WC_Email_Inquiry_Hook_Filter
 		if ( $template_name == 'loop/add-to-cart.php' ) {
 			$product_id = $product->get_id();
 			
-			if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && WC_Email_Inquiry_Functions::check_add_email_inquiry_button_on_shoppage( $product_id ) ) {
-				echo WC_Email_Inquiry_Hook_Filter::add_email_inquiry_button( $product_id );
+			if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && Functions::check_add_email_inquiry_button_on_shoppage( $product_id ) ) {
+				echo self::add_email_inquiry_button( $product_id );
 			}
 		}
 	}
@@ -293,8 +296,8 @@ class WC_Email_Inquiry_Hook_Filter
 		
 		if ( $wc_email_inquiry_customize_email_button_settings['inquiry_button_position'] == 'above' ) return;
 		 
-		if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && WC_Email_Inquiry_Functions::check_add_email_inquiry_button_on_shoppage( $product_id ) ) {
-			echo WC_Email_Inquiry_Hook_Filter::add_email_inquiry_button( $product_id );
+		if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && Functions::check_add_email_inquiry_button_on_shoppage( $product_id ) ) {
+			echo self::add_email_inquiry_button( $product_id );
 		}
 	}
 
@@ -314,8 +317,8 @@ class WC_Email_Inquiry_Hook_Filter
 		if ( in_array( $template_name, $addtocart_templates ) ) {
 			$product_id = $product->get_id();
 
-			if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && WC_Email_Inquiry_Functions::check_add_email_inquiry_button( $product_id ) ) {
-				echo WC_Email_Inquiry_Hook_Filter::add_email_inquiry_button( $product_id );
+			if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && Functions::check_add_email_inquiry_button( $product_id ) ) {
+				echo self::add_email_inquiry_button( $product_id );
 
 			}
 		}
@@ -337,8 +340,8 @@ class WC_Email_Inquiry_Hook_Filter
 		if ( in_array( $template_name, $addtocart_templates ) ) {
 			$product_id = $product->get_id();
 
-			if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && WC_Email_Inquiry_Functions::check_add_email_inquiry_button( $product_id ) ) {
-				echo WC_Email_Inquiry_Hook_Filter::add_email_inquiry_button( $product_id );
+			if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && Functions::check_add_email_inquiry_button( $product_id ) ) {
+				echo self::add_email_inquiry_button( $product_id );
 
 			}
 		}
@@ -355,14 +358,14 @@ class WC_Email_Inquiry_Hook_Filter
 	
 	public static function footer_modal_scripts() {
 		
-		WC_Email_Inquiry_Functions::enqueue_modal_scripts();
+		Functions::enqueue_modal_scripts();
 
 	}
 
 	public static function footer_default_form_scripts() {
 
 
-		WC_Email_Inquiry_Functions::enqueue_default_form_scripts();
+		Functions::enqueue_default_form_scripts();
 	}
 	
 	public static function add_google_fonts() {
@@ -443,4 +446,3 @@ class WC_Email_Inquiry_Hook_Filter
 		return $actions;
 	}
 }
-?>
