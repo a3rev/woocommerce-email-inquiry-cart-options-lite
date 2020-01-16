@@ -1,9 +1,13 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCEmailInquiry\FrameWork\Pages {
+
+use A3Rev\WCEmailInquiry\FrameWork;
+
 // File Security Check
-if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
+if ( ! defined( 'ABSPATH' ) ) exit; 
+
 /*-----------------------------------------------------------------------------------
 WC Admin Email Inquiry Cart Page
 
@@ -21,7 +25,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_EI_Settings_Page extends WC_Email_Inquiry_Admin_UI
+class EI_Settings extends FrameWork\Admin_UI
 {	
 	/**
 	 * @var string
@@ -99,9 +103,13 @@ class WC_EI_Settings_Page extends WC_Email_Inquiry_Admin_UI
 	/* Include all tabs into this page
 	/*-----------------------------------------------------------------------------------*/
 	public function tabs_include() {
-		
-		include_once( $this->admin_plugin_dir() . '/tabs/rules-roles-tab.php' );
-		include_once( $this->admin_plugin_dir() . '/tabs/email-inquiry-tab.php' );
+
+		global $wc_ei_rules_roles_tab;
+		$wc_ei_rules_roles_tab = new FrameWork\Tabs\Rules_Roles();
+
+		global $wc_ei_settings_tab;
+		$wc_ei_settings_tab = new FrameWork\Tabs\Email_Inquiry();
+
 		
 	}
 	
@@ -110,14 +118,16 @@ class WC_EI_Settings_Page extends WC_Email_Inquiry_Admin_UI
 	/* Show Settings Page */
 	/*-----------------------------------------------------------------------------------*/
 	public function admin_settings_page() {
-		global $wc_ei_admin_init;
-		$wc_ei_admin_init->admin_settings_page( $this->page_data() );
+		global ${$this->plugin_prefix.'admin_init'};
+		${$this->plugin_prefix.'admin_init'}->admin_settings_page( $this->page_data() );
 	}
 	
 }
 
-global $wc_ei_settings_page;
-$wc_ei_settings_page = new WC_EI_Settings_Page();
+}
+
+// global code
+namespace {
 
 /** 
  * wc_ei_settings_page_show()
@@ -128,4 +138,4 @@ function wc_ei_settings_page_show() {
 	$wc_ei_settings_page->admin_settings_page();
 }
 
-?>
+}

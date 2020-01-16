@@ -1,9 +1,13 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCEmailInquiry\FrameWork\Tabs {
+
+use A3Rev\WCEmailInquiry\FrameWork;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
+
 /*-----------------------------------------------------------------------------------
 WC EI Cart & Price Tab
 
@@ -22,7 +26,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_EI_Rules_Roles_Tab extends WC_Email_Inquiry_Admin_UI
+class Rules_Roles extends FrameWork\Admin_UI
 {	
 	/**
 	 * @var string
@@ -103,7 +107,8 @@ class WC_EI_Rules_Roles_Tab extends WC_Email_Inquiry_Admin_UI
 	public function settings_include() {
 		
 		// Includes Settings file
-		include_once( $this->admin_plugin_dir() . '/settings/rules-roles-settings.php' );
+		global $wc_ei_rules_roles_settings;
+		$wc_ei_rules_roles_settings = new FrameWork\Settings\Rules_Roles();
 		
 	}
 	
@@ -118,15 +123,17 @@ class WC_EI_Rules_Roles_Tab extends WC_Email_Inquiry_Admin_UI
 		$wc_ei_rules_roles_settings->settings_form();
 		$this->plugin_extension_end();
 		
-		//global $wc_ei_admin_init;
+		//global ${$this->plugin_prefix.'admin_init'};
 		
-		//$wc_ei_admin_init->admin_settings_tab( $this->parent_page, $this->tab_data() );
+		//${$this->plugin_prefix.'admin_init'}->admin_settings_tab( $this->parent_page, $this->tab_data() );
 		
 	}
 }
 
-global $wc_ei_rules_roles_tab;
-$wc_ei_rules_roles_tab = new WC_EI_Rules_Roles_Tab();
+}
+
+// global code
+namespace {
 
 /** 
  * wc_admin_ei_email_popup_tab_manager()
@@ -137,4 +144,4 @@ function wc_ei_rules_roles_tab_manager() {
 	$wc_ei_rules_roles_tab->tab_manager();
 }
 
-?>
+}

@@ -1,10 +1,14 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCEmailInquiry\FrameWork\Settings\EI {
+
+use A3Rev\WCEmailInquiry\FrameWork;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
-class WC_EI_Success_Message_Settings
+
+class Success_Message
 {
 	/**
 	 * @var array
@@ -51,7 +55,4 @@ class WC_EI_Success_Message_Settings
 
 }
 
-global $wc_ei_success_message_settings;
-$wc_ei_success_message_settings = new WC_EI_Success_Message_Settings();
-
-?>
+}

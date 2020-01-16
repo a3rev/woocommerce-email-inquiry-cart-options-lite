@@ -1,15 +1,19 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCEmailInquiry\FrameWork\Settings\EI {
+
+use A3Rev\WCEmailInquiry\FrameWork;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
+
 /*-----------------------------------------------------------------------------------
 WC EI Contact Form Settings
 
 -----------------------------------------------------------------------------------*/
 
-class WC_EI_Contact_Form_Settings
+class Contact_Form
 {
 	/**
 	 * @var array
@@ -30,7 +34,7 @@ class WC_EI_Contact_Form_Settings
 	/*-----------------------------------------------------------------------------------*/
 	public function init_form_fields() {
 
-		global $wc_ei_admin_init;
+		global ${WC_EMAIL_INQUIRY_PREFIX.'admin_init'};
 
 		$privacy_policy_url = '#';
 
@@ -41,7 +45,7 @@ class WC_EI_Contact_Form_Settings
 			array(
             	'name' 		=> __( 'Default Form Settings', 'woocommerce-email-inquiry-cart-options' ),
                 'type' 		=> 'heading',
-                'desc'		=> sprintf( __( 'The plugins default form applies to all products. For the ability to add custom forms created with Contact Form 7 or Gravity Forms, globally or for individual or groups of products upgrade to the Premium <a href="%s" target="_blank">WooCommerce Email Inquiry Ultimate</a> plugin.', 'woocommerce-email-inquiry-cart-options' ), $wc_ei_admin_init->ultimate_plugin_page_url ),
+                'desc'		=> sprintf( __( 'The plugins default form applies to all products. For the ability to add custom forms created with Contact Form 7 or Gravity Forms, globally or for individual or groups of products upgrade to the Premium <a href="%s" target="_blank">WooCommerce Email Inquiry Ultimate</a> plugin.', 'woocommerce-email-inquiry-cart-options' ), ${WC_EMAIL_INQUIRY_PREFIX.'admin_init'}->ultimate_plugin_page_url ),
                 'class'		=> 'wc_ei_default_form_container',
                 'id'		=> 'wc_ei_default_form_box',
                 'is_box'	=> true,
@@ -238,7 +242,4 @@ class WC_EI_Contact_Form_Settings
 
 }
 
-global $wc_ei_contact_form_settings;
-$wc_ei_contact_form_settings = new WC_EI_Contact_Form_Settings();
-
-?>
+}

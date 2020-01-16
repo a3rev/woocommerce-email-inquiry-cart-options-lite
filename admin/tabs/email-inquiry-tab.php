@@ -1,9 +1,13 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCEmailInquiry\FrameWork\Tabs {
+
+use A3Rev\WCEmailInquiry\FrameWork;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
+
 /*-----------------------------------------------------------------------------------
 WC EI Global Settings Tab
 
@@ -22,7 +26,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_EI_Settings_Tab extends WC_Email_Inquiry_Admin_UI
+class Email_Inquiry extends FrameWork\Admin_UI
 {	
 	/**
 	 * @var string
@@ -103,8 +107,11 @@ class WC_EI_Settings_Tab extends WC_Email_Inquiry_Admin_UI
 	public function settings_include() {
 		
 		// Includes Settings file
-		include_once( $this->admin_plugin_dir() . '/settings/email-inquiry-global-settings.php' );
-		include_once( $this->admin_plugin_dir() . '/settings/email-inquiry-button-style-settings.php' );
+		global $wc_ei_global_settings;
+		$wc_ei_global_settings = new FrameWork\Settings\Global_Panel();
+
+		global $wc_ei_button_style_settings;
+		$wc_ei_button_style_settings = new FrameWork\Settings\Button_Style();
 		
 	}
 	
@@ -113,17 +120,19 @@ class WC_EI_Settings_Tab extends WC_Email_Inquiry_Admin_UI
 	/* Call tab layout from Admin Init 
 	/*-----------------------------------------------------------------------------------*/
 	public function tab_manager() {
-		global $wc_ei_admin_init;
+		global ${$this->plugin_prefix.'admin_init'};
 
 		$this->plugin_extension_start();
-		$wc_ei_admin_init->admin_settings_tab( $this->parent_page, $this->tab_data() );
+		${$this->plugin_prefix.'admin_init'}->admin_settings_tab( $this->parent_page, $this->tab_data() );
 		$this->plugin_extension_end();
 
 	}
 }
 
-global $wc_ei_settings_tab;
-$wc_ei_settings_tab = new WC_EI_Settings_Tab();
+}
+
+// global code
+namespace {
 
 /** 
  * wc_admin_ei_email_popup_tab_manager()
@@ -134,4 +143,4 @@ function wc_ei_settings_tab_manager() {
 	$wc_ei_settings_tab->tab_manager();
 }
 
-?>
+}

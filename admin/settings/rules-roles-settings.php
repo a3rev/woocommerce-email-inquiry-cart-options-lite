@@ -1,9 +1,13 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCEmailInquiry\FrameWork\Settings {
+
+use A3Rev\WCEmailInquiry\FrameWork;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
+
 /*-----------------------------------------------------------------------------------
 WC EI Cart & Price Settings
 
@@ -28,7 +32,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
+class Rules_Roles extends FrameWork\Admin_UI
 {
 	
 	/**
@@ -117,9 +121,9 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 	/* Set default settings with function called from Admin Interface */
 	/*-----------------------------------------------------------------------------------*/
 	public function set_default_settings() {
-		global $wc_ei_admin_interface;
+		global ${$this->plugin_prefix.'admin_interface'};
 		
-		$wc_ei_admin_interface->reset_settings( $this->form_fields, $this->option_name, false );
+		${$this->plugin_prefix.'admin_interface'}->reset_settings( $this->form_fields, $this->option_name, false );
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -139,9 +143,9 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 	/* Get settings with function called from Admin Interface */
 	/*-----------------------------------------------------------------------------------*/
 	public function get_settings() {
-		global $wc_ei_admin_interface;
+		global ${$this->plugin_prefix.'admin_interface'};
 		
-		$wc_ei_admin_interface->get_settings( $this->form_fields, $this->option_name );
+		${$this->plugin_prefix.'admin_interface'}->get_settings( $this->form_fields, $this->option_name );
 	}
 	
 	/**
@@ -185,10 +189,10 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 	/* Call the form from Admin Interface
 	/*-----------------------------------------------------------------------------------*/
 	public function settings_form() {
-		global $wc_ei_admin_interface;
+		global ${$this->plugin_prefix.'admin_interface'};
 		
 		$output = '';
-		$output .= $wc_ei_admin_interface->admin_forms( $this->form_fields, $this->form_key, $this->option_name, $this->form_messages );
+		$output .= ${$this->plugin_prefix.'admin_interface'}->admin_forms( $this->form_fields, $this->form_key, $this->option_name, $this->form_messages );
 		
 		return $output;
 	}
@@ -200,7 +204,7 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 	public function init_form_fields() {
 		global $wp_roles;
 		if ( ! isset( $wp_roles ) ) {
-			$wp_roles = new WP_Roles();
+			$wp_roles = new \WP_Roles();
 		}
 		$roles = $wp_roles->get_names();
 		unset( $roles['manual_quote'] );
@@ -777,8 +781,10 @@ $(document).ready(function() {
 	}
 }
 
-global $wc_ei_rules_roles_settings;
-$wc_ei_rules_roles_settings = new WC_EI_Rules_Roles_Settings();
+}
+
+// global code
+namespace {
 
 /** 
  * wc_ei_rules_roles_settings_form()
@@ -789,4 +795,4 @@ function wc_ei_rules_roles_settings_form() {
 	$wc_ei_rules_roles_settings->settings_form();
 }
 
-?>
+}

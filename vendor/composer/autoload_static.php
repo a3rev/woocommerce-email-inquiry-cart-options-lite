@@ -16,12 +16,28 @@ class ComposerStaticInite7547935eddc166b5d40ff14985a8135
     public static $prefixDirsPsr4 = array (
         'A3Rev\\WCEmailInquiry\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/classes',
+            0 => __DIR__ . '/../..' . '/admin',
+            1 => __DIR__ . '/../..' . '/classes',
         ),
     );
 
     public static $classMap = array (
         'A3Rev\\WCEmailInquiry\\Ajax' => __DIR__ . '/../..' . '/classes/class-wc-email-inquiry-ajax.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Admin_Init' => __DIR__ . '/../..' . '/admin/admin-init.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Admin_Interface' => __DIR__ . '/../..' . '/admin/admin-interface.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Admin_UI' => __DIR__ . '/../..' . '/admin/admin-ui.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Fonts_Face' => __DIR__ . '/../..' . '/admin/includes/fonts_face.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Less_Sass' => __DIR__ . '/../..' . '/admin/less/sass.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Pages\\EI_Settings' => __DIR__ . '/../..' . '/admin/admin-pages/admin-settings-page.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Settings\\Button_Style' => __DIR__ . '/../..' . '/admin/settings/email-inquiry-button-style-settings.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Settings\\EI\\Contact_Form' => __DIR__ . '/../..' . '/admin/settings/email-inquiry/contact-form-global-settings.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Settings\\EI\\Popup_Form_Style' => __DIR__ . '/../..' . '/admin/settings/email-inquiry/popup-form-style-settings.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Settings\\EI\\Success_Message' => __DIR__ . '/../..' . '/admin/settings/email-inquiry/success-message-settings.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Settings\\Global_Panel' => __DIR__ . '/../..' . '/admin/settings/email-inquiry-global-settings.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Settings\\Rules_Roles' => __DIR__ . '/../..' . '/admin/settings/rules-roles-settings.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Tabs\\Email_Inquiry' => __DIR__ . '/../..' . '/admin/tabs/email-inquiry-tab.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Tabs\\Rules_Roles' => __DIR__ . '/../..' . '/admin/tabs/rules-roles-tab.php',
+        'A3Rev\\WCEmailInquiry\\FrameWork\\Uploader' => __DIR__ . '/../..' . '/admin/includes/uploader/class-uploader.php',
         'A3Rev\\WCEmailInquiry\\Functions' => __DIR__ . '/../..' . '/classes/class-wc-email-inquiry-functions.php',
         'A3Rev\\WCEmailInquiry\\Hook_Filter' => __DIR__ . '/../..' . '/classes/class-wc-email-inquiry-hook.php',
     );

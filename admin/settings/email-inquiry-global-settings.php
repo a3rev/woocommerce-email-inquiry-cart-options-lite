@@ -1,9 +1,13 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCEmailInquiry\FrameWork\Settings {
+
+use A3Rev\WCEmailInquiry\FrameWork;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
+
 /*-----------------------------------------------------------------------------------
 WC EI Global Settings
 
@@ -28,7 +32,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
+class Global_Panel extends FrameWork\Admin_UI
 {
 
 	/**
@@ -121,9 +125,9 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
 	/* Set default settings with function called from Admin Interface */
 	/*-----------------------------------------------------------------------------------*/
 	public function set_default_settings() {
-		global $wc_ei_admin_interface;
+		global ${$this->plugin_prefix.'admin_interface'};
 
-		$wc_ei_admin_interface->reset_settings( $this->form_fields, $this->option_name, false );
+		${$this->plugin_prefix.'admin_interface'}->reset_settings( $this->form_fields, $this->option_name, false );
 	}
 
 	/*-----------------------------------------------------------------------------------*/
@@ -131,9 +135,9 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
 	/* Reset default settings with function called from Admin Interface */
 	/*-----------------------------------------------------------------------------------*/
 	public function reset_default_settings() {
-		global $wc_ei_admin_interface;
+		global ${$this->plugin_prefix.'admin_interface'};
 		
-		$wc_ei_admin_interface->reset_settings( $this->form_fields, $this->option_name, true, true );
+		${$this->plugin_prefix.'admin_interface'}->reset_settings( $this->form_fields, $this->option_name, true, true );
 	}
 
 	/*-----------------------------------------------------------------------------------*/
@@ -149,9 +153,9 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
 	/* Get settings with function called from Admin Interface */
 	/*-----------------------------------------------------------------------------------*/
 	public function get_settings() {
-		global $wc_ei_admin_interface;
+		global ${$this->plugin_prefix.'admin_interface'};
 
-		$wc_ei_admin_interface->get_settings( $this->form_fields, $this->option_name );
+		${$this->plugin_prefix.'admin_interface'}->get_settings( $this->form_fields, $this->option_name );
 	}
 
 	/**
@@ -195,10 +199,10 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
 	/* Call the form from Admin Interface
 	/*-----------------------------------------------------------------------------------*/
 	public function settings_form() {
-		global $wc_ei_admin_interface;
+		global ${$this->plugin_prefix.'admin_interface'};
 
 		$output = '';
-		$output .= $wc_ei_admin_interface->admin_forms( $this->form_fields, $this->form_key, $this->option_name, $this->form_messages );
+		$output .= ${$this->plugin_prefix.'admin_interface'}->admin_forms( $this->form_fields, $this->form_key, $this->option_name, $this->form_messages );
 
 		return $output;
 	}
@@ -210,7 +214,7 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
 	public function init_form_fields() {
 		global $wp_roles;
 		if ( ! isset( $wp_roles ) ) {
-			$wp_roles = new WP_Roles();
+			$wp_roles = new \WP_Roles();
 		}
 		$roles = $wp_roles->get_names();
 
@@ -292,17 +296,17 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
 			),
         );
 
-		include_once( $this->admin_plugin_dir() . '/settings/email-inquiry/contact-form-global-settings.php' );
 		global $wc_ei_contact_form_settings;
+		$wc_ei_contact_form_settings = new EI\Contact_Form();
 		$this->form_fields = array_merge( $this->form_fields, $wc_ei_contact_form_settings->form_fields );
 
-		include_once( $this->admin_plugin_dir() . '/settings/email-inquiry/popup-form-style-settings.php' );
 		global $wc_ei_popup_form_style_settings;
+		$wc_ei_popup_form_style_settings = new EI\Popup_Form_Style();
 		$this->form_fields = array_merge( $this->form_fields, $wc_ei_popup_form_style_settings->form_fields );
 
 
-		include_once( $this->admin_plugin_dir() . '/settings/email-inquiry/success-message-settings.php' );
 		global $wc_ei_success_message_settings;
+		$wc_ei_success_message_settings = new EI\Success_Message();
 		$this->form_fields = array_merge( $this->form_fields, $wc_ei_success_message_settings->form_fields );
 
 		$this->form_fields = apply_filters( $this->option_name . '_settings_fields', $this->form_fields );
@@ -447,8 +451,10 @@ $(document).ready(function() {
 	}
 }
 
-global $wc_ei_global_settings;
-$wc_ei_global_settings = new WC_EI_Global_Settings();
+}
+
+// global code
+namespace {
 
 /**
  * wc_ei_global_settings_form()
@@ -459,4 +465,4 @@ function wc_ei_global_settings_form() {
 	$wc_ei_global_settings->settings_form();
 }
 
-?>
+}

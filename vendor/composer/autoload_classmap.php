@@ -7,6 +7,21 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'A3Rev\\WCEmailInquiry\\Ajax' => $baseDir . '/classes/class-wc-email-inquiry-ajax.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Admin_Init' => $baseDir . '/admin/admin-init.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Admin_Interface' => $baseDir . '/admin/admin-interface.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Admin_UI' => $baseDir . '/admin/admin-ui.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Fonts_Face' => $baseDir . '/admin/includes/fonts_face.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Less_Sass' => $baseDir . '/admin/less/sass.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Pages\\EI_Settings' => $baseDir . '/admin/admin-pages/admin-settings-page.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Settings\\Button_Style' => $baseDir . '/admin/settings/email-inquiry-button-style-settings.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Settings\\EI\\Contact_Form' => $baseDir . '/admin/settings/email-inquiry/contact-form-global-settings.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Settings\\EI\\Popup_Form_Style' => $baseDir . '/admin/settings/email-inquiry/popup-form-style-settings.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Settings\\EI\\Success_Message' => $baseDir . '/admin/settings/email-inquiry/success-message-settings.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Settings\\Global_Panel' => $baseDir . '/admin/settings/email-inquiry-global-settings.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Settings\\Rules_Roles' => $baseDir . '/admin/settings/rules-roles-settings.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Tabs\\Email_Inquiry' => $baseDir . '/admin/tabs/email-inquiry-tab.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Tabs\\Rules_Roles' => $baseDir . '/admin/tabs/rules-roles-tab.php',
+    'A3Rev\\WCEmailInquiry\\FrameWork\\Uploader' => $baseDir . '/admin/includes/uploader/class-uploader.php',
     'A3Rev\\WCEmailInquiry\\Functions' => $baseDir . '/classes/class-wc-email-inquiry-functions.php',
     'A3Rev\\WCEmailInquiry\\Hook_Filter' => $baseDir . '/classes/class-wc-email-inquiry-hook.php',
 );

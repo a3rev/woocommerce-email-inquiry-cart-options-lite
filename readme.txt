@@ -1,9 +1,9 @@
 === Email Inquiry & Cart Options for WooCommerce ===
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
-Requires at least: 4.6
-Tested up to: 5.3
-Stable tag: 2.3.0
+Requires at least: 4.9
+Tested up to: 5.3.2
+Stable tag: 2.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -77,10 +77,10 @@ Want to add a new language translation? Great! You can contribute via [translate
 
 = Minimum Requirements =
 
-* WordPress 4.6
+* WordPress 4.9
 * WooCommerce 3.0
-* PHP version 5.6.20
-* MySQL version 5.5
+* PHP version 7.0
+* MySQL version 5.6
 
 = Automatic installation =
 
@@ -125,6 +125,13 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.4.0 - 2020/01/16 =
+* This feature release completes the full refactor (frontend and backend) of the plugins PHP to Composer plus compatibility with WordPress 5.3.2 and WooCommerce 3.8.1
+* Feature - Plugin Framework fully refactored to Composer for cleaner code and faster PHP code on the admin panels
+* Tweak - Update plugin for compatibility with new version of plugin Framework
+* Tweak - Test for compatibility with WordPress 5.3.2
+* Tweak - Test for compatibility with WooCommerce 3.8.1
 
 = 2.3.0 - 2019/11/13 =
 * This feature release has a lot including compatibility with WooCommerce 3.8.0, WordPress 5.3 whilst maintaining backward compatibility, PHP upgrade to Composer PHP Dependency Manger and a full security review and update.
@@ -555,6 +562,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.4.0 =
+This feature release completes the full refactor (frontend and backend) of the plugins PHP to Composer plus compatibility with WordPress 5.3.2 and WooCommerce 3.8.1
 
 = 2.3.0 =
 This feature release has a lot including compatibility with WooCommerce 3.8.0, WordPress 5.3 whilst maintaining backward compatibility, PHP upgrade to Composer PHP Dependency Manger and a full security review and update

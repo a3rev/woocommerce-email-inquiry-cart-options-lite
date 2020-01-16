@@ -7,7 +7,7 @@
 	position:relative !important;	
 }
 <?php
-global $wc_ei_admin_interface, $wc_ei_fonts_face;
+global ${WC_EMAIL_INQUIRY_PREFIX.'admin_interface'}, ${WC_EMAIL_INQUIRY_PREFIX.'fonts_face'};
 
 // Email Inquiry Button Style
 global $wc_email_inquiry_customize_email_button;
@@ -50,13 +50,13 @@ body .wc_email_inquiry_button_container .wc_email_inquiry_email_button {
 	
 		
 	/*Border*/
-	<?php echo $wc_ei_admin_interface->generate_border_css( $inquiry_button_border ); ?>
+	<?php echo ${WC_EMAIL_INQUIRY_PREFIX.'admin_interface'}->generate_border_css( $inquiry_button_border ); ?>
 	
 	/* Shadow */
-	<?php echo $wc_ei_admin_interface->generate_shadow_css( $inquiry_button_shadow ); ?>
+	<?php echo ${WC_EMAIL_INQUIRY_PREFIX.'admin_interface'}->generate_shadow_css( $inquiry_button_shadow ); ?>
 	
 	/* Font */
-	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_button_font ); ?>
+	<?php echo ${WC_EMAIL_INQUIRY_PREFIX.'fonts_face'}->generate_font_css( $inquiry_button_font ); ?>
 	
 	text-align: center !important;
 	text-shadow: 0 -1px 0 hsla(0,0%,0%,.3);
@@ -65,7 +65,7 @@ body .wc_email_inquiry_button_container .wc_email_inquiry_email_button {
 
 body .wc_email_inquiry_button_container .wc_email_inquiry_hyperlink_text {
 	/* Font */
-	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_hyperlink_font ); ?>
+	<?php echo ${WC_EMAIL_INQUIRY_PREFIX.'fonts_face'}->generate_font_css( $inquiry_hyperlink_font ); ?>
 }
 
 body .wc_email_inquiry_button_container .wc_email_inquiry_hyperlink_text:hover {
@@ -89,11 +89,11 @@ extract($wc_email_inquiry_global_settings);
 }
 body .wc_email_inquiry_form, .wc_email_inquiry_form, .wc_email_inquiry_form .wc_email_inquiry_field, body .wc_email_inquiry_field {
 	/* Font */
-	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_contact_popup_text ); ?>
+	<?php echo ${WC_EMAIL_INQUIRY_PREFIX.'fonts_face'}->generate_font_css( $inquiry_contact_popup_text ); ?>
 }
 .wc_email_inquiry_custom_form_product_heading {
 	/* Font */
-	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_form_product_name_font ); ?>
+	<?php echo ${WC_EMAIL_INQUIRY_PREFIX.'fonts_face'}->generate_font_css( $inquiry_form_product_name_font ); ?>
 	
 	clear:none !important;
 	margin-top:5px !important;
@@ -101,17 +101,17 @@ body .wc_email_inquiry_form, .wc_email_inquiry_form, .wc_email_inquiry_form .wc_
 }
 a.wc_email_inquiry_custom_form_product_url {
 	/* Font */
-	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_form_product_url_font ); ?>
+	<?php echo ${WC_EMAIL_INQUIRY_PREFIX.'fonts_face'}->generate_font_css( $inquiry_form_product_url_font ); ?>
 }
 .wc_email_inquiry_subject {
 	/* Font */
-	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_form_subject_font ); ?>
+	<?php echo ${WC_EMAIL_INQUIRY_PREFIX.'fonts_face'}->generate_font_css( $inquiry_form_subject_font ); ?>
 }
 
 .wc_email_inquiry_field input, .wc_email_inquiry_field textarea{
 	box-sizing: border-box !important;
 	/*Border*/
-	<?php echo $wc_ei_admin_interface->generate_border_css( $inquiry_input_border ); ?>
+	<?php echo ${WC_EMAIL_INQUIRY_PREFIX.'admin_interface'}->generate_border_css( $inquiry_input_border ); ?>
 	
 	/*Background*/
 	background-color: <?php echo $inquiry_input_bg_colour; ?> !important;
@@ -146,13 +146,13 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 				) !important;;
 	
 	/*Border*/
-	<?php echo $wc_ei_admin_interface->generate_border_css( $inquiry_contact_button_border ); ?>
+	<?php echo ${WC_EMAIL_INQUIRY_PREFIX.'admin_interface'}->generate_border_css( $inquiry_contact_button_border ); ?>
 	
 	/* Shadow */
-	<?php echo $wc_ei_admin_interface->generate_shadow_css( $inquiry_contact_button_shadow ); ?>
+	<?php echo ${WC_EMAIL_INQUIRY_PREFIX.'admin_interface'}->generate_shadow_css( $inquiry_contact_button_shadow ); ?>
 	
 	/* Font */
-	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_contact_button_font ); ?>
+	<?php echo ${WC_EMAIL_INQUIRY_PREFIX.'fonts_face'}->generate_font_css( $inquiry_contact_button_font ); ?>
 		
 	text-align: center !important;
 	text-shadow: 0 -1px 0 hsla(0,0%,0%,.3);
@@ -161,7 +161,7 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 
 /* Contact Form Heading */
 .wc_email_inquiry_result_heading {
-	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_contact_heading_font ); ?>
+	<?php echo ${WC_EMAIL_INQUIRY_PREFIX.'fonts_face'}->generate_font_css( $inquiry_contact_heading_font ); ?>
 }
 
 </style>

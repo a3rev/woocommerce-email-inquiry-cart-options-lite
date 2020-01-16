@@ -6,8 +6,8 @@ function wc_email_inquiry_install(){
 	update_option('a3rev_wc_email_inquiry_version', WC_EMAIL_INQUIRY_VERSION );
 	update_option('a3rev_wc_email_inquiry_ultimate_version', '1.2.6');
 
-	global $wc_ei_admin_init;
-	delete_metadata( 'user', 0, $wc_ei_admin_init->plugin_name . '-' . 'plugin_framework_global_box' . '-' . 'opened', '', true );
+	global ${WC_EMAIL_INQUIRY_PREFIX.'admin_init'};
+	delete_metadata( 'user', 0, ${WC_EMAIL_INQUIRY_PREFIX.'admin_init'}->plugin_name . '-' . 'plugin_framework_global_box' . '-' . 'opened', '', true );
 
 	update_option('a3rev_wc_email_inquiry_just_installed', true);
 }
@@ -17,12 +17,12 @@ function wc_email_inquiry_init() {
 		delete_option('a3rev_wc_email_inquiry_just_installed');
 
 		// Set Settings Default from Admin Init
-		global $wc_ei_admin_init;
-		$wc_ei_admin_init->set_default_settings();
+		global ${WC_EMAIL_INQUIRY_PREFIX.'admin_init'};
+		${WC_EMAIL_INQUIRY_PREFIX.'admin_init'}->set_default_settings();
 
 		// Build sass
-		global $wc_email_inquiry_less;
-		$wc_email_inquiry_less->plugin_build_sass();
+		global ${WC_EMAIL_INQUIRY_PREFIX.'less'};
+		${WC_EMAIL_INQUIRY_PREFIX.'less'}->plugin_build_sass();
 	}
 
 	wc_email_inquiry_plugin_textdomain();
@@ -42,13 +42,13 @@ add_filter( 'plugin_row_meta', array('\A3Rev\WCEmailInquiry\Hook_Filter', 'plugi
 
 
 // Need to call Admin Init to show Admin UI
-global $wc_ei_admin_init;
-$wc_ei_admin_init->init();
+global ${WC_EMAIL_INQUIRY_PREFIX.'admin_init'};
+${WC_EMAIL_INQUIRY_PREFIX.'admin_init'}->init();
 
 $woocommerce_db_version = get_option( 'woocommerce_db_version', null );
 
 // Add upgrade notice to Dashboard pages
-add_filter( $wc_ei_admin_init->plugin_name . '_plugin_extension_boxes', array( '\A3Rev\WCEmailInquiry\Hook_Filter', 'plugin_extension_box' ) );
+add_filter( ${WC_EMAIL_INQUIRY_PREFIX.'admin_init'}->plugin_name . '_plugin_extension_boxes', array( '\A3Rev\WCEmailInquiry\Hook_Filter', 'plugin_extension_box' ) );
 
 // Add extra link on left of Deactivate link on Plugin manager page
 add_action( 'plugin_action_links_' . WC_EMAIL_INQUIRY_NAME, array( '\A3Rev\WCEmailInquiry\Hook_Filter', 'settings_plugin_links' ) );
@@ -157,15 +157,15 @@ function wc_ei_upgrade_plugin () {
 
 	if ( version_compare( get_option( 'a3rev_wc_email_inquiry_version' ), '1.2.0' ) === -1 ) {
 		// Build sass
-		global $wc_email_inquiry_less;
-		$wc_email_inquiry_less->plugin_build_sass();
+		global ${WC_EMAIL_INQUIRY_PREFIX.'less'};
+		${WC_EMAIL_INQUIRY_PREFIX.'less'}->plugin_build_sass();
 
 		update_option('a3rev_wc_email_inquiry_version', '1.2.0');
 	}
 
 	if ( version_compare( get_option( 'a3rev_wc_email_inquiry_version' ), '1.2.3' ) === -1 ) {
-		global $wc_ei_admin_init;
-		$wc_ei_admin_init->set_default_settings();
+		global ${WC_EMAIL_INQUIRY_PREFIX.'admin_init'};
+		${WC_EMAIL_INQUIRY_PREFIX.'admin_init'}->set_default_settings();
 	}
 
 	// Upgrade to 1.3.3

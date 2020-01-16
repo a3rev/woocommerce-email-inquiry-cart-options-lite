@@ -2,15 +2,15 @@
 /*
 Plugin Name: Email Inquiry & Cart Options for WooCommerce
 Description: Transform your entire WooCommerce products catalog or any individual product into an online brochure with Product Email Inquiry button and pop-up email form. Add product email inquiry functionality to any product either with WooCommerce functionality or hide that functionality and the page becomes a brochure.
-Version: 2.3.0
-Requires at least: 4.5
-Tested up to: 5.3
+Version: 2.4.0
+Requires at least: 4.9
+Tested up to: 5.3.2
 Author: a3rev Software
 Author URI: https://a3rev.com/
 Text Domain: woocommerce-email-inquiry-cart-options
 Domain Path: /languages
 WC requires at least: 3.0.0
-WC tested up to: 3.8
+WC tested up to: 3.8.1
 License: This software is under commercial license and copyright to A3 Revolution Software Development team
 
 	WooCommerce Email Inquiry & Cart Options. Plugin for the WooCommerce shopping Cart.
@@ -38,14 +38,32 @@ define('WC_EMAIL_INQUIRY_CSS_URL', WC_EMAIL_INQUIRY_URL . '/assets/css');
 if (!defined("WC_EMAIL_ULTIMATE_URI")) define("WC_EMAIL_ULTIMATE_URI", "https://a3rev.com/shop/woocommerce-email-inquiry-ultimate/");
 
 define( 'WC_EMAIL_INQUIRY_KEY', 'wc_email_inquiry' );
-define( 'WC_EMAIL_INQUIRY_VERSION',  '2.3.0' );
+define( 'WC_EMAIL_INQUIRY_PREFIX', 'wc_ei_' );
+define( 'WC_EMAIL_INQUIRY_VERSION',  '2.4.0' );
 define( 'WC_EMAIL_INQUIRY_G_FONTS', true );
+
+use \A3Rev\WCEmailInquiry\FrameWork;
 
 if ( version_compare( PHP_VERSION, '5.6.0', '>=' ) ) {
 	require __DIR__ . '/vendor/autoload.php';
 
 	global $wc_ei_ajax;
 	$wc_ei_ajax = new \A3Rev\WCEmailInquiry\Ajax();
+
+	/**
+	 * Plugin Framework init
+	 */
+	global ${WC_EMAIL_INQUIRY_PREFIX.'admin_interface'};
+	${WC_EMAIL_INQUIRY_PREFIX.'admin_interface'} = new FrameWork\Admin_Interface();
+
+	global $wc_ei_settings_page;
+	$wc_ei_settings_page = new FrameWork\Pages\EI_Settings();
+
+	global ${WC_EMAIL_INQUIRY_PREFIX.'admin_init'};
+	${WC_EMAIL_INQUIRY_PREFIX.'admin_init'} = new FrameWork\Admin_Init();
+
+	global ${WC_EMAIL_INQUIRY_PREFIX.'less'};
+	${WC_EMAIL_INQUIRY_PREFIX.'less'} = new FrameWork\Less_Sass();
 
 } else {
 	return;
@@ -67,14 +85,6 @@ function wc_email_inquiry_plugin_textdomain() {
 	load_textdomain( 'woocommerce-email-inquiry-cart-options', WP_LANG_DIR . '/woocommerce-email-inquiry-cart-options/woocommerce-email-inquiry-cart-options-' . $locale . '.mo' );
 	load_plugin_textdomain( 'woocommerce-email-inquiry-cart-options', false, WC_EMAIL_INQUIRY_FOLDER . '/languages/' );
 }
-
-include ('admin/admin-ui.php');
-include ('admin/admin-interface.php');
-
-include ('admin/admin-pages/admin-settings-page.php');
-
-include ('admin/admin-init.php');
-include ('admin/less/sass.php');
 
 include ('includes/wc-email-inquiry-template-functions.php');
 

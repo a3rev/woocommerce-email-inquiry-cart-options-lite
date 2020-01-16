@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-          "A3Rev\\WCEmailInquiry\\": [ "classes/" ]
+          "A3Rev\\WCEmailInquiry\\": [ "admin/", "classes/" ]
         }
     }
 }
