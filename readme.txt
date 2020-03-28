@@ -1,9 +1,9 @@
 === Email Inquiry & Cart Options for WooCommerce ===
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
-Requires at least: 4.9
-Tested up to: 5.3.2
-Stable tag: 2.4.0
+Requires at least: 5.0
+Tested up to: 5.4
+Stable tag: 2.4.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -77,7 +77,7 @@ Want to add a new language translation? Great! You can contribute via [translate
 
 = Minimum Requirements =
 
-* WordPress 4.9
+* WordPress 5.0
 * WooCommerce 3.0
 * PHP version 7.0
 * MySQL version 5.6
@@ -125,6 +125,16 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.4.1 - 2020/03/28 =
+* This maintenance release is for compatibility with WordPress 5.4, WooCommerce 4.0.1, Travis CI build unit test for compliance with WordPress PHP coding standards and PHP tweaks for compatibility with PHP v 7.0 to 7.4 
+* Tweak - Test for compatibility with WordPress 5.4
+* Tweak - Test for compatibility with WooCommerce 4.0.1
+* Tweak - Run Travis CI unit build tests for PHP compatibility issues with PHP 7.0 to 7.4
+* Fix - Update global ${$this- to $GLOBALS[$this to resolve 7.0+ PHP warnings
+* Fix - Update global ${$option} to $GLOBALS[$option] to resolve 7.0+ PHP warnings
+* Fix - Update less PHP lib that use square brackets [] instead of curly braces {} for Array, depreciated in PHP 7.4
+* Fix - Validate for do not use get_magic_quotes_gpc function for PHP 7.4
 
 = 2.4.0 - 2020/01/16 =
 * This feature release completes the full refactor (frontend and backend) of the plugins PHP to Composer plus compatibility with WordPress 5.3.2 and WooCommerce 3.8.1
@@ -562,6 +572,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.4.1 =
+This maintenance release is for compatibility with WordPress 5.4, WooCommerce 4.0.1, Travis CI build unit test for compliance with WordPress PHP coding standards and PHP tweaks for compatibility with PHP v 7.0 to 7.4
 
 = 2.4.0 =
 This feature release completes the full refactor (frontend and backend) of the plugins PHP to Composer plus compatibility with WordPress 5.3.2 and WooCommerce 3.8.1
