@@ -34,8 +34,6 @@ class Contact_Form
 	/*-----------------------------------------------------------------------------------*/
 	public function init_form_fields() {
 
-		global ${WC_EMAIL_INQUIRY_PREFIX.'admin_init'};
-
 		$privacy_policy_url = '#';
 
   		// Define settings
@@ -45,7 +43,7 @@ class Contact_Form
 			array(
             	'name' 		=> __( 'Default Form Settings', 'woocommerce-email-inquiry-cart-options' ),
                 'type' 		=> 'heading',
-                'desc'		=> sprintf( __( 'The plugins default form applies to all products. For the ability to add custom forms created with Contact Form 7 or Gravity Forms, globally or for individual or groups of products upgrade to the Premium <a href="%s" target="_blank">WooCommerce Email Inquiry Ultimate</a> plugin.', 'woocommerce-email-inquiry-cart-options' ), ${WC_EMAIL_INQUIRY_PREFIX.'admin_init'}->ultimate_plugin_page_url ),
+                'desc'		=> sprintf( __( 'The plugins default form applies to all products. For the ability to add custom forms created with Contact Form 7 or Gravity Forms, globally or for individual or groups of products upgrade to the Premium <a href="%s" target="_blank">WooCommerce Email Inquiry Ultimate</a> plugin.', 'woocommerce-email-inquiry-cart-options' ), $GLOBALS[WC_EMAIL_INQUIRY_PREFIX.'admin_init']->ultimate_plugin_page_url ),
                 'class'		=> 'wc_ei_default_form_container',
                 'id'		=> 'wc_ei_default_form_box',
                 'is_box'	=> true,

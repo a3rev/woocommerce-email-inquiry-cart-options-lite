@@ -151,8 +151,7 @@ class Functions
 
 		if ( ! wp_script_is( 'bootstrap-modal', 'registered' ) 
 			&& ! wp_script_is( 'bootstrap-modal', 'enqueued' ) ) {
-			global ${WC_EMAIL_INQUIRY_PREFIX.'admin_interface'};
-			${WC_EMAIL_INQUIRY_PREFIX.'admin_interface'}->register_modal_scripts();
+			$GLOBALS[WC_EMAIL_INQUIRY_PREFIX.'admin_interface']->register_modal_scripts();
 		}
 
 		wp_enqueue_style( 'bootstrap-modal' );

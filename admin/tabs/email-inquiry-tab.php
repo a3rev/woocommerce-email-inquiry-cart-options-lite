@@ -120,10 +120,8 @@ class Email_Inquiry extends FrameWork\Admin_UI
 	/* Call tab layout from Admin Init 
 	/*-----------------------------------------------------------------------------------*/
 	public function tab_manager() {
-		global ${$this->plugin_prefix.'admin_init'};
-
 		$this->plugin_extension_start();
-		${$this->plugin_prefix.'admin_init'}->admin_settings_tab( $this->parent_page, $this->tab_data() );
+		$GLOBALS[$this->plugin_prefix.'admin_init']->admin_settings_tab( $this->parent_page, $this->tab_data() );
 		$this->plugin_extension_end();
 
 	}

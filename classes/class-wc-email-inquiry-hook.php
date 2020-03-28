@@ -369,7 +369,6 @@ class Hook_Filter
 	}
 	
 	public static function add_google_fonts() {
-		global ${WC_EMAIL_INQUIRY_PREFIX.'fonts_face'};
 		global $wc_email_inquiry_global_settings;
 		global $wc_email_inquiry_customize_email_button;
 		$google_fonts = array( 
@@ -380,7 +379,7 @@ class Hook_Filter
 		
 		$google_fonts = apply_filters( 'wc_ei_google_fonts', $google_fonts );
 		
-		${WC_EMAIL_INQUIRY_PREFIX.'fonts_face'}->generate_google_webfonts( $google_fonts );
+		$GLOBALS[WC_EMAIL_INQUIRY_PREFIX.'fonts_face']->generate_google_webfonts( $google_fonts );
 	}
 	
 	public static function change_order_item_display_meta_value( $meta_value = '' ) {
@@ -403,15 +402,13 @@ class Hook_Filter
 
 	public static function plugin_extension_box( $boxes = array() ) {
 
-		global ${WC_EMAIL_INQUIRY_PREFIX.'admin_init'};
-
-		$support_box = '<a href="'.${WC_EMAIL_INQUIRY_PREFIX.'admin_init'}->support_url.'" target="_blank" alt="'.__('Go to Support Forum', 'woocommerce-email-inquiry-cart-options' ).'"><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/go-to-support-forum.png" /></a>';
+		$support_box = '<a href="'.$GLOBALS[WC_EMAIL_INQUIRY_PREFIX.'admin_init']->support_url.'" target="_blank" alt="'.__('Go to Support Forum', 'woocommerce-email-inquiry-cart-options' ).'"><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/go-to-support-forum.png" /></a>';
 		$boxes[] = array(
 			'content' => $support_box,
 			'css' => 'border: none; padding: 0; background: none;'
 		);
 
-		$ultimate_box = '<a href="'.${WC_EMAIL_INQUIRY_PREFIX.'admin_init'}->ultimate_plugin_page_url.'" target="_blank" alt="'.__('Go to Support Forum', 'woocommerce-email-inquiry-cart-options' ).'"><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/woocommerce-email-inquiry-ultimate.jpg" /></a>';
+		$ultimate_box = '<a href="'.$GLOBALS[WC_EMAIL_INQUIRY_PREFIX.'admin_init']->ultimate_plugin_page_url.'" target="_blank" alt="'.__('Go to Support Forum', 'woocommerce-email-inquiry-cart-options' ).'"><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/woocommerce-email-inquiry-ultimate.jpg" /></a>';
 		$boxes[] = array(
 			'content' => $ultimate_box,
 			'css' => 'border: none; padding: 0; background: none;'
@@ -434,9 +431,7 @@ class Hook_Filter
 			return $links;
 		}
 
-		global ${WC_EMAIL_INQUIRY_PREFIX.'admin_init'};
-
-		$links[] = '<a href="'.${WC_EMAIL_INQUIRY_PREFIX.'admin_init'}->support_url.'" target="_blank">'.__('Support', 'woocommerce-email-inquiry-cart-options' ).'</a>';
+		$links[] = '<a href="'.$GLOBALS[WC_EMAIL_INQUIRY_PREFIX.'admin_init']->support_url.'" target="_blank">'.__('Support', 'woocommerce-email-inquiry-cart-options' ).'</a>';
 		return $links;
 	}
 

@@ -53,17 +53,14 @@ if ( version_compare( PHP_VERSION, '5.6.0', '>=' ) ) {
 	/**
 	 * Plugin Framework init
 	 */
-	global ${WC_EMAIL_INQUIRY_PREFIX.'admin_interface'};
-	${WC_EMAIL_INQUIRY_PREFIX.'admin_interface'} = new FrameWork\Admin_Interface();
+	$GLOBALS[WC_EMAIL_INQUIRY_PREFIX.'admin_interface'] = new FrameWork\Admin_Interface();
 
 	global $wc_ei_settings_page;
 	$wc_ei_settings_page = new FrameWork\Pages\EI_Settings();
 
-	global ${WC_EMAIL_INQUIRY_PREFIX.'admin_init'};
-	${WC_EMAIL_INQUIRY_PREFIX.'admin_init'} = new FrameWork\Admin_Init();
+	$GLOBALS[WC_EMAIL_INQUIRY_PREFIX.'admin_init'] = new FrameWork\Admin_Init();
 
-	global ${WC_EMAIL_INQUIRY_PREFIX.'less'};
-	${WC_EMAIL_INQUIRY_PREFIX.'less'} = new FrameWork\Less_Sass();
+	$GLOBALS[WC_EMAIL_INQUIRY_PREFIX.'less'] = new FrameWork\Less_Sass();
 
 } else {
 	return;
