@@ -3,7 +3,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 5.0
 Tested up to: 5.4
-Stable tag: 2.4.1
+Stable tag: 2.4.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,6 +125,12 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.4.2 - 2020/05/05 =
+* This maintenance release removes form modal popup h tags plus has compatibility with WooCommerce 4.1.0
+* Tweak - Change h2 and h5 title font on modal popup to div tag so that they don't show up as empty h tags with Search engine crawl.
+* Tweak - Tested for compatibility with WooCommerce 4.1.0
+* Tweak - Update WooCommerce compatibility tag
 
 = 2.4.1 - 2020/03/28 =
 * This maintenance release is for compatibility with WordPress 5.4, WooCommerce 4.0.1, Travis CI build unit test for compliance with WordPress PHP coding standards and PHP tweaks for compatibility with PHP v 7.0 to 7.4 
@@ -572,6 +578,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.4.2 =
+This maintenance release removes form modal popup h tags plus has compatibility with WooCommerce 4.1.0
 
 = 2.4.1 =
 This maintenance release is for compatibility with WordPress 5.4, WooCommerce 4.0.1, Travis CI build unit test for compliance with WordPress PHP coding standards and PHP tweaks for compatibility with PHP v 7.0 to 7.4
