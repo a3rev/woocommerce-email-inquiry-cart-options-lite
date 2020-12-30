@@ -32,7 +32,7 @@
 				modal.addClass('loading');
 				modal.find('.modal-content').hide();
 
-				iframe_obj.load(function(){
+				iframe_obj.on( 'load', function(){
 				    modal.find('.modal-content').show();
 				    modal.removeClass('loading');
 
