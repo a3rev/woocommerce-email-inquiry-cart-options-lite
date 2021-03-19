@@ -677,10 +677,10 @@ $(document).ready(function() {
 		
 		initRulesRoles: function () {
 			// Disabled Manual Quote role for Manual Quote rule to admin can't remove this role for Manual Quote rule
-			$("select.role_apply_manual_quote option").first().attr('disabled', 'disabled');
+			$("select.role_apply_manual_quote option").first().prop('disabled', true);
 			
 			// Disabled Auto Quote role for Auto Quote rule to admin can't remove this role for Auto Quote rule
-			$("select.role_apply_auto_quote option").first().attr('disabled', 'disabled');
+			$("select.role_apply_auto_quote option").first().prop('disabled', true);
 			
 			if ( $("input.rules_roles_explanation").is(':checked') == false ) {
 				$(".rules_roles_explanation_container").hide();
