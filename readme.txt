@@ -3,7 +3,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 5.0
 Tested up to: 5.8
-Stable tag: 2.4.11
+Stable tag: 2.5.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,6 +125,10 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.5.0 - 2021/08/07 =
+* This feature release adds full compatibility with WooCommerce Product Add-ons
+* Feature - Write new filter to add support for hiding WooCommerce Product Addons prices on when the Hide Price is actived.
 
 = 2.4.11 - 2021/07/22 =
 * This maintenance release has code tweaks for compatibility with WordPress Major version 5.8, WooCommerce version 5.5.1 and some Security Hardening.
@@ -658,6 +662,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.5.0 =
+This feature release adds full compatibility with WooCommerce Product Add-ons.
 
 = 2.4.11 =
 This maintenance release has code tweaks for compatibility with WordPress Major version 5.8, WooCommerce version 5.5.1 and some Security Hardening.
