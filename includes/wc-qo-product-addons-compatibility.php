@@ -33,19 +33,62 @@ add_filter( 'woocommerce_product_addons_option_price', function( $price_for_disp
 
 }, 1001, 2 );
 
-// Hide price of addon from cart & checkout page
-add_action( 'woocommerce_before_cart', function() {
-	$hide_price = \A3Rev\WCEmailInquiry\Functions::check_hide_price(0);
+// <-- START - Don't include price to addon name from cart & checkout pages
+function wc_email_inquiry_custom_hidden_addon_price() {
+	return '';
+}
+add_filter( 'woocommerce_get_item_data', function( $other_data, $cart_item ) {
+	if ( class_exists( 'WC_Product_Addons' ) && ! empty( $cart_item['addons'] ) ) {
+		$hide_price = \A3Rev\WCEmailInquiry\Functions::check_hide_price( $cart_item['product_id'] );
 
-	if ( $hide_price ) {
-		echo '<style>.woocommerce-Price-amount{ display:none; }</style>';
+		if ( $hide_price ) {
+			add_filter( 'wc_price', 'wc_email_inquiry_custom_hidden_addon_price', 101 );
+		}
 	}
-} );
 
-add_action( 'woocommerce_before_checkout_form', function() {
-	$hide_price = \A3Rev\WCEmailInquiry\Functions::check_hide_price(0);
+	return $other_data;
+}, 9, 2 );
 
-	if ( $hide_price ) {
-		echo '<style>.woocommerce-Price-amount{ display:none; }</style>';
+add_filter( 'woocommerce_get_item_data', function( $other_data, $cart_item ) {
+	if ( class_exists( 'WC_Product_Addons' ) && ! empty( $cart_item['addons'] ) ) {
+		remove_filter( 'wc_price', 'wc_email_inquiry_custom_hidden_addon_price', 101 );
 	}
-} );
+
+	return $other_data;
+}, 11, 2 );
+// END -->
+
+// <--- START - Hide the price is include to addon name from email content and order received info on My account page
+function wc_email_inquiry_custom_addon_price( $price ) {
+	if ( stristr( $price, '+' ) === false ) {
+		$price = '+' . $price;
+	}
+	return $price;
+}
+
+add_action( 'woocommerce_checkout_create_order_line_item', function( $item, $cart_item_key, $values ) {
+	if ( class_exists( 'WC_Product_Addons' ) && ! empty( $values['addons'] ) ) {
+		add_filter( 'wc_price', 'wc_email_inquiry_custom_addon_price', 102 );
+	}
+}, 9, 3 );
+
+add_action( 'woocommerce_checkout_create_order_line_item', function( $item, $cart_item_key, $values ) {
+	if ( class_exists( 'WC_Product_Addons' ) && ! empty( $values['addons'] ) ) {
+		remove_filter( 'wc_price', 'wc_email_inquiry_custom_addon_price', 102 );
+	}
+}, 11, 3 );
+
+add_filter( 'woocommerce_order_item_display_meta_key', function( $display_key, $meta, $order_item ) {
+	if ( class_exists( 'WC_Product_Addons' ) && ! is_admin() ) {
+		if ( stristr( $display_key, ' (+' ) ) {
+			$product = is_callable( array( $order_item, 'get_product' ) ) ? $order_item->get_product() : false;
+			
+			if ( $product && \A3Rev\WCEmailInquiry\Functions::check_hide_price( $product->get_id() ) ) {
+				$display_key = preg_replace( "/\ \(\+[^)]+\)/", '', $display_key );
+			}
+		}
+	}
+
+	return $display_key;
+}, 10, 3 );
+// END -->
