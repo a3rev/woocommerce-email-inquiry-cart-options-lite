@@ -3,7 +3,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 5.0
 Tested up to: 5.8
-Stable tag: 2.5.1
+Stable tag: 2.6.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,6 +125,10 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.6.0 - 2021/11/08 =
+* This feature release adds compatibility with the WooCommerce Product Bundles plugin
+* Feature - Add full Email Inquiry button and hide price and cart compatibility with the official WooCommerce Product Bundles plugin
 
 = 2.5.1 - 2021/08/12 =
 * This maintenance release completes full compatibility with The WooCommerce Products Add-on plugin.
@@ -667,6 +671,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.6.0 =
+This feature release adds compatibility with the WooCommerce Product Bundles plugin
 
 = 2.5.1 =
 This maintenance release completes full compatibility with the WooCommerce Products Add-on plugin.
