@@ -1,9 +1,9 @@
 === Email Inquiry & Cart Options for WooCommerce ===
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
-Requires at least: 5.0
+Requires at least: 5.6
 Tested up to: 5.8
-Stable tag: 2.6.0
+Stable tag: 2.6.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -49,6 +49,13 @@ Email Inquiry & Cart Options uses the WordPress email config and requires no ext
 * Fully customizable Sent success message shows on a pop-up after inquiry is submitted.
 * Use the WordPress text editor (WYSIWYG and HTML) to style the success message (see image under the Screenshots tab on this page).
 
+= Compatibility =
+
+All the features of Email Inquiry & Cart Options for WooCommerce including Hide Price, Hide the Cart and Email Inquiry   work with these official WooCommerce plugins.
+
+* WooCommerce Addons Plugin
+* WooCommerce Product Bundles Plugin
+
 = GDPR Compliant =
 
 The plugins email contact form has options to turn on GDPR compliance features. They include:
@@ -77,10 +84,10 @@ Want to add a new language translation? Great! You can contribute via [translate
 
 = Minimum Requirements =
 
-* WordPress 5.0
-* WooCommerce 3.0
-* PHP version 7.0
-* MySQL version 5.6
+* WordPress 5.6
+* WooCommerce 5.0
+* PHP version 7.4
+* MySQL version 5.8
 
 = Automatic installation =
 
@@ -125,6 +132,10 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.6.1 - 2021/11/09 =
+* This maintenance release has a PHP fatal Error fix that has arisen out of yesterdays version 2.6.0 feature release.
+* Fix - Validate the global $product variable for call is_type() to check bundle product type.
 
 = 2.6.0 - 2021/11/08 =
 * This feature release adds compatibility with the WooCommerce Product Bundles plugin
@@ -671,6 +682,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.6.1 =
+This maintenance release has a PHP fatal Error fix that has arisen out of yesterdays version 2.6.0 feature release.
 
 = 2.6.0 =
 This feature release adds compatibility with the WooCommerce Product Bundles plugin
