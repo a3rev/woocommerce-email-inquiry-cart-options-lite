@@ -314,7 +314,7 @@ class Hook_Filter
 			'variable-subscription' => 'single-product/add-to-cart/variable-subscription.php',
 		) );
 
-		if ( in_array( $template_name, $addtocart_templates ) || ( $product && $product->is_type( 'bundle' ) && $template_name == 'single-product/short-description.php' ) ) {
+		if ( in_array( $template_name, $addtocart_templates ) || ( is_a( $product, 'WC_Product' ) && $product->is_type( 'bundle' ) && $template_name == 'single-product/short-description.php' ) ) {
 			$product_id = $product->get_id();
 
 			if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && Functions::check_add_email_inquiry_button( $product_id ) ) {
@@ -337,7 +337,7 @@ class Hook_Filter
 			'variable-subscription' => 'single-product/add-to-cart/variable-subscription.php',
 		) );
 
-		if ( in_array( $template_name, $addtocart_templates ) || ( $product && $product->is_type( 'bundle' ) && $template_name == 'single-product/short-description.php' ) ) {
+		if ( in_array( $template_name, $addtocart_templates ) || ( is_a( $product, 'WC_Product' ) && $product->is_type( 'bundle' ) && $template_name == 'single-product/short-description.php' ) ) {
 			$product_id = $product->get_id();
 
 			if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && Functions::check_add_email_inquiry_button( $product_id ) ) {
