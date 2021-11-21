@@ -115,7 +115,7 @@ class Hook_Filter
 		}
 	}
 	
-	public static function grouped_product_hide_add_to_cart( $add_to_cart='', $product_type ) {
+	public static function grouped_product_hide_add_to_cart( $add_to_cart='', $product_type='' ) {
 		global $product;
 		$product_id = $product->get_id();
 		
