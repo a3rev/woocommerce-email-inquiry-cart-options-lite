@@ -89,8 +89,6 @@ class Admin_UI
 		}
 
 		$this->support_url = 'https://wordpress.org/support/plugin/woocommerce-email-inquiry-cart-options';
-
-		$this->update_google_map_api_key();
 	}
 	
 	
