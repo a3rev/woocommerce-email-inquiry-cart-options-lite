@@ -352,6 +352,7 @@ class Admin_Interface extends Admin_UI
 	/*-----------------------------------------------------------------------------------*/
 	public function get_font_weights() {
 		$font_weights = array (
+			''					=> __( 'Default' ),
 			'300'				=> __( 'Thin', 'woocommerce-email-inquiry-cart-options' ),
 			'300 italic'		=> __( 'Thin/Italic', 'woocommerce-email-inquiry-cart-options' ),
 			'normal'			=> __( 'Normal', 'woocommerce-email-inquiry-cart-options' ),
@@ -2773,6 +2774,7 @@ class Admin_Interface extends Admin_UI
                                 id="<?php echo esc_attr( $id_attribute ); ?>-line_height"
 								class="a3rev-ui-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>-line_height chzn-select <?php if ( is_rtl() ) { echo 'chzn-rtl'; } ?>"
 								>
+									<option value="" selected="selected"><?php esc_html_e( 'Default' ); ?></option>
 								<?php
 									for ( $i = 0.6; $i <= 3.1; $i = $i + 0.1 ) {
 										?>

@@ -3,7 +3,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 5.6
 Tested up to: 6.1
-Stable tag: 2.8.2
+Stable tag: 2.9.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -130,6 +130,15 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 2.9.0 - 2022/12/06 =
+* This feature release adds Default font from the theme to the font control.
+* Feature - Add Default fonts from the Theme to the font control options.
+* Feature - On new install will get the theme fonts with Arial web font fall back.
+* Feature - On existing installs this update will not change the set fonts.
+* Plugin Framework - Update typography control from plugin framework to add support for Default value
+* Plugin Framework - Default value will get the h tag and content fonts that are set in the theme.
+* Plugin Framework - Change generate typography style for change on typography control
 
 = 2.8.2 - 2022/11/21 =
 * This maintenance release has 1 bug fix and compatibility with WooCommerce 7.1
@@ -721,6 +730,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 2.9.0 =
+This feature release adds Default font from the theme to the font control.
 
 = 2.8.2 =
 This maintenance release has 1 bug fix and compatibility with WooCommerce 7.1
