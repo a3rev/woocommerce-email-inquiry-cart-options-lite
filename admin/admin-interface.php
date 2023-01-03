@@ -78,15 +78,9 @@ class Admin_Interface extends Admin_UI
 		$admin_pages = $this->admin_pages();
 		
 		if ( is_admin() && isset( $_REQUEST['page'] ) && in_array( $_REQUEST['page'], $admin_pages ) ) {
-			add_action( 'admin_enqueue_scripts', array( $this, 'register_fontawesome_style' ), 0 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_css_load' ) );
 			do_action( $this->plugin_name . '_init_styles' );
 		}
-	}
-
-	public function register_fontawesome_style() {
-		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-		wp_register_style( 'font-awesome-styles', $this->admin_plugin_url() . '/assets/css/font-awesome' . $suffix . '.css', array(), '4.5.0', 'all' );
 	}
 
 	public function register_modal_scripts() {
@@ -2188,8 +2182,8 @@ class Admin_Interface extends Admin_UI
 									data-confirm_message="<?php echo esc_attr( $confirm_message ); ?>"
 								<?php } ?> 
 								><?php echo esc_html( $button_name ); ?></button>
-								<span class="a3rev-ui-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>-successed"><?php echo esc_html( $successed_text ); ?></span>
-								<span class="a3rev-ui-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>-errors"><?php echo esc_html( $errors_text ); ?></span>
+								<span class="a3rev-ui-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>-successed"><?php echo wp_kses_post( wptexturize( $successed_text ) ); ?></span>
+								<span class="a3rev-ui-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>-errors"><?php echo wp_kses_post( wptexturize( $errors_text ) ); ?></span>
 
 								<!-- Progress Bar -->
 								<?php if ( ! empty( $notice ) ) { ?>
@@ -2245,7 +2239,7 @@ class Admin_Interface extends Admin_UI
 											<span class="a3rev-ui-statistic-separate">/</span>
 											<span class="a3rev-ui-statistic-total-item"><?php echo esc_html( $total_items ); ?></span>
 											<br />
-											<span class="a3rev-ui-statistic-item-name"><?php echo esc_html( $single_submit['item_name'] ); ?></span>
+											<span class="a3rev-ui-statistic-item-name"><?php echo wp_kses_post( wptexturize( $single_submit['item_name'] ) ); ?></span>
 										</div>
 									</div>
 								<?php
