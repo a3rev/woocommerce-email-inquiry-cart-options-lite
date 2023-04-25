@@ -1,9 +1,9 @@
 === Email Inquiry & Cart Options for WooCommerce ===
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
-Requires at least: 5.6
+Requires at least: 6.0
 Tested up to: 6.2
-Stable tag: 3.0.0
+Stable tag: 3.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -130,6 +130,12 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 3.1.0 - 2023/04/25 =
+* This release has compatibility with WordPress 6.2.0, WooCommerce 7.6.0 plus declared compatibility with WooCommerce HPOS.
+* Tweak - Test for compatibility with WordPress 6.2
+* Tweak - Test for compatibility with WooCommerce 7.6.0
+* Tweak - Test and declare plugin compatibility with WooCommerce HPOS Custom Tables.
 
 = 3.0.0 - 2023/01/03 =
 * This feature release removes the fontawesome lib and replaces icons with SVGs plus adds Default Topography option to font controls and has compatibility with WooCommerce 7.2
@@ -740,6 +746,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 3.1.0 =
+This release has compatibility with WordPress 6.2.0, WooCommerce 7.6.0 plus declared compatibility with WooCommerce HPOS.
 
 = 3.0.0 =
 This feature release removes the fontawesome lib and replaces icons with SVGs plus adds Default Topography option to font controls and has compatibility with WooCommerce 7.2
