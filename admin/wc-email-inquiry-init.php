@@ -116,19 +116,66 @@ add_filter('woocommerce_cart_contents_total', array('\A3Rev\WCEmailInquiry\Hook_
 // Include Modal container to footer
 add_action( 'wp_footer', array( '\A3Rev\WCEmailInquiry\Hook_Filter', 'wc_email_inquiry_modal_popup' ) );
 
+$wc_email_inquiry_global_settings = get_option( 'wc_email_inquiry_global_settings', array( 'inquiry_single_type' => 'auto', 'inquiry_card_type' => 'shortcode' ) );
 // Add Email Inquiry Button on Shop page
-$wc_email_inquiry_customize_email_button_settings = get_option( 'wc_email_inquiry_customize_email_button', array( 'inquiry_button_position' => 'below' ) );
-$wc_email_inquiry_button_position = $wc_email_inquiry_customize_email_button_settings['inquiry_button_position'];
-if ($wc_email_inquiry_button_position == 'above' )
-	add_action('woocommerce_before_template_part', array('\A3Rev\WCEmailInquiry\Hook_Filter', 'shop_add_email_inquiry_button_above'), 9, 4);
-else
-	add_action('woocommerce_after_shop_loop_item', array('\A3Rev\WCEmailInquiry\Hook_Filter', 'shop_add_email_inquiry_button_below'), 12);
+$inquiry_card_type = $wc_email_inquiry_global_settings['inquiry_card_type'] ?? 'shortcode';
+if ( 'auto' == $inquiry_card_type ) {
+	$wc_email_inquiry_customize_email_button_settings = get_option( 'wc_email_inquiry_customize_email_button', array( 'inquiry_button_position' => 'below' ) );
+	$wc_email_inquiry_button_position = $wc_email_inquiry_customize_email_button_settings['inquiry_button_position'];
+	if ($wc_email_inquiry_button_position == 'above' )
+		add_action('woocommerce_before_template_part', array('\A3Rev\WCEmailInquiry\Hook_Filter', 'shop_add_email_inquiry_button_above'), 9, 4);
+	else
+		add_action('woocommerce_after_shop_loop_item', array('\A3Rev\WCEmailInquiry\Hook_Filter', 'shop_add_email_inquiry_button_below'), 12);
+}
 
 // Add Email Inquiry Button on Product Details page
-if ($wc_email_inquiry_button_position == 'above' )
-	add_action('woocommerce_before_template_part', array('\A3Rev\WCEmailInquiry\Hook_Filter', 'details_add_email_inquiry_button_above'), 9, 4 );
-else
-	add_action('woocommerce_after_template_part', array('\A3Rev\WCEmailInquiry\Hook_Filter', 'details_add_email_inquiry_button_below'), 2, 4);
+$inquiry_single_type = $wc_email_inquiry_global_settings['inquiry_single_type'] ?? 'auto';
+if ( 'auto' == $inquiry_single_type ) {
+	if ($wc_email_inquiry_button_position == 'above' )
+		add_action('woocommerce_before_template_part', array('\A3Rev\WCEmailInquiry\Hook_Filter', 'details_add_email_inquiry_button_above'), 9, 4 );
+	else
+		add_action('woocommerce_after_template_part', array('\A3Rev\WCEmailInquiry\Hook_Filter', 'details_add_email_inquiry_button_below'), 2, 4);
+}
+
+
+// Add shortcode [wc_email_inquiry_bt] show email inquiry button for one product
+add_shortcode('wc_email_inquiry_bt', function( $attributes ) {
+	if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) return;
+
+	if ( ! is_array( $attributes ) ) {
+		$attributes = array();
+	}
+
+	extract( array_merge( array(
+		'product_id'   => 0,
+		'button_class' => '',
+    ), $attributes ) );
+
+    if ( empty( $product_id ) ) {
+    	global $product;
+
+    	if ( $product && is_object( $product ) ) {
+    		$product_id = $product->get_id();
+    	}
+    }
+
+    if ( empty( $product_id ) ) {
+		global $post;
+		if ( $post ) {
+			$product_id = $post->ID;
+		}
+	}
+
+	if ( empty( $product_id ) ) return '';
+
+	if ( ! WCEmailInquiry\Functions::check_add_email_inquiry_button( $product_id ) ) return '';
+
+    $output = WCEmailInquiry\Hook_Filter::add_email_inquiry_button( $product_id );
+
+    return $output;
+
+} );
+
 
 // Check upgrade functions
 add_action('init', 'wc_ei_upgrade_plugin');
@@ -179,6 +226,12 @@ function wc_ei_upgrade_plugin () {
 		update_option('a3rev_wc_email_inquiry_version', '2.0.0');
 
 		include( WC_EMAIL_INQUIRY_DIR. '/includes/updates/update-2.0.0.php' );
+	}
+
+	if(version_compare(get_option('a3rev_wc_email_inquiry_version'), '3.2.0') === -1){
+		update_option('a3rev_wc_email_inquiry_version', '3.2.0');
+
+		include( WC_EMAIL_INQUIRY_DIR. '/includes/updates/update-3.2.0.php' );
 	}
 
 	update_option('a3rev_wc_email_inquiry_version', WC_EMAIL_INQUIRY_VERSION );

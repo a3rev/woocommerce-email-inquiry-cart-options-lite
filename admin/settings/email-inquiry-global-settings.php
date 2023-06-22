@@ -267,23 +267,63 @@ class Global_Panel extends FrameWork\Admin_UI
                 'type' 		=> 'hide_inquiry_button_yellow_message',
            	),
 
+           	array(
+				'name'		=> __( 'Product Single Page', 'woocommerce-email-inquiry-cart-options' ),
+                'type' 		=> 'heading',
+                'id'		=> 'wc_ei_product_single_box',
+                'is_box'	=> true,
+           	),
+           	array(
+				'name' 		=> __( 'Email Inquiry Feature', 'woocommerce-email-inquiry-cart-options' ),
+				'desc'		=> __( 'Show Email Inquiry feature on your Product Single page.', 'woocommerce-email-inquiry-cart-options' ),
+				'id' 		=> 'inquiry_single_type',
+				'class'		=> 'inquiry_single_type',
+				'type' 		=> 'onoff_radio',
+				'default' 	=> 'auto',
+				'onoff_options' => array(
+					array(
+						'val' 				=> 'auto',
+						'text' 				=> __( 'Automatic show via WooCommerce filter', 'woocommerce-email-inquiry-cart-options' ),
+						'checked_label'		=> __( 'ON', 'woocommerce-email-inquiry-cart-options' ) ,
+						'unchecked_label' 	=> __( 'OFF', 'woocommerce-email-inquiry-cart-options' ) ,
+					),
+					array(
+						'val' 				=> 'shortcode',
+						'text' 				=> __( 'Use shortcode to add to template of Product Single page', 'woocommerce-email-inquiry-cart-options' ) . '</span><span class="wc_ei_shortcode_desc wc_ei_product_single_shortcode_desc">' . __( '<strong>Shortcode:</strong> <code>[wc_email_inquiry_bt product_id="" button_class="" card_display="0" ]</code>', 'woocommerce-email-inquiry-cart-options' ),
+						'checked_label'		=> __( 'ON', 'woocommerce-email-inquiry-cart-options' ) ,
+						'unchecked_label' 	=> __( 'OFF', 'woocommerce-email-inquiry-cart-options' ) ,
+					),
+				),
+				'free_version'		=> true,
+			),
+
 			array(
 				'name'		=> __( 'Product Cards', 'woocommerce-email-inquiry-cart-options' ),
                 'type' 		=> 'heading',
                 'id'		=> 'wc_ei_product_cards_box',
                 'is_box'	=> true,
            	),
-			array(
+           	array(
 				'name' 		=> __( 'Email Inquiry Feature', 'woocommerce-email-inquiry-cart-options' ),
-				'desc'		=> __( "ON to show Email Inquiry feature on your Product Cards on Shop, category and tags pages.", 'woocommerce-email-inquiry-cart-options' ),
-				'class'		=> 'inquiry_single_only',
-				'id' 		=> 'inquiry_single_only',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'no',
-				'checked_value'		=> 'no',
-				'unchecked_value'	=> 'yes',
-				'checked_label' 	=> __( 'ON', 'woocommerce-email-inquiry-cart-options' ),
-				'unchecked_label'	=> __( 'OFF', 'woocommerce-email-inquiry-cart-options' ),
+				'desc'		=> __( 'Show Email Inquiry feature on your Product Cards on Shop, category and tags pages.', 'woocommerce-email-inquiry-cart-options' ),
+				'id' 		=> 'inquiry_card_type',
+				'class'		=> 'inquiry_card_type',
+				'type' 		=> 'onoff_radio',
+				'default' 	=> 'shortcode',
+				'onoff_options' => array(
+					array(
+						'val' 				=> 'auto',
+						'text' 				=> __( 'Automatic show via WooCommerce filter', 'woocommerce-email-inquiry-cart-options' ),
+						'checked_label'		=> __( 'ON', 'woocommerce-email-inquiry-cart-options' ) ,
+						'unchecked_label' 	=> __( 'OFF', 'woocommerce-email-inquiry-cart-options' ) ,
+					),
+					array(
+						'val' 				=> 'shortcode',
+						'text' 				=> __( 'Use shortcode to add to template of Product Cards on Shop, category and tags pages', 'woocommerce-email-inquiry-cart-options' ) . '</span><span class="wc_ei_shortcode_desc wc_ei_product_cards_shortcode_desc">' . __( '<strong>Shortcode:</strong> <code>[wc_email_inquiry_bt button_class="" card_display="1" ]</code>', 'woocommerce-email-inquiry-cart-options' ),
+						'checked_label'		=> __( 'ON', 'woocommerce-email-inquiry-cart-options' ) ,
+						'unchecked_label' 	=> __( 'OFF', 'woocommerce-email-inquiry-cart-options' ) ,
+					),
+				),
 				'free_version'		=> true,
 			),
         );
@@ -386,11 +426,24 @@ $(document).ready(function() {
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
 }
+.wc_ei_shortcode_desc {
+	display: block;
+	width: 100%;
+	margin-top: 15px;
+}
 </style>
 <script>
 (function($) {
 
 	$(document).ready(function() {
+
+		if ( $("input.inquiry_single_type:checked").val() != 'shortcode') {
+			$('.wc_ei_product_single_shortcode_desc').hide();
+		}
+
+		if ( $("input.inquiry_card_type:checked").val() != 'shortcode') {
+			$('.wc_ei_product_cards_shortcode_desc').hide();
+		}
 
 		if ( $("input.show_email_inquiry_button_after_login:checked").val() != 'yes') {
 			$('.show_email_inquiry_button_after_login_container').css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
@@ -403,6 +456,20 @@ $(document).ready(function() {
 		if ( $("input.acceptance:checked").val() != 'yes') {
 			$(".show_acceptance_yes").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
 		}
+
+		$(document).on( "a3rev-ui-onoff_radio-switch", '.inquiry_single_type', function( event, value, status ) {
+			$(".wc_ei_product_single_shortcode_desc").hide();
+			if ( value == 'shortcode' && status == 'true' ) {
+				$(".wc_ei_product_single_shortcode_desc").show();
+			}
+		});
+
+		$(document).on( "a3rev-ui-onoff_radio-switch", '.inquiry_card_type', function( event, value, status ) {
+			$(".wc_ei_product_cards_shortcode_desc").hide();
+			if ( value == 'shortcode' && status == 'true' ) {
+				$(".wc_ei_product_cards_shortcode_desc").show();
+			}
+		});
 
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.rules_roles_explanation', function( event, value, status ) {
 			if ( status == 'true' ) {

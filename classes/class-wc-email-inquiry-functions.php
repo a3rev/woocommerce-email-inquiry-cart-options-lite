@@ -125,17 +125,6 @@ class Functions
 		return false;
 		
 	}
-	
-	public static function check_add_email_inquiry_button_on_shoppage ($product_id=0) {
-		global $wc_email_inquiry_global_settings;
-			
-		$wc_email_inquiry_single_only = $wc_email_inquiry_global_settings['inquiry_single_only'];
-		
-		if ($wc_email_inquiry_single_only == 'yes') return false;
-		
-		return self::check_add_email_inquiry_button($product_id);
-		
-	}
 
 	public static function enqueue_modal_scripts() {
 

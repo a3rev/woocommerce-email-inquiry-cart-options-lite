@@ -83,7 +83,7 @@ extract($wc_email_inquiry_global_settings);
 	-moz-box-sizing:content-box !important;
 	-webkit-box-sizing:content-box !important;	
 }
-.wc_email_inquiry_form, .wc_email_inquiry_modal.default .modal-content {
+.wc_email_inquiry_form, .wc_email_inquiry_modal .modal-content {
 	background-color: <?php echo $inquiry_form_bg_colour; ?> !important;	
 }
 body .wc_email_inquiry_form, .wc_email_inquiry_form, .wc_email_inquiry_form .wc_email_inquiry_field, body .wc_email_inquiry_field {

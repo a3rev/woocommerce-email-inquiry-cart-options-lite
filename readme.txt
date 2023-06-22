@@ -3,7 +3,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 6.0
 Tested up to: 6.2
-Stable tag: 3.1.0
+Stable tag: 3.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -48,6 +48,7 @@ Email Inquiry & Cart Options uses the WordPress email config and requires no ext
 * Telephone Field IF showing has option for *Required field ON or OFF  
 * Fully customizable Sent success message shows on a pop-up after inquiry is submitted.
 * Use the WordPress text editor (WYSIWYG and HTML) to style the success message (see image under the Screenshots tab on this page).
+* **NEW** Email Inquiry shortcodes. Works with New WC Single Product Page Bock Template and page builders like Elementor.
 
 = Compatibility =
 
@@ -130,6 +131,15 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 3.2.0 - 2023/06/22 =
+* This feature release adds insert Email Inquiry by 2 new shortcodes. Works with New WC Single Product Page Bock Template and page builders like Elementor.
+* Feature - Add Email Inquiry Shop shortcode. Adds Email Inquiry to all product pages across the store.
+* Feature - Add Single Product Email Inquiry shortcode. Use to insert a Single Product Email Inquiry, by product id into anywhere that accepts shortcodes.
+* Feature - Fully compatible with the new WooCommerce Single Product Blocks Template
+* Feature - Fully compatible with page builders like Elementor, Divi etc
+* Tweak - Adds new Email Inquiry Shortcode options to the Settings tab
+* Tweak - Test for compatibility with WooCommerce 7.8.0
 
 = 3.1.0 - 2023/04/25 =
 * This release has compatibility with WordPress 6.2.0, WooCommerce 7.6.0 plus declared compatibility with WooCommerce HPOS.
@@ -746,6 +756,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 3.2.0 =
+* This feature release adds insert Email Inquiry by 2 new shortcodes. Works with New WC Single Product Page Bock Template and page builders like Elementor.
 
 = 3.1.0 =
 This release has compatibility with WordPress 6.2.0, WooCommerce 7.6.0 plus declared compatibility with WooCommerce HPOS.

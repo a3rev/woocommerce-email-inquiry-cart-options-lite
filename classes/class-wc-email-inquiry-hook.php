@@ -282,7 +282,7 @@ class Hook_Filter
 		if ( $template_name == 'loop/add-to-cart.php' ) {
 			$product_id = $product->get_id();
 			
-			if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && Functions::check_add_email_inquiry_button_on_shoppage( $product_id ) ) {
+			if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && Functions::check_add_email_inquiry_button( $product_id ) ) {
 				echo self::add_email_inquiry_button( $product_id );
 			}
 		}
@@ -296,7 +296,7 @@ class Hook_Filter
 		
 		if ( $wc_email_inquiry_customize_email_button_settings['inquiry_button_position'] == 'above' ) return;
 		 
-		if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && Functions::check_add_email_inquiry_button_on_shoppage( $product_id ) ) {
+		if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && Functions::check_add_email_inquiry_button( $product_id ) ) {
 			echo self::add_email_inquiry_button( $product_id );
 		}
 	}
