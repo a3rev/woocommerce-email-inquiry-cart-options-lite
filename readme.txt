@@ -3,7 +3,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 6.0
 Tested up to: 6.2
-Stable tag: 3.2.0
+Stable tag: 3.2.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -131,6 +131,10 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 3.2.1 - 2023/06/26 =
+* This maintenance release fixes a small PHP bug that emerged from the 3.2.0 release.
+* Fix - defined wc_email_inquiry_button_position variable on correct position to fix PHP bug
 
 = 3.2.0 - 2023/06/22 =
 * This feature release adds insert Email Inquiry by 2 new shortcodes. Works with New WC Single Product Page Bock Template and page builders like Elementor.
@@ -756,6 +760,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 3.2.1 =
+This maintenance release fixes a small PHP bug that emerged from the 3.2.0 release.
 
 = 3.2.0 =
 * This feature release adds insert Email Inquiry by 2 new shortcodes. Works with New WC Single Product Page Bock Template and page builders like Elementor.

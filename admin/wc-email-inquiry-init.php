@@ -116,12 +116,13 @@ add_filter('woocommerce_cart_contents_total', array('\A3Rev\WCEmailInquiry\Hook_
 // Include Modal container to footer
 add_action( 'wp_footer', array( '\A3Rev\WCEmailInquiry\Hook_Filter', 'wc_email_inquiry_modal_popup' ) );
 
+$wc_email_inquiry_customize_email_button_settings = get_option( 'wc_email_inquiry_customize_email_button', array( 'inquiry_button_position' => 'below' ) );
+$wc_email_inquiry_button_position = $wc_email_inquiry_customize_email_button_settings['inquiry_button_position'];
+
 $wc_email_inquiry_global_settings = get_option( 'wc_email_inquiry_global_settings', array( 'inquiry_single_type' => 'auto', 'inquiry_card_type' => 'shortcode' ) );
 // Add Email Inquiry Button on Shop page
 $inquiry_card_type = $wc_email_inquiry_global_settings['inquiry_card_type'] ?? 'shortcode';
 if ( 'auto' == $inquiry_card_type ) {
-	$wc_email_inquiry_customize_email_button_settings = get_option( 'wc_email_inquiry_customize_email_button', array( 'inquiry_button_position' => 'below' ) );
-	$wc_email_inquiry_button_position = $wc_email_inquiry_customize_email_button_settings['inquiry_button_position'];
 	if ($wc_email_inquiry_button_position == 'above' )
 		add_action('woocommerce_before_template_part', array('\A3Rev\WCEmailInquiry\Hook_Filter', 'shop_add_email_inquiry_button_above'), 9, 4);
 	else
