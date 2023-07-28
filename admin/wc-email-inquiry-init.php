@@ -138,6 +138,9 @@ if ( 'auto' == $inquiry_single_type ) {
 		add_action('woocommerce_after_template_part', array('\A3Rev\WCEmailInquiry\Hook_Filter', 'details_add_email_inquiry_button_below'), 2, 4);
 }
 
+// Force do_shortcode for the content from the shortcode & paragraph blocks
+add_filter( 'render_block_core/shortcode', array('\A3Rev\WCEmailInquiry\Hook_Filter', 'render_block_core_shortcode'), 10, 3);
+add_filter( 'render_block_core/paragraph', array('\A3Rev\WCEmailInquiry\Hook_Filter', 'render_block_core_shortcode'), 10, 3);
 
 // Add shortcode [wc_email_inquiry_bt] show email inquiry button for one product
 add_shortcode('wc_email_inquiry_bt', function( $attributes ) {
@@ -155,7 +158,7 @@ add_shortcode('wc_email_inquiry_bt', function( $attributes ) {
     if ( empty( $product_id ) ) {
     	global $product;
 
-    	if ( $product && is_object( $product ) ) {
+    	if ( $product && is_a( $product, 'WC_Product' ) ) {
     		$product_id = $product->get_id();
     	}
     }

@@ -208,6 +208,13 @@ class Hook_Filter
 		
 		return $cart_contents_total;
 	}
+
+	public static function render_block_core_shortcode( $content, $parsed_block, $block ) {
+		if ( has_shortcode( $content, 'wc_email_inquiry_bt' ) ) {
+			$content = do_shortcode( $content );
+		}
+	    return $content;
+	}
 	
 	public static function add_email_inquiry_button( $product_id ) {
 		global $post;
