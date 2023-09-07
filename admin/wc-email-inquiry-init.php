@@ -155,20 +155,7 @@ add_shortcode('wc_email_inquiry_bt', function( $attributes ) {
 		'button_class' => '',
     ), $attributes ) );
 
-    if ( empty( $product_id ) ) {
-    	global $product;
-
-    	if ( $product && is_a( $product, 'WC_Product' ) ) {
-    		$product_id = $product->get_id();
-    	}
-    }
-
-    if ( empty( $product_id ) ) {
-		global $post;
-		if ( $post ) {
-			$product_id = $post->ID;
-		}
-	}
+    $product_id = WCEmailInquiry\Functions::get_current_product_id( $product_id );
 
 	if ( empty( $product_id ) ) return '';
 

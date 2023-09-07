@@ -216,7 +216,7 @@ class Hook_Filter
 	    return $content;
 	}
 	
-	public static function add_email_inquiry_button( $product_id ) {
+	public static function add_email_inquiry_button( $product_id, $custom_button = '' ) {
 		global $post;
 		global $wc_email_inquiry_contact_form_settings;
 		global $wc_email_inquiry_customize_email_button;
@@ -248,37 +248,42 @@ class Hook_Filter
 		if (trim( $wc_email_inquiry_button_title ) == '') $wc_email_inquiry_button_title = __( 'Product Enquiry', 'woocommerce-email-inquiry-cart-options' );
 		
 		$wc_email_inquiry_button_position = $wc_email_inquiry_customize_email_button['inquiry_button_position'];
+
+		if ( empty( $custom_button ) ) {
 				
-		$button_link = '';
+			$button_link = '';
 
-		if ( trim( $wc_email_inquiry_text_before ) != '' ) {
+			if ( trim( $wc_email_inquiry_text_before ) != '' ) {
 
-			$button_link .= '<span class="wc_email_inquiry_text_before wc_email_inquiry_text_before_'.$product_id.'">'.trim($wc_email_inquiry_text_before).'</span> ';
+				$button_link .= '<span class="wc_email_inquiry_text_before wc_email_inquiry_text_before_'.$product_id.'">'.trim($wc_email_inquiry_text_before).'</span> ';
+			}
+
+			$button_link .= '<a '.$email_inquiry_page_link. $target_link .' class="wc_email_inquiry_hyperlink_text wc_email_inquiry_hyperlink_text_'.$product_id.' '.$email_inquiry_button_class.'" id="wc_email_inquiry_button_'.$product_id.'" '. $button_attributes .' data-product_id="'.$product_id.'" '. $product_attributes .' form_action="hide">'.$wc_email_inquiry_hyperlink_text.$expand_text.'</a>';
+
+			if ( trim( $wc_email_inquiry_trailing_text ) != '' ) {
+
+				$button_link .= ' <span class="wc_email_inquiry_trailing_text wc_email_inquiry_trailing_text_'.$product_id.'">'.trim($wc_email_inquiry_trailing_text).'</span>';
+			}
+			
+			$button_button = '<a '.$email_inquiry_page_link. $target_link .' class="wc_email_inquiry_email_button wc_email_inquiry_button_'.$product_id.' '.$email_inquiry_button_class.'" id="wc_email_inquiry_button_'.$product_id.'" '. $button_attributes .' data-product_id="'.$product_id.'" '. $product_attributes .' form_action="hide">'.$wc_email_inquiry_button_title.$expand_text.'</a>';
+
+			$button_ouput = '<span class="wc_email_inquiry_button_container">';
+
+			if ($wc_email_inquiry_button_type == 'link') {
+
+				$button_ouput .= $button_link;
+			} else {
+
+				$button_ouput .= $button_button;
+			}
+				
+			$button_ouput .= '</span>';
+		} else {
+			$button_ouput = sprintf( $custom_button, $email_inquiry_page_link.' '.$target_link.' '.$button_attributes.' '.$product_attributes, $email_inquiry_button_class, $expand_text  );
 		}
-
-		$button_link .= '<a '.$email_inquiry_page_link. $target_link .' class="wc_email_inquiry_hyperlink_text wc_email_inquiry_hyperlink_text_'.$product_id.' '.$email_inquiry_button_class.'" id="wc_email_inquiry_button_'.$product_id.'" '. $button_attributes .' data-product_id="'.$product_id.'" '. $product_attributes .' form_action="hide">'.$wc_email_inquiry_hyperlink_text.$expand_text.'</a>';
-
-		if ( trim( $wc_email_inquiry_trailing_text ) != '' ) {
-
-			$button_link .= ' <span class="wc_email_inquiry_trailing_text wc_email_inquiry_trailing_text_'.$product_id.'">'.trim($wc_email_inquiry_trailing_text).'</span>';
-		}
-		
-		$button_button = '<a '.$email_inquiry_page_link. $target_link .' class="wc_email_inquiry_email_button wc_email_inquiry_button_'.$product_id.' '.$email_inquiry_button_class.'" id="wc_email_inquiry_button_'.$product_id.'" '. $button_attributes .' data-product_id="'.$product_id.'" '. $product_attributes .' form_action="hide">'.$wc_email_inquiry_button_title.$expand_text.'</a>';
 
 		add_action( 'wp_footer', array( __CLASS__, 'footer_modal_scripts' ) );
 		add_action( 'wp_footer', array( __CLASS__, 'footer_default_form_scripts' ) );
-
-		$button_ouput = '<span class="wc_email_inquiry_button_container">';
-
-		if ($wc_email_inquiry_button_type == 'link') {
-
-			$button_ouput .= $button_link;
-		} else {
-
-			$button_ouput .= $button_button;
-		}
-			
-		$button_ouput .= '</span>';
 			
 		return $button_ouput . $inner_form;
 	}

@@ -30,6 +30,9 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 	font-size:13px !important;
 	padding:5px !important;
 }
+.wc_email_inquiry_field textarea {
+	display: inline;
+}
 .wc_email_inquiry_subject {
 	width: 73%;
 	display: table;
@@ -119,10 +122,14 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 #wc_email_inquiry_modal .modal-dialog {
   margin-top: 50px !important;
 }
+#wc_email_inquiry_modal .modal-dialog.hasiframe {
+  max-width: 680px;
+}
 #wc_email_inquiry_modal iframe#wc_email_inquiry_party_form {
 	width: 100%;
 	min-height: 400px;
 	z-index: 999;
+	border: none;
 }
 #wc_email_inquiry_modal .wc_email_inquiry_iframe_container {
 	overflow: auto;

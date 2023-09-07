@@ -24,4 +24,5 @@ return array(
     'A3Rev\\WCEmailInquiry\\FrameWork\\Uploader' => $baseDir . '/admin/includes/uploader/class-uploader.php',
     'A3Rev\\WCEmailInquiry\\Functions' => $baseDir . '/classes/class-wc-email-inquiry-functions.php',
     'A3Rev\\WCEmailInquiry\\Hook_Filter' => $baseDir . '/classes/class-wc-email-inquiry-hook.php',
+    'A3Rev\\WCEmailInquiry\\Blocks' => $baseDir . '/src/blocks.php',
 );

@@ -40,6 +40,7 @@ class ComposerStaticInite7547935eddc166b5d40ff14985a8135
         'A3Rev\\WCEmailInquiry\\FrameWork\\Uploader' => __DIR__ . '/../..' . '/admin/includes/uploader/class-uploader.php',
         'A3Rev\\WCEmailInquiry\\Functions' => __DIR__ . '/../..' . '/classes/class-wc-email-inquiry-functions.php',
         'A3Rev\\WCEmailInquiry\\Hook_Filter' => __DIR__ . '/../..' . '/classes/class-wc-email-inquiry-hook.php',
+        'A3Rev\\WCEmailInquiry\\Blocks' => __DIR__ . '/../..' . '/src/blocks.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

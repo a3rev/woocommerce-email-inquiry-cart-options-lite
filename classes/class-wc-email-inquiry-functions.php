@@ -22,9 +22,32 @@ namespace A3Rev\WCEmailInquiry;
 class Functions 
 {	
 	
-	/** 
-	 * Set global variable when plugin loaded
-	 */
+	public static function get_current_product_id( $product_id = 0 ) {
+		if ( empty( $product_id ) ) {
+	    	global $product;
+
+	    	if ( $product && is_a( $product, 'WC_Product' ) ) {
+	    		$product_id = $product->get_id();
+	    	}
+	    }
+
+	    // Get current product ID from Query Loop block of WP Predictive Search
+		if ( empty( $product_id ) ) {
+			global $psobject;
+			if ( $psobject ) {
+				$product_id = $psobject->id;
+			}
+		}
+
+	    if ( empty( $product_id ) && is_product() ) {
+			global $post;
+			if ( $post ) {
+				$product_id = $post->ID;
+			}
+		}
+
+		return $product_id;
+	}
 	
 	public static function check_hide_add_cart_button ($product_id) {
 
