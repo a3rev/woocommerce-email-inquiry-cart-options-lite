@@ -2,8 +2,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 6.0
-Tested up to: 6.3
-Stable tag: 3.3.0
+Tested up to: 6.4
+Stable tag: 3.3.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -131,6 +131,12 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 3.3.1 - 2023/10/30 =
+* This maintenance release has a Code Tweak for compatibility with WordPress 6.4 and WooCommerce 8.2
+* Tweak - Tested for compatibility with WordPress 6.4
+* Tweak - Tested for compatibility with WooCommerce 8.2
+* Tweak - Call add action to 'enqueue_block_assets' instead of 'enqueue_block_editor_assets' for enqueue style inside iframe of Gutenberg.
 
 = 3.3.0 - 2023/09/07 =
 * This feature release adds a "Product Inquiry Button" Block for use in Gutenberg Templates. Also compatibility with WooCommerce 8.0.3 and WordPress 6.3
@@ -774,6 +780,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 3.3.1 =
+This maintenance release has a Code Tweak for compatibility with WordPress 6.4 and WooCommerce 8.2
 
 = 3.3.0 =
 This feature release adds a "Product Inquiry Button" Block for use in Gutenberg Templates. Also compatibility with WooCommerce 8.0.3 and WordPress 6.3
