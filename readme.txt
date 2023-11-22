@@ -3,7 +3,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 6.0
 Tested up to: 6.4
-Stable tag: 3.3.1
+Stable tag: 3.3.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -131,6 +131,12 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 3.3.2 - 2023/11/22 =
+* This maintenance release has plugin framework updates for compatibility with PHP 8.1 onwards, plus backward compatibility to WooCommerce 6.0.
+* Tweak - Remove backward compatibility for WooCommerce versions less than 6.0
+* Framework - Set parameter number of preg_match function from null to 0 for compatibility with PHP 8.1 onwards
+* Framework - Validate empty before call trim for option value
 
 = 3.3.1 - 2023/10/30 =
 * This maintenance release has a Code Tweak for compatibility with WordPress 6.4 and WooCommerce 8.2
@@ -780,6 +786,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 3.3.2 =
+This maintenance release has plugin framework updates for compatibility with PHP 8.1 onwards, plus backward compatibility to WooCommerce 6.0.
 
 = 3.3.1 =
 This maintenance release has a Code Tweak for compatibility with WordPress 6.4 and WooCommerce 8.2
