@@ -70,6 +70,14 @@ if ( ! empty( $product_id ) ) {
 	$product_id = 0;
 }
 
+$your_name  = '';
+$your_email = '';
+if ( is_user_logged_in() ) {
+	$current_user = wp_get_current_user();
+	$your_name    = $current_user->first_name . ' ' . $current_user->last_name;
+	$your_email   = $current_user->user_email;
+}
+
 ?>	
 <div class="wc_email_inquiry_default_form_container <?php echo $wc_email_inquiry_form_class; ?>">
 	<div style="padding:10px;">
@@ -84,14 +92,16 @@ if ( ! empty( $product_id ) ) {
 	        		<?php } ?>
 
 	        	</label> 
-				<input type="text" class="your_name" name="your_name" id="your_name" value="" title="<?php echo esc_attr( $name_label ); ?>" />
+	        	<?php if ( ! empty( $your_name ) ) { echo '<span class="wc_email_inquiry_default_value">'.esc_html( $your_name ).'</span>'; } ?>
+				<input type="<?php echo ( ! empty( $your_name ) ? 'hidden' : 'text' ); ?>" class="your_name" name="your_name" id="your_name" value="<?php echo esc_attr( $your_name ); ?>" title="<?php echo esc_attr( $name_label ); ?>" />
 			</div>
 			<div class="wc_email_inquiry_field">
 	        	<label class="wc_email_inquiry_label" for="your_email">
 	        		<?php echo $email_label; ?> 
 	        		<span class="wc_email_inquiry_required">*</span>
-	        	</label>
-				<input type="text" class="your_email" name="your_email" id="your_email" value="" title="<?php echo esc_attr( $email_label ); ?>" />
+	        	</label> 
+	        	<?php if ( ! empty( $your_email ) ) { echo '<span class="wc_email_inquiry_default_value">'.esc_html( $your_email ).'</span>'; } ?>
+				<input type="<?php echo ( ! empty( $your_email ) ? 'hidden' : 'text' ); ?>" class="your_email" name="your_email" id="your_email" value="<?php echo esc_attr( $your_email ); ?>" title="<?php echo esc_attr( $email_label ); ?>" />
 			</div>
 
 			<?php if ( $show_phone ) { ?>

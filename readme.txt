@@ -2,8 +2,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 6.0
-Tested up to: 6.4
-Stable tag: 3.3.2
+Tested up to: 6.4.1
+Stable tag: 3.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -131,6 +131,10 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 3.4.0 - 2023/11/27 =
+* This feature release adds auto fill name and email on default form for logged in users.
+* Feature - Default Email Form, auto fill Name and Email of current logged in user. Saves logged in user from having complete those fields.
 
 = 3.3.2 - 2023/11/22 =
 * This maintenance release has plugin framework updates for compatibility with PHP 8.1 onwards, plus backward compatibility to WooCommerce 6.0.
@@ -786,6 +790,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 3.4.0 =
+This feature release adds auto fill name and email on default form for logged in users.
 
 = 3.3.2 =
 This maintenance release has plugin framework updates for compatibility with PHP 8.1 onwards, plus backward compatibility to WooCommerce 6.0.
