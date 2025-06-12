@@ -23,6 +23,10 @@ add_action( 'woocommerce_product_addons_start', function( $post_id ) {
 add_filter( 'woocommerce_product_addons_option_price', function( $price_for_display, $option ) {
 	global $product;
 
+	if ( ! ( $product instanceof WC_Product ) ) {
+		return $price_for_display;
+	}
+
 	$hide_price = \A3Rev\WCEmailInquiry\Functions::check_hide_price( $product->get_id() );
 
 	if ( $hide_price ) {

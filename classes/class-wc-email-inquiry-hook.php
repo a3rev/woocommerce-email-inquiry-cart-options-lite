@@ -37,6 +37,10 @@ class Hook_Filter
 		global $post;
 		global $product;
 		if ($template_name == 'loop/add-to-cart.php') {
+			if ( ! ( $product instanceof WC_Product ) ) {
+				return;
+			}
+
 			$product_id = $product->get_id();
 			
 			if (Functions::check_hide_add_cart_button($product_id))
@@ -81,6 +85,10 @@ class Hook_Filter
 		global $post;
 		global $product;
 		if ($template_name == 'loop/add-to-cart.php') {
+			if ( ! ( $product instanceof WC_Product ) ) {
+				return;
+			}
+
 			$product_id = $product->get_id();
 			
 			if (Functions::check_hide_add_cart_button($product_id))
@@ -90,6 +98,11 @@ class Hook_Filter
 	
 	public static function details_before_hide_add_to_cart_button() {
 		global $post, $product;
+
+		if ( ! ( $product instanceof WC_Product ) ) {
+			return;
+		}
+
 		$product_id = $product->get_id();
 		
 		if (Functions::check_hide_add_cart_button($product_id) ) {
@@ -99,6 +112,11 @@ class Hook_Filter
 	
 	public static function details_after_hide_add_to_cart_button() {
 		global $post, $product;
+
+		if ( ! ( $product instanceof WC_Product ) ) {
+			return;
+		}
+
 		$product_id = $product->get_id();
 		
 		if (Functions::check_hide_add_cart_button($product_id)){
@@ -108,6 +126,11 @@ class Hook_Filter
 	
 	public static function grouped_product_hide_add_to_cart_style() {
 		global $product;
+
+		if ( ! ( $product instanceof WC_Product ) ) {
+			return;
+		}
+
 		$product_id = $product->get_id();
 		
 		if ( $product->is_type('grouped') && Functions::check_hide_add_cart_button( $product_id ) ){
@@ -117,6 +140,11 @@ class Hook_Filter
 	
 	public static function grouped_product_hide_add_to_cart( $add_to_cart='', $product_type='' ) {
 		global $product;
+
+		if ( ! ( $product instanceof WC_Product ) ) {
+			return $add_to_cart;
+		}
+
 		$product_id = $product->get_id();
 		
 		if ( Functions::check_hide_add_cart_button( $product_id ) ){
@@ -129,6 +157,11 @@ class Hook_Filter
 	public static function before_grouped_product_hide_quatity_control( $template_name, $template_path, $located, $args ) {
 		global $product;
 		if ( $template_name == 'single-product/add-to-cart/quantity.php' ) {
+
+			if ( ! ( $product instanceof WC_Product ) ) {
+				return;
+			}
+
 			$product_id = $product->get_id();
 			
 			if ( Functions::check_hide_add_cart_button( $product_id ) ) {
@@ -140,6 +173,11 @@ class Hook_Filter
 	public static function after_grouped_product_hide_quatity_control( $template_name, $template_path, $located, $args ) {
 		global $product;
 		if ( $template_name == 'single-product/add-to-cart/quantity.php' ) {
+
+			if ( ! ( $product instanceof WC_Product ) ) {
+				return;
+			}
+
 			$product_id = $product->get_id();
 			
 			if ( Functions::check_hide_add_cart_button( $product_id ) ) {
@@ -292,6 +330,10 @@ class Hook_Filter
 		global $post;
 		global $product;
 		if ( $template_name == 'loop/add-to-cart.php' ) {
+			if ( ! ( $product instanceof WC_Product ) ) {
+				return;
+			}
+
 			$product_id = $product->get_id();
 			
 			if ( ( $post->post_type == 'product' || $post->post_type == 'product_variation' ) && Functions::check_add_email_inquiry_button( $product_id ) ) {
@@ -304,6 +346,11 @@ class Hook_Filter
 		global $post;
 		global $product;
 		global $wc_email_inquiry_customize_email_button_settings;
+
+		if ( ! ( $product instanceof WC_Product ) ) {
+			return;
+		}
+
 		$product_id = $product->get_id();
 		
 		if ( $wc_email_inquiry_customize_email_button_settings['inquiry_button_position'] == 'above' ) return;
@@ -316,6 +363,10 @@ class Hook_Filter
 	public static function details_add_email_inquiry_button_above($template_name, $template_path, $located, $args) {
 		global $post;
 		global $product;
+
+		if ( ! ( $product instanceof WC_Product ) ) {
+			return;
+		}
 
 		$addtocart_templates = apply_filters( 'wc_ei_addtocart_templates', array(
 			'simple'                => 'single-product/add-to-cart/simple.php',
@@ -339,6 +390,10 @@ class Hook_Filter
 	public static function details_add_email_inquiry_button_below($template_name, $template_path, $located, $args){
 		global $post;
 		global $product;
+
+		if ( ! ( $product instanceof WC_Product ) ) {
+			return;
+		}
 
 		$addtocart_templates = apply_filters( 'wc_ei_addtocart_templates', array(
 			'simple'                => 'single-product/add-to-cart/simple.php',
