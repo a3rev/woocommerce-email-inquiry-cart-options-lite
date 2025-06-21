@@ -23,7 +23,7 @@ add_action( 'woocommerce_product_addons_start', function( $post_id ) {
 add_filter( 'woocommerce_product_addons_option_price', function( $price_for_display, $option ) {
 	global $product;
 
-	if ( ! ( $product instanceof WC_Product ) ) {
+	if ( ! is_a( $product, 'WC_Product' ) ) {
 		return $price_for_display;
 	}
 

@@ -37,7 +37,7 @@ class Hook_Filter
 		global $post;
 		global $product;
 		if ($template_name == 'loop/add-to-cart.php') {
-			if ( ! ( $product instanceof WC_Product ) ) {
+			if ( ! is_a( $product, 'WC_Product' ) ) {
 				return;
 			}
 
@@ -85,7 +85,7 @@ class Hook_Filter
 		global $post;
 		global $product;
 		if ($template_name == 'loop/add-to-cart.php') {
-			if ( ! ( $product instanceof WC_Product ) ) {
+			if ( ! is_a( $product, 'WC_Product' ) ) {
 				return;
 			}
 
@@ -99,7 +99,7 @@ class Hook_Filter
 	public static function details_before_hide_add_to_cart_button() {
 		global $post, $product;
 
-		if ( ! ( $product instanceof WC_Product ) ) {
+		if ( ! is_a( $product, 'WC_Product' ) ) {
 			return;
 		}
 
@@ -113,7 +113,7 @@ class Hook_Filter
 	public static function details_after_hide_add_to_cart_button() {
 		global $post, $product;
 
-		if ( ! ( $product instanceof WC_Product ) ) {
+		if ( ! is_a( $product, 'WC_Product' ) ) {
 			return;
 		}
 
@@ -127,7 +127,7 @@ class Hook_Filter
 	public static function grouped_product_hide_add_to_cart_style() {
 		global $product;
 
-		if ( ! ( $product instanceof WC_Product ) ) {
+		if ( ! is_a( $product, 'WC_Product' ) ) {
 			return;
 		}
 
@@ -141,7 +141,7 @@ class Hook_Filter
 	public static function grouped_product_hide_add_to_cart( $add_to_cart='', $product_type='' ) {
 		global $product;
 
-		if ( ! ( $product instanceof WC_Product ) ) {
+		if ( ! is_a( $product, 'WC_Product' ) ) {
 			return $add_to_cart;
 		}
 
@@ -158,7 +158,7 @@ class Hook_Filter
 		global $product;
 		if ( $template_name == 'single-product/add-to-cart/quantity.php' ) {
 
-			if ( ! ( $product instanceof WC_Product ) ) {
+			if ( ! is_a( $product, 'WC_Product' ) ) {
 				return;
 			}
 
@@ -174,7 +174,7 @@ class Hook_Filter
 		global $product;
 		if ( $template_name == 'single-product/add-to-cart/quantity.php' ) {
 
-			if ( ! ( $product instanceof WC_Product ) ) {
+			if ( ! is_a( $product, 'WC_Product' ) ) {
 				return;
 			}
 
@@ -330,7 +330,7 @@ class Hook_Filter
 		global $post;
 		global $product;
 		if ( $template_name == 'loop/add-to-cart.php' ) {
-			if ( ! ( $product instanceof WC_Product ) ) {
+			if ( ! is_a( $product, 'WC_Product' ) ) {
 				return;
 			}
 
@@ -347,7 +347,7 @@ class Hook_Filter
 		global $product;
 		global $wc_email_inquiry_customize_email_button_settings;
 
-		if ( ! ( $product instanceof WC_Product ) ) {
+		if ( ! is_a( $product, 'WC_Product' ) ) {
 			return;
 		}
 
@@ -364,7 +364,7 @@ class Hook_Filter
 		global $post;
 		global $product;
 
-		if ( ! ( $product instanceof WC_Product ) ) {
+		if ( ! is_a( $product, 'WC_Product' ) ) {
 			return;
 		}
 
@@ -391,7 +391,7 @@ class Hook_Filter
 		global $post;
 		global $product;
 
-		if ( ! ( $product instanceof WC_Product ) ) {
+		if ( ! is_a( $product, 'WC_Product' ) ) {
 			return;
 		}
 
