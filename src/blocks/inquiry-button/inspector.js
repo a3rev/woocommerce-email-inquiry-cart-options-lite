@@ -10,16 +10,20 @@ const { __ } = wp.i18n;
 
 const {
 	PanelBody,
-	TextControl,
 	Button,
-	ButtonGroup,
 } = wp.components;
 
 const {
 	InspectorControls,
 } = wp.blockEditor || wp.editor;
 
-const { Component, Fragment } = wp.element;
+const { Component, Fragment, createElement } = wp.element;
+
+const ButtonGroupCompat = ( props ) => {
+	const { className, ...rest } = props;
+	const classes = 'components-button-group' + ( className ? ' ' + className : '' );
+	return createElement( 'div', { role: 'group', ...rest, className: classes } );
+};
 
 function WidthPanel( { selectedWidth, setAttributes } ) {
 	function handleChange( newWidth ) {
@@ -32,7 +36,7 @@ function WidthPanel( { selectedWidth, setAttributes } ) {
 
 	return (
 		<PanelBody title={ __( 'Width settings' ) }>
-			<ButtonGroup aria-label={ __( 'Button width' ) }>
+			<ButtonGroupCompat aria-label={ __( 'Button width' ) }>
 				{ [ 25, 50, 75, 100 ].map( ( widthValue ) => {
 					return (
 						<Button
@@ -49,7 +53,7 @@ function WidthPanel( { selectedWidth, setAttributes } ) {
 						</Button>
 					);
 				} ) }
-			</ButtonGroup>
+			</ButtonGroupCompat>
 		</PanelBody>
 	);
 }

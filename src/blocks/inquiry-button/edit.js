@@ -21,7 +21,6 @@ const {
 const { __ } = wp.i18n;
 
 const {
-	useEffect,
 	Fragment
 } = wp.element;
 
