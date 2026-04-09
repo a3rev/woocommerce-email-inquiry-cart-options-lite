@@ -25,6 +25,8 @@ function wc_email_inquiry_init() {
 	wc_email_inquiry_plugin_textdomain();
 }
 
+add_action( 'after_setup_theme', 'wc_email_inquiry_plugin_textdomain' );
+
 // Add language
 add_action('init', 'wc_email_inquiry_init');
 

@@ -89,7 +89,11 @@ class Button_Style extends FrameWork\Admin_UI
 			add_action( $this->plugin_name . '_admin_field_' . $custom_type, array( $this, $custom_type ) );
 		}
 		
-		add_action( 'plugins_loaded', array( $this, 'init_form_fields' ), 1 );
+		if ( did_action( 'plugins_loaded' ) ) {
+			$this->init_form_fields();
+		} else {
+			add_action( 'plugins_loaded', array( $this, 'init_form_fields' ), 1 );
+		}
 		$this->subtab_init();
 		
 		$this->form_messages = array(
