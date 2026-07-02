@@ -63,11 +63,9 @@ add_filter('woocommerce_order_item_display_meta_value', array('\A3Rev\WCEmailInq
 
 // AJAX hide yellow message dontshow
 add_action('wp_ajax_wc_ei_yellow_message_dontshow', array('\A3Rev\WCEmailInquiry\Functions', 'wc_ei_yellow_message_dontshow') );
-add_action('wp_ajax_nopriv_wc_ei_yellow_message_dontshow', array('\A3Rev\WCEmailInquiry\Functions', 'wc_ei_yellow_message_dontshow') );
 
 // AJAX hide yellow message dismiss
 add_action('wp_ajax_wc_ei_yellow_message_dismiss', array('\A3Rev\WCEmailInquiry\Functions', 'wc_ei_yellow_message_dismiss') );
-add_action('wp_ajax_nopriv_wc_ei_yellow_message_dismiss', array('\A3Rev\WCEmailInquiry\Functions', 'wc_ei_yellow_message_dismiss') );
 
 // Check for hide add to cart on Product Grid Block
 add_filter( 'woocommerce_blocks_product_grid_item_html', array( '\A3Rev\WCEmailInquiry\Hook_Filter', 'product_grid_block' ), 10, 3 );

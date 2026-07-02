@@ -20,7 +20,7 @@ if ( '' != trim( $wc_email_inquiry_global_settings['inquiry_contact_heading'] ) 
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<div class="modal-title wc_email_inquiry_result_heading" id="exampleModalLabel"><?php echo $wc_email_inquiry_contact_heading; ?></div>
+				<div class="modal-title wc_email_inquiry_result_heading" id="exampleModalLabel"><?php echo esc_html( $wc_email_inquiry_contact_heading ); ?></div>
 				<span class="close" data-dismiss="modal" aria-label="<?php echo __( 'Close', 'woocommerce-email-inquiry-cart-options' ); ?>">
 					<span aria-hidden="true">&times;</span>
 				</span>

@@ -189,7 +189,7 @@ class Hook_Filter
 	public static function global_hide_price( $price ) {
 		$product_id = 0;
 
-		if ( ( in_array( basename ($_SERVER['PHP_SELF']), array('admin-ajax.php') ) || !is_admin() ) && Functions::check_hide_price($product_id)) return '';
+		if ( ( wp_doing_ajax() || !is_admin() ) && Functions::check_hide_price($product_id)) return '';
 		
 		return $price;
 	}
@@ -453,7 +453,7 @@ class Hook_Filter
 		if ( stristr( $meta_value, 'http://' ) !== false || stristr( $meta_value, 'https://' ) !== false ) {
 			$meta_value = strip_tags( $meta_value );
 			$meta_file_name = basename( $meta_value );
-			$meta_value = '<a href="'.$meta_value.'">'.$meta_file_name.'</a>';
+			$meta_value = '<a href="'.esc_url( $meta_value ).'">'.esc_html( $meta_file_name ).'</a>';
 		}
 		
 		return $meta_value;

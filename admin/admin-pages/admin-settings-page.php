@@ -81,8 +81,8 @@ class EI_Settings extends FrameWork\Admin_UI
 		);
 
 		if ( isset( $_GET['page'] ) &&  in_array( $_GET['page'], array( 'email-cart-options' ) ) ) {
-			if ( ! isset( $_SESSION ) ) {
-				@session_start();
+			if ( session_status() === PHP_SESSION_NONE ) {
+				session_start();
 			}
 		}
 		

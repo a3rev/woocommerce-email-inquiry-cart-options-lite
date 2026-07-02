@@ -211,7 +211,7 @@ class Functions
 
 	public static function reset_products_to_global_settings() {
 		global $wpdb;
-		$wpdb->query( "DELETE FROM ".$wpdb->postmeta." WHERE meta_key='_wc_email_inquiry_settings_custom' " );
+		$wpdb->delete( $wpdb->postmeta, array( 'meta_key' => '_wc_email_inquiry_settings_custom' ) );
 	}
 	
 	public static function email_inquiry( $product_id, $your_name, $your_email, $your_phone, $your_message, $send_copy_yourself = 1 ) {
@@ -267,11 +267,11 @@ class Functions
 			wc_ei_email_notification_tpl();
 			$content = ob_get_clean();
 		  
-			$content = str_replace('[your_name]', $your_name, $content);
-			$content = str_replace('[your_email]', $your_email, $content);
-			$content = str_replace('[your_phone]', $your_phone, $content);
-			$content = str_replace('[product_name]', $product_name, $content);
-			$content = str_replace('[product_url]', $product_url, $content);
+			$content = str_replace('[your_name]', esc_html( $your_name ), $content);
+			$content = str_replace('[your_email]', esc_html( $your_email ), $content);
+			$content = str_replace('[your_phone]', esc_html( $your_phone ), $content);
+			$content = str_replace('[product_name]', esc_html( $product_name ), $content);
+			$content = str_replace('[product_url]', esc_url( $product_url ), $content);
 			$your_message = str_replace( '://', ':&#173;­//', $your_message );
 			$your_message = str_replace( '.com', '&#173;.com', $your_message );
 			$your_message = str_replace( '.net', '&#173;.net', $your_message );
@@ -331,16 +331,46 @@ class Functions
 	
 	public static function wc_ei_yellow_message_dontshow() {
 		check_ajax_referer( 'wc_ei_yellow_message_dontshow', 'security' );
-		$option_name   = sanitize_key( $_REQUEST['option_name'] );
-		update_option( $option_name, 1 );
+
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			die();
+		}
+
+		$allowed_option_names = array(
+			'wc_ei_hide_inquiry_button_message_dontshow',
+			'wc_ei_hide_addtocart_message_dontshow',
+			'wc_ei_hide_price_message_dontshow',
+			'wc_ei_manual_quote_message_dontshow',
+			'wc_ei_use_woocommerce_css_message_dontshow',
+			'wc_ei_button_hyperlink_margin_message_dontshow',
+		);
+		$option_name = isset( $_REQUEST['option_name'] ) ? sanitize_key( $_REQUEST['option_name'] ) : '';
+		if ( in_array( $option_name, $allowed_option_names, true ) ) {
+			update_option( $option_name, 1 );
+		}
 		die();
 	}
-	
+
 	public static function wc_ei_yellow_message_dismiss() {
 		check_ajax_referer( 'wc_ei_yellow_message_dismiss', 'security' );
-		$session_name   = $_REQUEST['session_name'];
-		if ( !isset($_SESSION) ) { @session_start(); } 
-		$_SESSION[$session_name] = 1 ;
+
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			die();
+		}
+
+		$allowed_session_names = array(
+			'wc_ei_hide_inquiry_button_message_dismiss',
+			'wc_ei_hide_addtocart_message_dismiss',
+			'wc_ei_hide_price_message_dismiss',
+			'wc_ei_manual_quote_message_dismiss',
+			'wc_ei_use_woocommerce_css_message_dismiss',
+			'wc_ei_button_hyperlink_margin_message_dismiss',
+		);
+		$session_name = isset( $_REQUEST['session_name'] ) ? sanitize_key( $_REQUEST['session_name'] ) : '';
+		if ( in_array( $session_name, $allowed_session_names, true ) ) {
+			if ( session_status() === PHP_SESSION_NONE ) { session_start(); }
+			$_SESSION[ $session_name ] = 1;
+		}
 		die();
 	}
 }
