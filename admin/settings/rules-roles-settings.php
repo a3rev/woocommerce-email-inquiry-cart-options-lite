@@ -426,7 +426,7 @@ class Rules_Roles extends FrameWork\Admin_UI
 .a3rev_panel_container .hide_addtocart_yellow_message_container {
 <?php if ( $customized_settings['hide_addcartbt'] == 'no' && $customized_settings['hide_addcartbt_after_login'] == 'no' ) echo 'display: none;'; ?>
 <?php if ( get_option( 'wc_ei_hide_addtocart_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
-<?php if ( !isset($_SESSION) ) { @session_start(); } if ( isset( $_SESSION['wc_ei_hide_addtocart_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+<?php if ( session_status() === PHP_SESSION_NONE ) { session_start(); } if ( isset( $_SESSION['wc_ei_hide_addtocart_message_dismiss'] ) ) echo 'display: none !important;'; ?>
 }
 </style>
 <script>
@@ -495,7 +495,7 @@ $(document).ready(function() {
 .a3rev_panel_container .hide_price_yellow_message_container {
 <?php if ( $customized_settings['hide_price'] == 'no' && $customized_settings['hide_price_after_login'] == 'no' ) echo 'display: none;'; ?>
 <?php if ( get_option( 'wc_ei_hide_price_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
-<?php if ( !isset($_SESSION) ) { @session_start(); } if ( isset( $_SESSION['wc_ei_hide_price_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+<?php if ( session_status() === PHP_SESSION_NONE ) { session_start(); } if ( isset( $_SESSION['wc_ei_hide_price_message_dismiss'] ) ) echo 'display: none !important;'; ?>
 }
 </style>
 <script>
@@ -562,7 +562,7 @@ $(document).ready(function() {
 <style>
 .a3rev_panel_container .manual_quote_yellow_message_container {
 <?php if ( get_option( 'wc_ei_manual_quote_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
-<?php if ( !isset($_SESSION) ) { @session_start(); } if ( isset( $_SESSION['wc_ei_manual_quote_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+<?php if ( session_status() === PHP_SESSION_NONE ) { session_start(); } if ( isset( $_SESSION['wc_ei_manual_quote_message_dismiss'] ) ) echo 'display: none !important;'; ?>
 }
 </style>
 <script>
@@ -615,7 +615,7 @@ $(document).ready(function() {
 <style>
 .a3rev_panel_container .use_woocommerce_css_yellow_message_container {
 <?php if ( get_option( 'wc_ei_use_woocommerce_css_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
-<?php if ( !isset($_SESSION) ) { @session_start(); } if ( isset( $_SESSION['wc_ei_use_woocommerce_css_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+<?php if ( session_status() === PHP_SESSION_NONE ) { session_start(); } if ( isset( $_SESSION['wc_ei_use_woocommerce_css_message_dismiss'] ) ) echo 'display: none !important;'; ?>
 }
 </style>
 <script>

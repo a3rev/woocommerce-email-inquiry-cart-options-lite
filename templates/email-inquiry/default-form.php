@@ -79,13 +79,13 @@ if ( is_user_logged_in() ) {
 }
 
 ?>	
-<div class="wc_email_inquiry_default_form_container <?php echo $wc_email_inquiry_form_class; ?>">
+<div class="wc_email_inquiry_default_form_container <?php echo esc_attr( $wc_email_inquiry_form_class ); ?>">
 	<div style="padding:10px;">
 
 		<div class="wc_email_inquiry_content">
 			<div class="wc_email_inquiry_field">
 	        	<label class="wc_email_inquiry_label" for="your_name">
-	        		<?php echo $name_label; ?> 
+	        		<?php echo esc_html( $name_label ); ?> 
 
 	        		<?php if ( $name_required ) { ?>
 	        		<span class="wc_email_inquiry_required">*</span>
@@ -97,7 +97,7 @@ if ( is_user_logged_in() ) {
 			</div>
 			<div class="wc_email_inquiry_field">
 	        	<label class="wc_email_inquiry_label" for="your_email">
-	        		<?php echo $email_label; ?> 
+	        		<?php echo esc_html( $email_label ); ?> 
 	        		<span class="wc_email_inquiry_required">*</span>
 	        	</label> 
 	        	<?php if ( ! empty( $your_email ) ) { echo '<span class="wc_email_inquiry_default_value">'.esc_html( $your_email ).'</span>'; } ?>
@@ -108,7 +108,7 @@ if ( is_user_logged_in() ) {
 
 			<div class="wc_email_inquiry_field">
 	        	<label class="wc_email_inquiry_label" for="your_phone">
-	        		<?php echo $phone_label; ?> 
+	        		<?php echo esc_html( $phone_label ); ?> 
 
 	        		<?php if ( $phone_required ) { ?>
 	        		<span class="wc_email_inquiry_required">*</span>
@@ -122,14 +122,14 @@ if ( is_user_logged_in() ) {
 
 			<div class="wc_email_inquiry_field">
 	        	<label class="wc_email_inquiry_label">
-	        		<?php echo $subject_label; ?> 
+	        		<?php echo esc_html( $subject_label ); ?> 
 	        	</label> 
-				<span class="wc_email_inquiry_subject"><?php echo $product_name; ?></span>
+				<span class="wc_email_inquiry_subject"><?php echo esc_html( $product_name ); ?></span>
 			</div>
 
 			<div class="wc_email_inquiry_field">
 	        	<label class="wc_email_inquiry_label" for="your_message">
-	        		<?php echo $message_label; ?> 
+	        		<?php echo esc_html( $message_label ); ?> 
 	        		
 	        		<?php if ( $message_required ) { ?>
 	        		<span class="wc_email_inquiry_required">*</span>
@@ -143,7 +143,7 @@ if ( is_user_logged_in() ) {
 
 			<div class="wc_email_inquiry_field">
 	            <label class="wc_email_inquiry_label">&nbsp;</label>
-	            <label class="wc_email_inquiry_send_copy"><input type="checkbox" name="send_copy" id="send_copy" value="1" /> <?php echo $send_copy_label; ?></label>
+	            <label class="wc_email_inquiry_send_copy"><input type="checkbox" name="send_copy" id="send_copy" value="1" /> <?php echo esc_html( $send_copy_label ); ?></label>
 	        </div>
 
 	        <?php } ?>
@@ -155,7 +155,7 @@ if ( is_user_logged_in() ) {
 			<?php $information_text = get_option( 'wc_email_inquiry_contact_form_information_text', '' ); ?>
 			<?php if ( ! empty( $information_text ) ) { ?>
 			<div class="wc_email_inquiry_field">
-				<?php echo stripslashes( $information_text ); ?>
+				<?php echo wp_kses_post( stripslashes( $information_text ) ); ?>
 			</div>
 
 			<?php } ?>
@@ -167,20 +167,20 @@ if ( is_user_logged_in() ) {
 			}
 			?>
 			<div class="wc_email_inquiry_field">
-				<label class="wc_email_inquiry_send_copy"><input type="checkbox" name="agree_terms" class="agree_terms" value="1"> <?php echo stripslashes( $condition_text ); ?></label>
+				<label class="wc_email_inquiry_send_copy"><input type="checkbox" name="agree_terms" class="agree_terms" value="1"> <?php echo wp_kses_post( stripslashes( $condition_text ) ); ?></label>
 			</div>
 			<div class="wc_email_inquiry_field">&nbsp;</div>
 			<?php } ?>
 
 	        <div class="wc_email_inquiry_field">
 	            <a class="wc_email_inquiry_form_button"
-	            	data-product_id="<?php echo $product_id; ?>"
+	            	data-product_id="<?php echo absint( $product_id ); ?>"
 	            	data-name_required="<?php echo ( $name_required ? 1 : 0 ); ?>"
 	            	data-show_phone="<?php echo ( $show_phone ? 1 : 0 ); ?>"
 	            	data-phone_required="<?php echo ( $phone_required ? 1 : 0 ); ?>"
 	            	data-message_required="<?php echo ( $message_required ? 1 : 0 ); ?>"
 	            	data-show_acceptance="<?php echo ( $show_acceptance ? 1 : 0 ); ?>"
-	            	><?php echo $wc_email_inquiry_contact_text_button; ?></a> 
+	            	><?php echo esc_html( $wc_email_inquiry_contact_text_button ); ?></a>
 
 	            <span class="wc_email_inquiry_loading"><img src="<?php echo WC_EMAIL_INQUIRY_IMAGES_URL; ?>/loading.gif" /></span>
 	        </div>

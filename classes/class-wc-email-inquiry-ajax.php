@@ -38,13 +38,23 @@ class Ajax
 			'message' => __( "Sorry, this product don't enable email inquiry.", 'woocommerce-email-inquiry-cart-options' ),
 		);
 
-		$product_id         = absint( $_POST['product_id'] );
-		$your_name          = wp_unslash( wp_strip_all_tags( $_POST['your_name'] ) );
-		$your_email         = wp_unslash( wp_strip_all_tags( $_POST['your_email'] ) );
-		$your_phone         = wp_unslash( wp_strip_all_tags( $_POST['your_phone'] ) );
-		$your_message       = wp_unslash( wp_strip_all_tags( $_POST['your_message'] ) );
-		$send_copy_yourself = wp_unslash( wp_strip_all_tags( $_POST['send_copy'] ) );
-		
+		if ( ! check_ajax_referer( 'wc-ei-default-form', 'security', false ) ) {
+			wp_send_json( $json_var );
+			die();
+		}
+
+		$product_id         = isset( $_POST['product_id'] ) ? absint( $_POST['product_id'] ) : 0;
+		$your_name          = isset( $_POST['your_name'] ) ? sanitize_text_field( wp_unslash( $_POST['your_name'] ) ) : '';
+		$your_email         = isset( $_POST['your_email'] ) ? wp_unslash( wp_strip_all_tags( $_POST['your_email'] ) ) : '';
+		$your_phone         = isset( $_POST['your_phone'] ) ? wp_unslash( wp_strip_all_tags( $_POST['your_phone'] ) ) : '';
+		$your_message       = isset( $_POST['your_message'] ) ? wp_unslash( wp_strip_all_tags( $_POST['your_message'] ) ) : '';
+		$send_copy_yourself = isset( $_POST['send_copy'] ) ? wp_unslash( wp_strip_all_tags( $_POST['send_copy'] ) ) : '';
+
+		if ( ! is_email( $your_email ) ) {
+			wp_send_json( $json_var );
+			die();
+		}
+
 		$email_result = Functions::email_inquiry( $product_id, $your_name, $your_email, $your_phone, $your_message, $send_copy_yourself );
 
 		if ( false !== $email_result ) {

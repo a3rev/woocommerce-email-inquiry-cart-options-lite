@@ -3,7 +3,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 3.5.0
+Stable tag: 3.5.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -131,6 +131,14 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 3.5.1 - 2026/07/02 =
+* Security - Add nonce verification to the public email inquiry submit handler
+* Security - Add capability checks and an option/session-key whitelist to the yellow message dismissal handlers
+* Security - Add capability check to the shared admin AJAX event handler
+* Security - Remove the cleartext SSL-verification bypass on outbound API requests
+* Security - Validate the submitter email address before sending the inquiry copy
+* Security - Escape output across the email inquiry templates
 
 = 3.5.0 - 2026/03/31 =
 * This maintenance release has bug fixes and compatibility with WordPress 7.0, WooCommerce 10.6
@@ -816,6 +824,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 3.5.1 =
+This release includes security hardening for the email inquiry AJAX handlers and admin settings.
 
 = 3.5.0 =
 This maintenance release has bug fixes and compatibility with WordPress 7.0, WooCommerce 10.6

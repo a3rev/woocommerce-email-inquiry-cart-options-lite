@@ -398,7 +398,7 @@ class Button_Style extends FrameWork\Admin_UI
 <style>
 .a3rev_panel_container .button_hyperlink_margin_blue_message_container {
 <?php if ( get_option( 'wc_ei_button_hyperlink_margin_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
-<?php if ( !isset($_SESSION) ) { @session_start(); } if ( isset( $_SESSION['wc_ei_button_hyperlink_margin_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+<?php if ( session_status() === PHP_SESSION_NONE ) { session_start(); } if ( isset( $_SESSION['wc_ei_button_hyperlink_margin_message_dismiss'] ) ) echo 'display: none !important;'; ?>
 }
 </style>
 <script>
